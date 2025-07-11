@@ -2,7 +2,11 @@
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const PricingSection = () => {
+interface PricingSectionProps {
+  id?: string;
+}
+
+const PricingSection = ({ id }: PricingSectionProps) => {
   const plans = [
     {
       name: "Starter",
@@ -84,7 +88,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-gray-50">
+    <section id={id} className="py-16 lg:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-6">

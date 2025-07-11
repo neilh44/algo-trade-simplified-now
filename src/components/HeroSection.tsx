@@ -2,9 +2,13 @@
 import { Button } from "@/components/ui/button";
 import { Play, TrendingUp, Zap, Shield } from "lucide-react";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  id?: string;
+}
+
+const HeroSection = ({ id }: HeroSectionProps) => {
   return (
-    <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white overflow-hidden">
+    <section id={id} className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 animate-pulse">
         <div className="w-full h-full bg-white/5 bg-[radial-gradient(circle_at_center,white_2px,transparent_2px)] bg-[length:60px_60px]"></div>

@@ -2,9 +2,13 @@
 import { Button } from "@/components/ui/button";
 import { Play, MousePointer, Calendar } from "lucide-react";
 
-const DemoSection = () => {
+interface DemoSectionProps {
+  id?: string;
+}
+
+const DemoSection = ({ id }: DemoSectionProps) => {
   return (
-    <section className="py-16 lg:py-24 bg-gray-900 text-white">
+    <section id={id} className="py-16 lg:py-24 bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold mb-6">

@@ -1,7 +1,11 @@
 
 import { Mail, Phone, MapPin, Linkedin, MessageCircle, Youtube, Twitter } from "lucide-react";
 
-const Footer = () => {
+interface FooterProps {
+  id?: string;
+}
+
+const Footer = ({ id }: FooterProps) => {
   const quickLinks = [
     { name: "Documentation", href: "#" },
     { name: "API Reference", href: "#" },
@@ -34,7 +38,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer id={id} className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-4 gap-12">
           {/* Company Info */}
