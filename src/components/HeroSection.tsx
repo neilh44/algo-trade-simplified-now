@@ -31,8 +31,10 @@ const HeroSection = ({ id }: HeroSectionProps) => {
             </h1>
             
             <p className="text-xl lg:text-2xl text-blue-100 mb-8 leading-relaxed">
-              Connect TradingView, Amibroker, or Python to your broker in seconds. 
-              Execute trades automatically with institutional-grade speed.
+              Execute trades with lightning-fast, institutional-level precision.
+
+              With Automate Algos, you can seamlessly automate your crypto trading straight from TradingView through your broker.
+              Trigger trades automatically based on support and resistance levels, trendlines, channels, Fibonacci levels, indicators, oscillators, or TradingView alerts using webhooks.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
