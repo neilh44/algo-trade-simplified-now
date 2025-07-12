@@ -17,7 +17,7 @@ const Header = () => {
   const location = useLocation();
 
   const redirectToAuth = () => {
-    window.location.href = "https://app.automatealgos.in/";
+    window.location.href = "https://app.automatealgos.in/authentication/side-register";
   };
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const Header = () => {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-border' 
-          : 'bg-black/20 backdrop-blur-sm'
+          : 'bg-blue-900/80 backdrop-blur-sm'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
@@ -159,7 +159,7 @@ const Header = () => {
                 onClick={redirectToAuth}
                 className="bg-primary hover:bg-primary/90 text-primary-foreground"
               >
-                Sign In / Sign Up
+                Sign Up
               </Button>
             </div>
 
@@ -232,7 +232,7 @@ const Header = () => {
                   onClick={redirectToAuth}
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                 >
-                  Sign In / Sign Up
+                  Sign Up
                 </Button>
               </div>
             </nav>

@@ -41,7 +41,7 @@ const HeroSection = ({ id }: HeroSectionProps) => {
               <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-lg font-semibold rounded-lg shadow-lg">
                 Start Free 7-Day Trial
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-4 text-lg font-semibold rounded-lg">
+              <Button size="lg" variant="outline" className="border-white text-blue-900 bg-white hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-lg">
                 <Play className="w-5 h-5 mr-2" />
                 Watch Live Demo
               </Button>
@@ -72,40 +72,16 @@ const HeroSection = ({ id }: HeroSectionProps) => {
           {/* Right Column - Visual */}
           <div className="relative">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-              <div className="space-y-6">
-                {/* Trading Flow Animation */}
-                <div className="flex items-center justify-between">
-                  <div className="bg-green-500 rounded-lg p-3 text-white text-center min-w-[80px]">
-                    <div className="text-xs font-medium">Strategy</div>
-                    <div className="text-sm">TradingView</div>
-                  </div>
-                  <div className="flex-1 h-0.5 bg-gradient-to-r from-green-500 to-orange-500 mx-4 animate-pulse"></div>
-                  <div className="bg-orange-500 rounded-lg p-3 text-white text-center min-w-[80px]">
-                    <div className="text-xs font-medium">Execution</div>
-                    <div className="text-sm">Zerodha</div>
-                  </div>
-                </div>
-                
-                {/* Mock Performance Chart */}
-                <div className="bg-gray-900/50 rounded-lg p-4">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-gray-300">Live Performance</span>
-                    <span className="text-green-400 font-semibold">+23.4%</span>
-                  </div>
-                  <div className="h-32 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg flex items-end justify-center">
-                    <div className="text-xs text-gray-400">Real-time trading visualization</div>
-                  </div>
-                </div>
-                
-                {/* Broker Logos */}
-                <div className="grid grid-cols-4 gap-4">
-                  {['Zerodha', 'Fyers', 'Upstox', 'Angel'].map((broker) => (
-                    <div key={broker} className="bg-white/5 rounded-lg p-2 text-center">
-                      <div className="text-xs text-gray-300">{broker}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <iframe 
+                width="100%" 
+                height="315" 
+                src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+                title="YouTube video player" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen 
+                className="rounded-lg">
+              </iframe>
             </div>
           </div>
         </div>

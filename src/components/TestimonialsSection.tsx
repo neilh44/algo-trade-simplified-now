@@ -13,15 +13,6 @@ const TestimonialsSection = () => {
       strategy: "Swing Trading"
     },
     {
-      name: "Priya Sharma",
-      location: "Delhi",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b25fcff0?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      text: "Finally found a platform that connects TradingView to my Zerodha account perfectly. No more manual trades!",
-      result: "100% Automated",
-      strategy: "Intraday Trading"
-    },
-    {
       name: "Amit Patel",
       location: "Ahmedabad",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
@@ -31,15 +22,6 @@ const TestimonialsSection = () => {
       strategy: "Options Trading"
     },
     {
-      name: "Sneha Reddy",
-      location: "Bangalore",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      text: "As a Python developer, I love how I can deploy my algorithms without worrying about broker APIs.",
-      result: "5x Faster Setup",
-      strategy: "Quantitative Trading"
-    },
-    {
       name: "Vikram Singh",
       location: "Pune",
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
@@ -47,15 +29,6 @@ const TestimonialsSection = () => {
       text: "The backtesting feature helped me optimize my strategy before going live. Very professional platform.",
       result: "+23% Win Rate",
       strategy: "Futures Trading"
-    },
-    {
-      name: "Kavya Nair",
-      location: "Chennai",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      text: "Multi-account copy trading feature is a game-changer. I can now manage all my family's portfolios easily.",
-      result: "3 Accounts Synced",
-      strategy: "Portfolio Management"
     }
   ];
 
@@ -89,7 +62,7 @@ const TestimonialsSection = () => {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
           {testimonials.map((testimonial, index) => (
             <div key={index} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
               <div className="flex items-center mb-6">

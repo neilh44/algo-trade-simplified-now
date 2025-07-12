@@ -80,22 +80,6 @@ const DemoSection = ({ id }: DemoSectionProps) => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/20 rounded-2xl p-8">
-              <h3 className="text-xl font-semibold mb-3 text-orange-400">Live Trading Examples</h3>
-              <p className="text-gray-300 mb-4">
-                See real trades being executed in real-time with our demo account (paper trading mode).
-              </p>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="bg-gray-800/50 rounded-lg p-3">
-                  <div className="text-gray-400">Last Trade</div>
-                  <div className="text-green-400 font-semibold">NIFTY: +127 pts</div>
-                </div>
-                <div className="bg-gray-800/50 rounded-lg p-3">
-                  <div className="text-gray-400">Execution Time</div>
-                  <div className="text-blue-400 font-semibold">0.18 seconds</div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 

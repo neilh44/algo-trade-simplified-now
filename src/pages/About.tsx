@@ -261,7 +261,7 @@ const About = () => {
                 <Button 
                 size="lg" 
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
-                onClick={() => window.location.href = "https://app.automatealgos.in/"}
+                onClick={() => window.location.href = "https://app.automatealgos.in/authentication/side-register"}
               >
                 Start Your Journey Today
               </Button>

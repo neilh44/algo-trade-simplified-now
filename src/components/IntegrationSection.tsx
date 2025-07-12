@@ -8,17 +8,18 @@ interface IntegrationSectionProps {
 const IntegrationSection = ({ id }: IntegrationSectionProps) => {
   const strategyPlatforms = [
     { name: "TradingView", description: "Pine Script Integration", icon: TrendingUp, color: "bg-blue-500" },
-    { name: "Amibroker", description: "AFL Strategy Support", icon: BarChart3, color: "bg-green-500" },
     { name: "Python", description: "Custom Algorithms", icon: Code, color: "bg-yellow-500" },
     { name: "Excel", description: "Spreadsheet Trading", icon: Calculator, color: "bg-purple-500" }
   ];
 
-  const indianBrokers = [
-    "Zerodha", "Fyers", "Upstox", "AngelOne", "5Paisa", "Alice Blue", "IIFL", "Motilal Oswal"
+  const brokers = [
+    { name: "TradingView", status: "active" },
+    { name: "CoinDCX", status: "active" }
   ];
 
-  const internationalBrokers = [
-    "Interactive Brokers", "Alpaca", "Oanda", "TD Ameritrade"
+  const comingSoonBrokers = [
+    { name: "Delta Exchange", status: "coming-soon" },
+    { name: "CoinSwitch", status: "coming-soon" }
   ];
 
   return (
@@ -37,7 +38,7 @@ const IntegrationSection = ({ id }: IntegrationSectionProps) => {
         {/* Strategy Platforms */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Strategy Platforms</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {strategyPlatforms.map((platform) => (
               <div key={platform.name} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
                 <div className={`${platform.color} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
@@ -85,25 +86,26 @@ const IntegrationSection = ({ id }: IntegrationSectionProps) => {
 
         {/* Brokers */}
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Indian Brokers */}
+          {/* Active Brokers */}
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Indian Brokers</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Active Connections</h3>
             <div className="grid grid-cols-2 gap-4">
-              {indianBrokers.map((broker) => (
-                <div key={broker} className="bg-white rounded-lg p-4 shadow-md text-center hover:shadow-lg transition-shadow">
-                  <span className="font-medium text-gray-900">{broker}</span>
+              {brokers.map((broker) => (
+                <div key={broker.name} className="bg-white rounded-lg p-4 shadow-md text-center hover:shadow-lg transition-shadow">
+                  <span className="font-medium text-gray-900">{broker.name}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* International Brokers */}
+          {/* Coming Soon Brokers */}
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">International Brokers</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Coming Soon</h3>
             <div className="grid grid-cols-2 gap-4">
-              {internationalBrokers.map((broker) => (
-                <div key={broker} className="bg-white rounded-lg p-4 shadow-md text-center hover:shadow-lg transition-shadow">
-                  <span className="font-medium text-gray-900">{broker}</span>
+              {comingSoonBrokers.map((broker) => (
+                <div key={broker.name} className="bg-gray-100 rounded-lg p-4 shadow-md text-center hover:shadow-lg transition-shadow">
+                  <span className="font-medium text-gray-500">{broker.name}</span>
+                  <div className="text-xs text-blue-600 mt-1">Coming Soon</div>
                 </div>
               ))}
             </div>
