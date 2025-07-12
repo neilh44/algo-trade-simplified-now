@@ -7,10 +7,7 @@ const navigationItems = [
   { id: 'home', label: 'Home', href: '/', external: false },
   { id: 'services', label: 'Services', href: '/services', external: false },
   { id: 'products', label: 'Products', href: '/products', external: false },
-  { id: 'integration', label: 'Integration', href: '#integration', external: false },
-  { id: 'features', label: 'Features', href: '#features', external: false },
-  { id: 'demo', label: 'Demo', href: '#demo', external: false },
-  { id: 'pricing', label: 'Pricing', href: '#pricing', external: false }
+  { id: 'about', label: 'About Us', href: '/about', external: false }
 ];
 
 const Header = () => {
