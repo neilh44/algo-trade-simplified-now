@@ -1,21 +1,27 @@
 import { useState, useEffect } from "react";
 import { Menu, X, TrendingUp } from "lucide-react";
 import { Button } from "./ui/button";
+import { Link, useLocation } from "react-router-dom";
 
 const navigationItems = [
-  { id: 'home', label: 'Home', href: '#home' },
-  { id: 'integration', label: 'Integration', href: '#integration' },
-  { id: 'features', label: 'Features', href: '#features' },
-  { id: 'demo', label: 'Demo', href: '#demo' },
-  { id: 'learning', label: 'Learning', href: '#learning' },
-  { id: 'pricing', label: 'Pricing', href: '#pricing' },
-  { id: 'contact', label: 'Contact', href: '#contact' }
+  { id: 'home', label: 'Home', href: '/', external: false },
+  { id: 'services', label: 'Services', href: '/services', external: false },
+  { id: 'products', label: 'Products', href: '/products', external: false },
+  { id: 'integration', label: 'Integration', href: '#integration', external: false },
+  { id: 'features', label: 'Features', href: '#features', external: false },
+  { id: 'demo', label: 'Demo', href: '#demo', external: false },
+  { id: 'pricing', label: 'Pricing', href: '#pricing', external: false }
 ];
 
 const Header = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const redirectToAuth = () => {
+    window.location.href = "https://automatealgos.in/";
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,20 +57,23 @@ const Header = () => {
     };
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    
-    if (element) {
-      const headerHeight = 80;
-      const elementPosition = element.offsetTop - headerHeight;
+  const handleNavigation = (item: any) => {
+    if (item.href.startsWith('#')) {
+      // Handle anchor scrolling for same page
+      const targetId = item.href.replace('#', '');
+      const element = document.getElementById(targetId);
       
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
+      if (element) {
+        const headerHeight = 80;
+        const elementPosition = element.offsetTop - headerHeight;
+        
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+      }
     }
-    
+    // For external routes, Link component will handle navigation
     setIsMobileMenuOpen(false);
   };
 
@@ -91,37 +100,68 @@ const Header = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              {navigationItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.href)}
-                  className={`px-3 py-2 text-sm font-medium transition-colors relative ${
-                    activeSection === item.id
-                      ? isScrolled 
-                        ? 'text-primary' 
-                        : 'text-white'
-                      : isScrolled 
-                        ? 'text-muted-foreground hover:text-foreground' 
-                        : 'text-white/80 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                  {activeSection === item.id && (
-                    <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${
-                      isScrolled ? 'bg-primary' : 'bg-white'
-                    } transition-colors`} />
-                  )}
-                </button>
-              ))}
+              {navigationItems.map((item) => {
+                const isActive = item.href.startsWith('#') 
+                  ? activeSection === item.id 
+                  : location.pathname === item.href;
+                
+                if (item.href.startsWith('#')) {
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleNavigation(item)}
+                      className={`px-3 py-2 text-sm font-medium transition-colors relative ${
+                        isActive
+                          ? isScrolled 
+                            ? 'text-primary' 
+                            : 'text-white'
+                          : isScrolled 
+                            ? 'text-muted-foreground hover:text-foreground' 
+                            : 'text-white/80 hover:text-white'
+                      }`}
+                    >
+                      {item.label}
+                      {isActive && (
+                        <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${
+                          isScrolled ? 'bg-primary' : 'bg-white'
+                        } transition-colors`} />
+                      )}
+                    </button>
+                  );
+                } else {
+                  return (
+                    <Link
+                      key={item.id}
+                      to={item.href}
+                      className={`px-3 py-2 text-sm font-medium transition-colors relative ${
+                        isActive
+                          ? isScrolled 
+                            ? 'text-primary' 
+                            : 'text-white'
+                          : isScrolled 
+                            ? 'text-muted-foreground hover:text-foreground' 
+                            : 'text-white/80 hover:text-white'
+                      }`}
+                    >
+                      {item.label}
+                      {isActive && (
+                        <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${
+                          isScrolled ? 'bg-primary' : 'bg-white'
+                        } transition-colors`} />
+                      )}
+                    </Link>
+                  );
+                }
+              })}
             </nav>
 
             {/* Desktop CTA */}
             <div className="hidden md:block">
               <Button 
-                onClick={() => scrollToSection('#pricing')}
+                onClick={redirectToAuth}
                 className="bg-primary hover:bg-primary/90 text-primary-foreground"
               >
-                Start Free Trial
+                Sign In / Sign Up
               </Button>
             </div>
 
@@ -150,25 +190,48 @@ const Header = () => {
           <div className="fixed inset-0 bg-black/50" onClick={() => setIsMobileMenuOpen(false)} />
           <div className="fixed top-20 left-0 right-0 bg-background border-b border-border shadow-lg">
             <nav className="px-4 py-6 space-y-4">
-              {navigationItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.href)}
-                  className={`block w-full text-left px-3 py-3 text-base font-medium transition-colors ${
-                    activeSection === item.id
-                      ? 'text-primary bg-primary/10'
-                      : 'text-foreground hover:text-primary hover:bg-accent'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
+              {navigationItems.map((item) => {
+                const isActive = item.href.startsWith('#') 
+                  ? activeSection === item.id 
+                  : location.pathname === item.href;
+                
+                if (item.href.startsWith('#')) {
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleNavigation(item)}
+                      className={`block w-full text-left px-3 py-3 text-base font-medium transition-colors ${
+                        isActive
+                          ? 'text-primary bg-primary/10'
+                          : 'text-foreground hover:text-primary hover:bg-accent'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  );
+                } else {
+                  return (
+                    <Link
+                      key={item.id}
+                      to={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`block w-full text-left px-3 py-3 text-base font-medium transition-colors ${
+                        isActive
+                          ? 'text-primary bg-primary/10'
+                          : 'text-foreground hover:text-primary hover:bg-accent'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                }
+              })}
               <div className="pt-4 border-t border-border">
                 <Button 
-                  onClick={() => scrollToSection('#pricing')}
+                  onClick={redirectToAuth}
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                 >
-                  Start Free Trial
+                  Sign In / Sign Up
                 </Button>
               </div>
             </nav>
