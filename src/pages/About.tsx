@@ -163,7 +163,6 @@ const About = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-foreground">Archit Mittal</h3>
                   <p className="text-primary font-semibold">Co-Founder & Lead Derivatives Algo Trader</p>
-                  <p className="text-sm text-muted-foreground mt-1">Gurugram</p>
                 </div>
                 
                 <div className="space-y-4 text-sm">
@@ -262,7 +261,7 @@ const About = () => {
                 <Button 
                 size="lg" 
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
-                onClick={() => window.location.href = "https://www.automatealgos.in/"}
+                onClick={() => window.location.href = "https://app.automatealgos.in/"}
               >
                 Start Your Journey Today
               </Button>
