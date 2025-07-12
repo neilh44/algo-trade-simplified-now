@@ -30,7 +30,7 @@ import {
 
 const Products = () => {
   const redirectToAuth = () => {
-    window.location.href = "https://automatealgos.in/";
+    window.location.href = "https://www.automatealgos.in/";
   };
 
   const algorithms = [
@@ -295,17 +295,18 @@ const Products = () => {
       
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-surface-bright" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
           <div className="text-center max-w-4xl mx-auto">
-            <Badge variant="outline" className="mb-4 text-primary border-primary/20">
+            <Badge variant="outline" className="mb-4 text-primary border-primary/20 font-medium">
               No Credit Card Required • 99.9% Uptime • 50+ Brokers Supported
             </Badge>
-            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 font-manrope">
               Automate Your Trading Success with 
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Proven Algorithms</span>
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"> Proven Algorithms</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-xl text-muted-foreground mb-8 leading-relaxed font-normal">
               From Manual to Automated - Deploy Professional Trading Algorithms in Minutes.<br />
               Join 35,000+ traders who've automated their success with our proven strategies.
             </p>
@@ -313,14 +314,14 @@ const Products = () => {
               <Button 
                 size="lg" 
                 onClick={redirectToAuth}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold"
               >
                 Start 7-Day Free Trial
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="px-8 py-6 text-lg border-primary/20 hover:bg-primary/5"
+                className="px-8 py-6 text-lg border-primary/20 hover:bg-hover-background font-semibold"
               >
                 <PlayCircle className="mr-2 h-5 w-5" />
                 Watch Live Demo
@@ -331,7 +332,7 @@ const Products = () => {
       </section>
 
       {/* Performance Stats */}
-      <section className="py-16 bg-card/50">
+      <section className="py-16 bg-surface-bright">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -342,8 +343,8 @@ const Products = () => {
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <stat.icon className="h-8 w-8 mx-auto mb-2 text-primary" />
-                <div className="text-3xl font-bold text-foreground">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-3xl font-bold text-foreground font-manrope">{stat.value}</div>
+                <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
               </div>
             ))}
           </div>

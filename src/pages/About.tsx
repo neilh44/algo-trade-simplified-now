@@ -10,17 +10,17 @@ const About = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/10 via-secondary/5 to-background pt-32 pb-20">
+      <section className="relative bg-gradient-to-br from-primary/10 via-secondary/5 to-surface-bright pt-32 pb-20">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 font-manrope">
               Empowering Traders with{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
                 Smart Technology
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-normal">
               Your trusted partner in algorithmic trading education and solutions
             </p>
           </div>
@@ -28,11 +28,11 @@ const About = () => {
       </section>
 
       {/* Our Story Section */}
-      <section className="py-20 bg-card/50">
+      <section className="py-20 bg-surface-bright">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">Our Journey</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 font-manrope">Our Journey</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed font-normal">
               Founded with a vision to democratize algorithmic trading, we bridge the gap between complex 
               financial markets and everyday traders. Our platform combines cutting-edge technology with 
               educational excellence to help you master the art of automated trading.
@@ -259,10 +259,10 @@ const About = () => {
             </div>
             
             <div className="text-center">
-              <Button 
+                <Button 
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                onClick={() => window.location.href = "https://automatealgos.in/"}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
+                onClick={() => window.location.href = "https://www.automatealgos.in/"}
               >
                 Start Your Journey Today
               </Button>
