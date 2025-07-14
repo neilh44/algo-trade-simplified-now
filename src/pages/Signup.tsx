@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { BookOpen, Code, TrendingUp, Shield, Users, Award, Play, CheckCircle } from 'lucide-react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { BookOpen, Code, TrendingUp, Shield, Users, Award, Play, CheckCircle, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/hooks/useAuth';
 
 const Signup = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const { toast } = useToast();
+  const { signUp } = useAuth();
   const intent = searchParams.get('intent');
   
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
+    password: '',
+    confirmPassword: '',
     phone: '',
     experience: '',
     interest: '',
@@ -22,7 +28,10 @@ const Signup = () => {
     message: ''
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -31,19 +40,46 @@ const Signup = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Thank you for your interest!",
-        description: "We'll contact you within 24 hours to discuss your algorithmic trading journey.",
-      });
+    setError('');
+
+    // Validate passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
       setIsSubmitting(false);
-      // Reset form
-      setFormData({
-        fullName: '', email: '', phone: '', experience: '', interest: '', source: '', message: ''
+      return;
+    }
+
+    // Validate password strength
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const { error } = await signUp({
+        fullName: formData.fullName,
+        email: formData.email,
+        password: formData.password,
+        phoneNumber: formData.phone,
+        tradingExperience: formData.experience,
+        primaryInterest: formData.interest,
+        howHeardAboutUs: formData.source,
+        goalsMessage: formData.message,
+        intent: intent || 'general',
       });
-    }, 1500);
+
+      if (error) {
+        setError(error);
+      } else {
+        // Success will be handled by the useAuth hook
+        navigate('/dashboard');
+      }
+    } catch (err: any) {
+      setError(err.message || 'An error occurred during signup');
+    }
+    
+    setIsSubmitting(false);
   };
 
   const formTitle = intent === 'access' 
@@ -142,6 +178,12 @@ const Signup = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
+              {error && (
+                <Alert variant="destructive">
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Full Name *
@@ -168,6 +210,56 @@ const Signup = () => {
                   placeholder="Enter your email address"
                   className="w-full"
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Password *
+                </label>
+                <div className="relative">
+                  <Input
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    value={formData.password}
+                    onChange={(e) => handleInputChange('password', e.target.value)}
+                    placeholder="Create a strong password"
+                    className="w-full pr-10"
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </Button>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Confirm Password *
+                </label>
+                <div className="relative">
+                  <Input
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    required
+                    value={formData.confirmPassword}
+                    onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+                    placeholder="Confirm your password"
+                    className="w-full pr-10"
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </Button>
+                </div>
               </div>
 
               <div>
@@ -254,7 +346,14 @@ const Signup = () => {
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg font-semibold"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Submitting...' : 'Get Started Now'}
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Creating Account...
+                    </>
+                  ) : (
+                    'Get Started Now'
+                  )}
                 </Button>
               </div>
 
