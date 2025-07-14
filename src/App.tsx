@@ -5,6 +5,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { AdminLayout } from "./components/admin/AdminLayout";
+import { ProtectedAdminRoute } from "./components/admin/ProtectedAdminRoute";
+import { AdminDashboard } from "./pages/admin/AdminDashboard";
+import { UserManagement } from "./pages/admin/UserManagement";
+import { ResourceManagement } from "./pages/admin/ResourceManagement";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Products from "./pages/Products";
@@ -37,6 +42,23 @@ const App = () => (
                 <Dashboard />
               </ProtectedRoute>
             } />
+            
+            {/* Admin Routes */}
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <ProtectedAdminRoute>
+                  <AdminLayout />
+                </ProtectedAdminRoute>
+              </ProtectedRoute>
+            }>
+              <Route index element={<AdminDashboard />} />
+              <Route path="users" element={<UserManagement />} />
+              <Route path="resources" element={<ResourceManagement />} />
+              <Route path="activities" element={<div className="p-6">Activities Page (Coming Soon)</div>} />
+              <Route path="support" element={<div className="p-6">Support Page (Coming Soon)</div>} />
+              <Route path="upload" element={<div className="p-6">Upload Page (Coming Soon)</div>} />
+            </Route>
+            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

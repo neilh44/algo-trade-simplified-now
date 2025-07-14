@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { useAdmin } from '@/hooks/useAdmin';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -11,10 +12,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User, Settings, LogOut, Home, BookOpen, FileText, TrendingUp, HelpCircle } from 'lucide-react';
+import { User, Settings, LogOut, Home, BookOpen, FileText, TrendingUp, HelpCircle, Shield } from 'lucide-react';
 
 export const DashboardHeader = () => {
   const { user, signOut } = useAuth();
+  const { isAdmin } = useAdmin();
   const [activeNav, setActiveNav] = useState('dashboard');
 
   const navItems = [
@@ -96,6 +98,17 @@ export const DashboardHeader = () => {
                   <Settings className="mr-2 h-4 w-4" />
                   <span>Settings</span>
                 </DropdownMenuItem>
+                {isAdmin && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/admin">
+                        <Shield className="mr-2 h-4 w-4" />
+                        <span>Admin Panel</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  </>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={signOut}>
                   <LogOut className="mr-2 h-4 w-4" />
