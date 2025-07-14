@@ -116,7 +116,11 @@ const LearningSection = ({ id }: LearningSectionProps) => {
               ))}
             </div>
             <div className="mt-8 text-center">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+              <Button 
+                size="lg" 
+                className="bg-blue-600 hover:bg-blue-700"
+                onClick={() => window.location.href = '/signup?intent=access'}
+              >
                 Access All Courses
               </Button>
             </div>
@@ -152,7 +156,12 @@ const LearningSection = ({ id }: LearningSectionProps) => {
               ))}
             </div>
             <div className="mt-8 text-center">
-              <Button size="lg" variant="outline" className="border-green-500 text-green-600 hover:bg-green-500 hover:text-white">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-green-500 text-green-600 hover:bg-green-500 hover:text-white"
+                onClick={() => window.location.href = '/signup?intent=download'}
+              >
                 Download All Resources
               </Button>
             </div>
