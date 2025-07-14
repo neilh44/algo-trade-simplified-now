@@ -1,4 +1,3 @@
-
 import { Mail, Phone, MapPin, Linkedin, MessageCircle, Youtube, Twitter } from "lucide-react";
 
 interface FooterProps {
@@ -33,10 +32,6 @@ const Footer = ({ id }: FooterProps) => {
     { name: "Data Security", href: "#" }
   ];
 
-  const integrations = [
-    "TradingView", "Zerodha", "Fyers", "Upstox", "AngelOne", "Interactive Brokers"
-  ];
-
   return (
     <footer id={id} className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -44,7 +39,7 @@ const Footer = ({ id }: FooterProps) => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white mb-2">AlgoTrade Pro</h3>
+              <h3 className="text-2xl font-bold text-white mb-2">Automate Algos</h3>
               <p className="text-gray-400">
                 Automate your trading strategies with institutional-grade infrastructure. 
                 Trusted by 5,000+ traders across India.
@@ -54,7 +49,7 @@ const Footer = ({ id }: FooterProps) => {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-400" />
-                <span className="text-gray-300">support@algotradepro.com</span>
+                <span className="text-gray-300">support@automatealgos.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-green-400" />
@@ -62,7 +57,7 @@ const Footer = ({ id }: FooterProps) => {
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-orange-400" />
-                <span className="text-gray-300">TF1, JIVABHAI MARKET, KALOl, GANDHINAGAR, GUJARAT, INDIA</span>
+                <span className="text-gray-300">TF-1 Jivabhai Market Kalol Gandhinagar Gujarat India</span>
               </div>
             </div>
 
@@ -147,22 +142,10 @@ const Footer = ({ id }: FooterProps) => {
           </div>
         </div>
 
-        {/* Integrations */}
-        <div className="mt-16 pt-8 border-t border-gray-800">
-          <h4 className="font-semibold mb-4 text-center">Integrated Platforms & Brokers</h4>
-          <div className="flex flex-wrap justify-center items-center gap-6">
-            {integrations.map((integration, index) => (
-              <div key={index} className="bg-gray-800 px-4 py-2 rounded-lg text-sm text-gray-300">
-                {integration}
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
           <div className="text-gray-400 text-sm mb-4 md:mb-0">
-            © 2024 AlgoTrade Pro. All rights reserved. Trading involves risk of loss.
+            © 2025 Automate Algos. All rights reserved. Trading involves risk of loss.
           </div>
           <div className="flex space-x-6 text-sm">
             <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -182,7 +165,7 @@ const Footer = ({ id }: FooterProps) => {
           <p className="text-xs text-gray-500 leading-relaxed">
             <strong>Risk Disclaimer:</strong> Trading in financial instruments involves substantial risk of loss and is not suitable for all investors. 
             Past performance is not indicative of future results. Please consider your financial situation and risk tolerance before trading. 
-            AlgoTrade Pro provides software tools and does not provide investment advice. All trading decisions are made by the user.
+            Automate Algos provides software tools and does not provide investment advice. All trading decisions are made by the user.
           </p>
         </div>
       </div>

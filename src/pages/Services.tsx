@@ -168,7 +168,7 @@ const Services = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-surface-bright" />
@@ -197,7 +197,7 @@ const Services = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="px-8 py-6 text-lg border-primary/20 hover:bg-hover-background font-semibold"
+                className="px-8 py-6 text-lg border-primary/20 hover:bg-hover-background hover:text-blue-600 font-semibold"
               >
                 <Play className="mr-2 h-5 w-5" />
                 Watch Free Demo Class

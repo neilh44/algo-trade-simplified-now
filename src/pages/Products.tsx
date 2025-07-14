@@ -25,7 +25,8 @@ import {
   Code,
   Users,
   Award,
-  PlayCircle
+  PlayCircle,
+  Play
 } from "lucide-react";
 
 const Products = () => {
@@ -292,7 +293,7 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-surface-bright" />
@@ -300,15 +301,15 @@ const Products = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
           <div className="text-center max-w-4xl mx-auto">
             <Badge variant="outline" className="mb-4 text-primary border-primary/20 font-medium">
-              No Credit Card Required • 99.9% Uptime • 50+ Brokers Supported
+              SEBI Registered • 500+ Success Stories • Industry-Recognized Certification
             </Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 font-manrope">
-              Automate Your Trading Success with 
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"> Proven Algorithms</span>
+              Master Trading with Professional 
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"> Education</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed font-normal">
-              From Manual to Automated - Deploy Professional Trading Algorithms in Minutes.<br />
-              Join 35,000+ traders who've automated their success with our proven strategies.
+              From Beginner to Expert - Comprehensive Trading Education for Every Level.<br />
+              Join 15,000+ students who've transformed their trading careers with our proven curriculum.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
@@ -316,15 +317,15 @@ const Products = () => {
                 onClick={redirectToAuth}
                 className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold"
               >
-                Start 7-Day Free Trial
+                Start Your Learning Journey
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="px-8 py-6 text-lg border-primary/20 hover:bg-hover-background font-semibold"
+                className="px-8 py-6 text-lg border-primary/20 hover:bg-hover-background hover:text-blue-600 font-semibold"
               >
-                <PlayCircle className="mr-2 h-5 w-5" />
-                Watch Live Demo
+                <Play className="mr-2 h-5 w-5" />
+                Watch Free Demo Class
               </Button>
             </div>
           </div>
@@ -640,6 +641,7 @@ const Products = () => {
         </div>
       </section>
 
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
@@ -661,7 +663,7 @@ const Products = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="px-8 py-6 text-lg border-primary/20 hover:bg-primary/5"
+              className="px-8 py-6 text-lg border-primary/20 hover:bg-blue/5 hover:text-blue-600"
             >
               Schedule Demo Call
             </Button>

@@ -91,7 +91,7 @@ const Header = () => {
               <span className={`text-xl font-bold transition-colors ${
                 isScrolled ? 'text-foreground' : 'text-white'
               }`}>
-                AlgoTrade
+                Automate Algos
               </span>
             </div>
 
