@@ -21,28 +21,37 @@ export const useAdmin = () => {
     checkAdminStatus();
   }, [user]);
 
+
   const checkAdminStatus = async () => {
     if (!user) {
       setIsAdmin(false);
       setLoading(false);
       return;
     }
-
+  
     try {
-      const { data: profile } = await supabase
+      type AdminCheck = { is_admin: boolean };
+  
+      const { data: profile, error } = await supabase
         .from('profiles')
-        .select('role')
+        .select('is_admin')
         .eq('user_id', user.id)
-        .single();
-
-      setIsAdmin(profile?.role === 'admin');
-    } catch (error) {
-      console.error('Error checking admin status:', error);
+        .single<AdminCheck>();
+  
+      if (error) {
+        console.error('Error checking admin status:', error);
+        setIsAdmin(false);
+      } else {
+        setIsAdmin(profile?.is_admin === true);
+      }
+    } catch (err) {
+      console.error('Unexpected error:', err);
       setIsAdmin(false);
     } finally {
       setLoading(false);
     }
   };
+  
 
   const fetchUsers = async () => {
     if (!isAdmin) return;

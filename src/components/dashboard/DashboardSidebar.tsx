@@ -8,7 +8,6 @@ import {
   Users,
   User,
   HelpCircle,
-  MessageSquare,
   Calendar,
   Star,
 } from 'lucide-react';
@@ -21,42 +20,42 @@ const sidebarItems = [
   },
   {
     title: 'Free Courses',
-    href: '/dashboard/courses',
+    href: '/FreeCourses', // updated
     icon: BookOpen,
   },
   {
     title: 'Resources',
-    href: '/dashboard/resources',
+    href: '/Resources', // updated
     icon: FileText,
   },
   {
     title: 'Progress',
-    href: '/dashboard/progress',
+    href: '/Progress', // updated
     icon: TrendingUp,
   },
   {
     title: 'Community',
-    href: '/dashboard/community',
+    href: '/dashboard/community', // unchanged
     icon: Users,
   },
   {
     title: 'Live Sessions',
-    href: '/dashboard/sessions',
+    href: '/LiveSessions', // updated
     icon: Calendar,
   },
   {
     title: 'Achievements',
-    href: '/dashboard/achievements',
+    href: '/dashboard/achievements', // unchanged
     icon: Star,
   },
   {
     title: 'Profile',
-    href: '/dashboard/profile',
+    href: '/Profile', // updated
     icon: User,
   },
   {
     title: 'Support',
-    href: '/dashboard/support',
+    href: '/Support', // updated
     icon: HelpCircle,
   },
 ];
@@ -72,7 +71,7 @@ export const DashboardSidebar = () => {
           {sidebarItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.href;
-            
+
             return (
               <Link
                 key={item.href}
