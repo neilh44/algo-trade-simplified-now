@@ -89,7 +89,7 @@ const Signup = () => {
     : 'Start Your Algo Trading Journey';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5">
       <div className="flex min-h-screen">
         {/* Left Side - 60% */}
         <div className="flex-1 lg:w-3/5 p-8 lg:p-12 flex flex-col justify-center">
@@ -97,20 +97,20 @@ const Signup = () => {
             {/* Branding */}
             <div className="mb-8">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mr-4">
-                  <TrendingUp className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mr-4">
+                  <TrendingUp className="w-6 h-6 text-primary-foreground" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold text-gray-900">AutomateAlgos</h1>
-                  <p className="text-gray-600">Algorithmic Trading Made Simple</p>
+                  <h1 className="text-3xl font-bold text-foreground">AutomateAlgos</h1>
+                  <p className="text-muted-foreground">Algorithmic Trading Made Simple</p>
                 </div>
               </div>
             </div>
 
             {/* Value Proposition */}
             <div className="mb-8">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                Master <span className="text-blue-600">Algorithmic Trading</span> with Expert-Led Courses
+              <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+                Master <span className="text-primary">Algorithmic Trading</span> with Expert-Led Courses
               </h2>
               
               {/* Key Benefits */}
@@ -121,32 +121,32 @@ const Signup = () => {
                   'Real-world trading strategies that actually work',
                   'Comprehensive risk management techniques',
                   'Live trading support and mentorship'
-                ].map((benefit, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
-                    <span className="text-gray-700 text-lg">{benefit}</span>
-                  </div>
-                ))}
+                 ].map((benefit, index) => (
+                   <div key={index} className="flex items-center space-x-3">
+                     <CheckCircle className="w-6 h-6 text-secondary flex-shrink-0" />
+                     <span className="text-foreground text-lg">{benefit}</span>
+                   </div>
+                 ))}
               </div>
             </div>
 
             {/* Course Highlights */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">25+</div>
-                <div className="text-gray-600">Expert Courses</div>
+                <div className="text-3xl font-bold text-primary mb-2">25+</div>
+                <div className="text-muted-foreground">Expert Courses</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">150+</div>
-                <div className="text-gray-600">Hours Content</div>
+                <div className="text-3xl font-bold text-primary mb-2">150+</div>
+                <div className="text-muted-foreground">Hours Content</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">2,500+</div>
-                <div className="text-gray-600">Active Students</div>
+                <div className="text-3xl font-bold text-primary mb-2">2,500+</div>
+                <div className="text-muted-foreground">Active Students</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">95%</div>
-                <div className="text-gray-600">Success Rate</div>
+                <div className="text-3xl font-bold text-primary mb-2">95%</div>
+                <div className="text-muted-foreground">Success Rate</div>
               </div>
             </div>
 
@@ -159,22 +159,22 @@ const Signup = () => {
                 { icon: Users, text: 'Expert Mentorship' },
                 { icon: Award, text: 'Certificates' },
                 { icon: Shield, text: 'Risk Management' }
-              ].map((feature, index) => (
-                <div key={index} className="flex items-center space-x-3 p-3 bg-white rounded-lg shadow-sm">
-                  <feature.icon className="w-5 h-5 text-blue-600" />
-                  <span className="text-gray-700">{feature.text}</span>
-                </div>
-              ))}
+               ].map((feature, index) => (
+                 <div key={index} className="flex items-center space-x-3 p-3 bg-card rounded-lg border">
+                   <feature.icon className="w-5 h-5 text-primary" />
+                   <span className="text-card-foreground">{feature.text}</span>
+                 </div>
+               ))}
             </div>
           </div>
         </div>
 
         {/* Right Side - 40% */}
-        <div className="w-full lg:w-2/5 bg-white shadow-2xl p-8 lg:p-12 flex flex-col justify-center">
+        <div className="w-full lg:w-2/5 bg-card shadow-2xl p-8 lg:p-12 flex flex-col justify-center border-l">
           <div className="max-w-md mx-auto w-full">
             <div className="mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">{formTitle}</h3>
-              <p className="text-gray-600">Fill out the form below and we'll get back to you within 24 hours.</p>
+              <h3 className="text-2xl font-bold text-card-foreground mb-2">{formTitle}</h3>
+              <p className="text-muted-foreground">Fill out the form below and we'll get back to you within 24 hours.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -185,7 +185,7 @@ const Signup = () => {
               )}
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-card-foreground mb-2">
                   Full Name *
                 </label>
                 <Input
@@ -199,7 +199,7 @@ const Signup = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-card-foreground mb-2">
                   Email Address *
                 </label>
                 <Input
@@ -213,7 +213,7 @@ const Signup = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-card-foreground mb-2">
                   Password *
                 </label>
                 <div className="relative">
@@ -238,7 +238,7 @@ const Signup = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-card-foreground mb-2">
                   Confirm Password *
                 </label>
                 <div className="relative">
@@ -263,7 +263,7 @@ const Signup = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-card-foreground mb-2">
                   Phone Number *
                 </label>
                 <Input
@@ -277,7 +277,7 @@ const Signup = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-card-foreground mb-2">
                   Trading Experience Level
                 </label>
                 <Select value={formData.experience} onValueChange={(value) => handleInputChange('experience', value)}>
@@ -293,7 +293,7 @@ const Signup = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-card-foreground mb-2">
                   Primary Interest
                 </label>
                 <Select value={formData.interest} onValueChange={(value) => handleInputChange('interest', value)}>
@@ -310,7 +310,7 @@ const Signup = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-card-foreground mb-2">
                   How did you hear about us?
                 </label>
                 <Select value={formData.source} onValueChange={(value) => handleInputChange('source', value)}>
@@ -329,7 +329,7 @@ const Signup = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-card-foreground mb-2">
                   Message/Goals
                 </label>
                 <Textarea
@@ -343,7 +343,7 @@ const Signup = () => {
               <div className="pt-4">
                 <Button 
                   type="submit" 
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg font-semibold"
+                  className="w-full py-3 text-lg font-semibold"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -357,7 +357,7 @@ const Signup = () => {
                 </Button>
               </div>
 
-              <div className="text-xs text-gray-500 text-center mt-4">
+              <div className="text-xs text-muted-foreground text-center mt-4">
                 <p>By submitting this form, you agree to receive educational content and course updates from AutomateAlgos. 
                    We respect your privacy and will never share your information with third parties. 
                    You can unsubscribe at any time.</p>
