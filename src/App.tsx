@@ -34,6 +34,16 @@ import InteractiveDemo from "./pages/InteractiveDemo";
 import ScheduleDemo from "./pages/ScheduleDemo";
 import ContactUs from "./pages/ContactUs";
 import CaseStudy from "./pages/CaseStudy";
+import SystemStatus from "./pages/SystemStatus";
+import FeatureRequests from "./pages/FeatureRequests";
+import BugReports from "./pages/BugReports";
+import CommunityForum from "./pages/CommunityForum";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import RefundPolicy from "./pages/RefundPolicy";
+import RiskDisclosure from "./pages/RiskDisclosure";
+import Compliance from "./pages/Compliance";
+import DataSecurity from "./pages/DataSecurity";
 import NotFound from "./pages/NotFound";
 
 // Dashboard Pages (now standalone)
@@ -127,6 +137,18 @@ const App = () => (
             {/* Support Routes */}
             <Route path="/help" element={<HelpCenter />} />
             <Route path="/contact" element={<ContactSupport />} />
+            <Route path="/status" element={<SystemStatus />} />
+            <Route path="/feature-requests" element={<FeatureRequests />} />
+            <Route path="/bug-reports" element={<BugReports />} />
+            <Route path="/community" element={<CommunityForum />} />
+            
+            {/* Legal Routes */}
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
+            <Route path="/risk-disclosure" element={<RiskDisclosure />} />
+            <Route path="/compliance" element={<Compliance />} />
+            <Route path="/data-security" element={<DataSecurity />} />
             
             {/* Landing Page CTA Routes */}
             <Route path="/interactive-demo" element={<InteractiveDemo />} />

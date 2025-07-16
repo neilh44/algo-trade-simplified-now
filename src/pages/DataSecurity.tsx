@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import { AppFooter } from "@/components/AppFooter";
+import AppFooter from "@/components/AppFooter";
 import { ArrowLeft, Lock, Shield, Key, Server, Eye, AlertTriangle, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -255,19 +255,19 @@ const DataSecurity = () => {
                     <h4 className="font-semibold text-orange-800 mb-2">Incident Response Timeline</h4>
                     <div className="grid md:grid-cols-4 gap-3 text-sm">
                       <div className="text-center">
-                        <div className="font-medium text-orange-800">< 15 min</div>
+                        <div className="font-medium text-orange-800">&lt; 15 min</div>
                         <div className="text-orange-600">Detection & Alert</div>
                       </div>
                       <div className="text-center">
-                        <div className="font-medium text-orange-800">< 1 hour</div>
+                        <div className="font-medium text-orange-800">&lt; 1 hour</div>
                         <div className="text-orange-600">Assessment & Containment</div>
                       </div>
                       <div className="text-center">
-                        <div className="font-medium text-orange-800">< 4 hours</div>
+                        <div className="font-medium text-orange-800">&lt; 4 hours</div>
                         <div className="text-orange-600">Resolution & Recovery</div>
                       </div>
                       <div className="text-center">
-                        <div className="font-medium text-orange-800">< 24 hours</div>
+                        <div className="font-medium text-orange-800">&lt; 24 hours</div>
                         <div className="text-orange-600">User Communication</div>
                       </div>
                     </div>

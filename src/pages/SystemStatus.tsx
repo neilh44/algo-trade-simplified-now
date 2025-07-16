@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { AppFooter } from "@/components/AppFooter";
+import AppFooter from "@/components/AppFooter";
 import { ArrowLeft, CheckCircle, AlertTriangle, Clock, Activity, Server, Database, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -125,7 +125,7 @@ const SystemStatus = () => {
                 <div className="text-xs text-green-500 mt-1">Last 30 days</div>
               </div>
               <div className="text-center p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="text-2xl font-bold text-blue-800 mb-1">< 100ms</div>
+                <div className="text-2xl font-bold text-blue-800 mb-1">&lt; 100ms</div>
                 <div className="text-sm text-blue-600">Average Response</div>
                 <div className="text-xs text-blue-500 mt-1">API latency</div>
               </div>

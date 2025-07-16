@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { AppFooter } from "@/components/AppFooter";
+import AppFooter from "@/components/AppFooter";
 import { ArrowLeft, Bug, Upload, AlertTriangle, CheckCircle, Clock, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
