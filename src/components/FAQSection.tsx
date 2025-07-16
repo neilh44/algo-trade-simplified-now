@@ -28,7 +28,7 @@ const FAQSection = () => {
     },
     {
       question: "Which brokers are currently supported?",
-      answer: "We support all major Indian brokers including Zerodha, Fyers, Upstox, AngelOne, 5Paisa, Alice Blue, IIFL, and Motilal Oswal. International brokers include Interactive Brokers, Alpaca, and Oanda. We're constantly adding new integrations based on user demand.",
+      answer: "We support all major Indian brokers. We're constantly adding new integrations based on user demand.",
       icon: Link,
       color: "from-blue-500 to-indigo-600",
       bgColor: "bg-blue-50",
@@ -68,14 +68,6 @@ const FAQSection = () => {
       color: "from-blue-400 to-indigo-500",
       counter: 256,
       suffix: "-bit"
-    },
-    {
-      title: "30-Day Money Back",
-      description: "Not satisfied? Get a full refund within 30 days, no questions asked.",
-      icon: CheckCircle,
-      color: "from-purple-400 to-pink-500",
-      counter: 30,
-      suffix: " days"
     },
     {
       title: "24/7 Market Monitoring",

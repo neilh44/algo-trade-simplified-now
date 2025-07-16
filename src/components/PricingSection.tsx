@@ -13,10 +13,14 @@ const PricingSection = ({ id }: PricingSectionProps) => {
     navigate('/contact-us');
   };
 
+  const handleStartFreeTrial = () => {
+    window.location.href = 'https://app.automatealgos.in/authentication/side-register';
+  };
+
   const plans = [
     {
-      name: "Starter",
-      price: "₹999",
+      name: "Free",
+      price: "0",
       period: "month",
       description: "Perfect for individual traders getting started with automation",
       features: [
@@ -36,7 +40,7 @@ const PricingSection = ({ id }: PricingSectionProps) => {
       cta: "Start Free Trial"
     },
     {
-      name: "Professional",
+      name: "Monthly",
       price: "₹1,999",
       period: "month",
       description: "For serious traders who need advanced features and multiple connections",
@@ -59,7 +63,7 @@ const PricingSection = ({ id }: PricingSectionProps) => {
       cta: "Start Free Trial"
     },
     {
-      name: "Enterprise",
+      name: "Annualy",
       price: "₹4,999",
       period: "month",
       description: "For professional traders and institutions requiring unlimited access",
@@ -140,6 +144,7 @@ const PricingSection = ({ id }: PricingSectionProps) => {
                   <Button 
                     size="lg" 
                     className={`w-full ${plan.popular ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-900 hover:bg-gray-800'}`}
+                    onClick={handleStartFreeTrial}
                   >
                     {plan.cta}
                   </Button>
@@ -211,16 +216,6 @@ const PricingSection = ({ id }: PricingSectionProps) => {
           </div>
         </div>
 
-        {/* Money-back Guarantee */}
-        <div className="text-center bg-white rounded-2xl p-8 shadow-lg">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            30-Day Money-Back Guarantee
-          </h3>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Try our platform risk-free. If you're not completely satisfied within 30 days, 
-            we'll refund your money. No questions asked.
-          </p>
-        </div>
       </div>
     </section>
   );
