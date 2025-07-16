@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, TrendingUp } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link, useLocation } from "react-router-dom";
 
@@ -96,8 +96,8 @@ const Header = () => {
               onClick={redirectToHome}
               className="flex items-center space-x-2 transition-opacity hover:opacity-80"
             >
-              <div className="p-2 bg-primary rounded-lg">
-                <TrendingUp className="h-6 w-6 text-primary-foreground" />
+              <div className="p-2 bg-white rounded-lg">
+                <img src="/logo.svg" alt="Automate Algos Logo" className="h-6 w-6" />
               </div>
               <span className={`text-xl font-bold transition-colors ${
                 isScrolled ? 'text-foreground' : 'text-white'
