@@ -28,7 +28,7 @@ const FAQSection = () => {
     },
     {
       question: "Which brokers are currently supported?",
-      answer: "We support all major Indian brokers. We're constantly adding new integrations based on user demand.",
+      answer: "We support all major Indian brokers Tradingview, CoinDCX. We're constantly adding new integrations based on user demand. Delta exchange & coinswitch are coming",
       icon: Link,
       color: "from-blue-500 to-indigo-600",
       bgColor: "bg-blue-50",
@@ -36,7 +36,7 @@ const FAQSection = () => {
     },
     {
       question: "Can I use my existing TradingView or Python strategies?",
-      answer: "Yes! You can directly connect your TradingView Pine Script strategies, import your Python algorithms, or use Amibroker AFL scripts. Our platform translates these into broker-compatible orders automatically. No code changes required.",
+      answer: "Yes! You can directly connect your TradingView Pine Script strategies, import your Python algorithms. Our platform translates these into broker-compatible orders automatically. No code changes required.",
       icon: Code,
       color: "from-purple-500 to-pink-600",
       bgColor: "bg-purple-50",

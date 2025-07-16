@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Linkedin, MessageCircle, Youtube, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, MessageCircle, Youtube, Twitter, Instagram } from "lucide-react";
 
 interface FooterProps {
   id?: string;
@@ -31,6 +31,39 @@ const Footer = ({ id }: FooterProps) => {
     { name: "Risk Disclosure", href: "/risk-disclosure" },
     { name: "Compliance", href: "/compliance" },
     { name: "Data Security", href: "/data-security" }
+  ];
+
+  const socialLinks = [
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/company/automate-algos",
+      icon: Linkedin,
+      hoverColor: "hover:bg-blue-600"
+    },
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/automate_algos",
+      icon: Instagram,
+      hoverColor: "hover:bg-pink-600"
+    },
+    {
+      name: "Telegram",
+      href: "https://t.me/+cQV3FPA406UwMjhl",
+      icon: MessageCircle,
+      hoverColor: "hover:bg-blue-500"
+    },
+    {
+      name: "YouTube",
+      href: "https://youtu.be/yjtgComx9xY",
+      icon: Youtube,
+      hoverColor: "hover:bg-red-600"
+    },
+    {
+      name: "Twitter",
+      href: "https://x.com/automate_algos?s=11",
+      icon: Twitter,
+      hoverColor: "hover:bg-blue-400"
+    }
   ];
 
   return (
@@ -66,18 +99,18 @@ const Footer = ({ id }: FooterProps) => {
             <div className="mt-8">
               <h4 className="font-semibold mb-4">Follow Us</h4>
               <div className="flex space-x-4">
-                <a href="#" className="bg-gray-800 p-2 rounded-lg hover:bg-blue-600 transition-colors">
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a href="#" className="bg-gray-800 p-2 rounded-lg hover:bg-green-600 transition-colors">
-                  <MessageCircle className="w-5 h-5" />
-                </a>
-                <a href="#" className="bg-gray-800 p-2 rounded-lg hover:bg-red-600 transition-colors">
-                  <Youtube className="w-5 h-5" />
-                </a>
-                <a href="#" className="bg-gray-800 p-2 rounded-lg hover:bg-blue-400 transition-colors">
-                  <Twitter className="w-5 h-5" />
-                </a>
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`bg-gray-800 p-2 rounded-lg ${social.hoverColor} transition-colors`}
+                    title={social.name}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
