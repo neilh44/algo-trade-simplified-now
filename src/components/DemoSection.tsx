@@ -1,12 +1,22 @@
-
 import { Button } from "@/components/ui/button";
 import { Play, MousePointer, Calendar } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface DemoSectionProps {
   id?: string;
 }
 
 const DemoSection = ({ id }: DemoSectionProps) => {
+  const navigate = useNavigate();
+
+  const handleInteractiveDemo = () => {
+    window.open('https://app.automatealgos.in', '_blank');
+  };
+
+  const handleScheduleDemo = () => {
+    navigate('/ScheduleDemo');
+  };
+
   return (
     <section id={id} className="py-16 lg:py-24 bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,7 +66,11 @@ const DemoSection = ({ id }: DemoSectionProps) => {
                   <p className="text-gray-300 mb-4">
                     Click through our platform interface and experience the strategy deployment process firsthand.
                   </p>
-                  <Button variant="outline" className="border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white">
+                  <Button 
+                    variant="outline" 
+                    className="border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white"
+                    onClick={handleInteractiveDemo}
+                  >
                     Try Interactive Demo
                   </Button>
                 </div>
@@ -73,7 +87,11 @@ const DemoSection = ({ id }: DemoSectionProps) => {
                   <p className="text-gray-300 mb-4">
                     Schedule a one-on-one demo with our trading experts and get your questions answered.
                   </p>
-                  <Button variant="outline" className="border-green-500 text-green-400 hover:bg-green-500 hover:text-white">
+                  <Button 
+                    variant="outline" 
+                    className="border-green-500 text-green-400 hover:bg-green-500 hover:text-white"
+                    onClick={handleScheduleDemo}
+                  >
                     Schedule Demo Call
                   </Button>
                 </div>

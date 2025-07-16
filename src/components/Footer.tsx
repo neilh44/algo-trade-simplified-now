@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, MessageCircle, Youtube, Twitter } from "lucide-react";
 
 interface FooterProps {
@@ -6,30 +7,30 @@ interface FooterProps {
 
 const Footer = ({ id }: FooterProps) => {
   const quickLinks = [
-    { name: "Documentation", href: "#" },
-    { name: "API Reference", href: "#" },
-    { name: "Tutorials", href: "#" },
-    { name: "Video Guides", href: "#" },
-    { name: "Strategy Templates", href: "#" },
-    { name: "Blog", href: "#" }
+    { name: "Documentation", href: "/docs" },
+    { name: "API Reference", href: "/api-reference" },
+    { name: "Tutorials", href: "/tutorials" },
+    { name: "Video Guides", href: "/video-guides" },
+    { name: "Strategy Templates", href: "/strategy-templates" },
+    { name: "Blog", href: "/blog" }
   ];
 
   const supportLinks = [
-    { name: "Help Center", href: "#" },
-    { name: "Contact Support", href: "#" },
-    { name: "System Status", href: "#" },
-    { name: "Feature Requests", href: "#" },
-    { name: "Bug Reports", href: "#" },
-    { name: "Community Forum", href: "#" }
+    { name: "Help Center", href: "/help" },
+    { name: "Contact Support", href: "/contact" },
+    { name: "System Status", href: "/status" },
+    { name: "Feature Requests", href: "/feature-requests" },
+    { name: "Bug Reports", href: "/bug-reports" },
+    { name: "Community Forum", href: "/community" }
   ];
 
   const legalLinks = [
-    { name: "Terms of Service", href: "#" },
-    { name: "Privacy Policy", href: "#" },
-    { name: "Refund Policy", href: "#" },
-    { name: "Risk Disclosure", href: "#" },
-    { name: "Compliance", href: "#" },
-    { name: "Data Security", href: "#" }
+    { name: "Terms of Service", href: "/terms" },
+    { name: "Privacy Policy", href: "/privacy" },
+    { name: "Refund Policy", href: "/refund-policy" },
+    { name: "Risk Disclosure", href: "/risk-disclosure" },
+    { name: "Compliance", href: "/compliance" },
+    { name: "Data Security", href: "/data-security" }
   ];
 
   return (
@@ -87,9 +88,9 @@ const Footer = ({ id }: FooterProps) => {
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
+                  <Link to={link.href} className="text-gray-400 hover:text-white transition-colors">
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -101,9 +102,9 @@ const Footer = ({ id }: FooterProps) => {
             <ul className="space-y-3">
               {supportLinks.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
+                  <Link to={link.href} className="text-gray-400 hover:text-white transition-colors">
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -115,9 +116,9 @@ const Footer = ({ id }: FooterProps) => {
             <ul className="space-y-3 mb-8">
               {legalLinks.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
+                  <Link to={link.href} className="text-gray-400 hover:text-white transition-colors">
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -148,15 +149,15 @@ const Footer = ({ id }: FooterProps) => {
             © 2025 Automate Algos. All rights reserved. Trading involves risk of loss.
           </div>
           <div className="flex space-x-6 text-sm">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+            <Link to="/data-security" className="text-gray-400 hover:text-white transition-colors">
               Security
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+            </Link>
+            <Link to="/status" className="text-gray-400 hover:text-white transition-colors">
               Status
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+            </Link>
+            <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
               Support
-            </a>
+            </Link>
           </div>
         </div>
 
