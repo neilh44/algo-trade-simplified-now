@@ -1,8 +1,14 @@
-
 import { Download, Calculator, FileText, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const LeadMagnetSection = () => {
+  const navigate = useNavigate();
+  
+  const handleDownloadClick = () => {
+    navigate('/signup');
+  };
+
   const leadMagnets = [
     {
       title: "Top 10 TradingView Strategies",
@@ -75,7 +81,10 @@ const LeadMagnetSection = () => {
                 </div>
               </div>
               
-              <Button className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white border-0">
+              <Button 
+                onClick={handleDownloadClick}
+                className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white border-0"
+              >
                 <Download className="w-5 h-5 mr-2" />
                 Download Free {resource.type}
               </Button>
@@ -101,7 +110,11 @@ const LeadMagnetSection = () => {
                   placeholder="Enter your email address"
                   className="flex-1 px-6 py-4 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
-                <Button size="lg" className="bg-green-500 hover:bg-green-600 text-white px-8">
+                <Button 
+                  size="lg" 
+                  onClick={handleDownloadClick}
+                  className="bg-green-500 hover:bg-green-600 text-white px-8"
+                >
                   Get Free Access
                 </Button>
               </div>

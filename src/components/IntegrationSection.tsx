@@ -21,6 +21,10 @@ const IntegrationSection = ({ id }: IntegrationSectionProps) => {
     { name: "CoinSwitch", status: "coming-soon", logo: "🔄" }
   ];
 
+  const handleGetStarted = () => {
+    window.open('https://app.automatealgos.in', '_blank');
+  };
+
   return (
     <section id={id} className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
       {/* Animated Background Elements */}
@@ -165,7 +169,10 @@ const IntegrationSection = ({ id }: IntegrationSectionProps) => {
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
               Join thousands of traders who trust our platform for seamless integration and lightning-fast execution.
             </p>
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+            <button 
+              onClick={handleGetStarted}
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all cursor-pointer"
+            >
               Get Started Now
             </button>
           </div>

@@ -1,4 +1,3 @@
-
 import { BookOpen, Download, Calculator, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -7,6 +6,8 @@ interface LearningSectionProps {
 }
 
 const LearningSection = ({ id }: LearningSectionProps) => {
+  const targetUrl = "https://automatealgos.in/signup?intent=access";
+
   const courses = [
     {
       title: "Algorithmic Trading Zero to Hero",
@@ -73,6 +74,10 @@ const LearningSection = ({ id }: LearningSectionProps) => {
     }
   ];
 
+  const handleButtonClick = () => {
+    window.location.href = targetUrl;
+  };
+
   return (
     <section id={id} className="py-16 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,7 +111,7 @@ const LearningSection = ({ id }: LearningSectionProps) => {
                           <span>•</span>
                           <span>{course.level}</span>
                         </div>
-                        <Button variant="outline" size="sm">
+                        <Button variant="outline" size="sm" onClick={handleButtonClick}>
                           Enroll Now
                         </Button>
                       </div>
@@ -119,7 +124,7 @@ const LearningSection = ({ id }: LearningSectionProps) => {
               <Button 
                 size="lg" 
                 className="bg-blue-600 hover:bg-blue-700"
-                onClick={() => window.location.href = '/signup?intent=access'}
+                onClick={handleButtonClick}
               >
                 Access All Courses
               </Button>
@@ -146,7 +151,12 @@ const LearningSection = ({ id }: LearningSectionProps) => {
                         <div className="text-sm text-gray-500">
                           <span className="font-medium">{resource.downloads}</span> downloads
                         </div>
-                        <Button variant="outline" size="sm" className="border-green-500 text-green-600 hover:bg-green-500 hover:text-white">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="border-green-500 text-green-600 hover:bg-green-500 hover:text-white"
+                          onClick={handleButtonClick}
+                        >
                           Download {resource.type}
                         </Button>
                       </div>
@@ -160,7 +170,7 @@ const LearningSection = ({ id }: LearningSectionProps) => {
                 size="lg" 
                 variant="outline" 
                 className="border-green-500 text-green-600 hover:bg-green-500 hover:text-white"
-                onClick={() => window.location.href = '/signup?intent=download'}
+                onClick={handleButtonClick}
               >
                 Download All Resources
               </Button>
@@ -186,7 +196,7 @@ const LearningSection = ({ id }: LearningSectionProps) => {
                 placeholder="Enter your email address"
                 className="flex-1 px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <Button className="bg-blue-600 hover:bg-blue-700 px-6">
+              <Button className="bg-blue-600 hover:bg-blue-700 px-6" onClick={handleButtonClick}>
                 Subscribe
               </Button>
             </div>

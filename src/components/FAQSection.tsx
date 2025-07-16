@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChevronDown, Shield, Zap, Link, Code, HelpCircle, Star, CheckCircle, Clock, Award } from "lucide-react";
 
 const FAQSection = () => {
+  const navigate = useNavigate();
+
   const [openItem, setOpenItem] = useState<number | null>(0);
   const [hoveredTrust, setHoveredTrust] = useState<number | null>(null);
   const [animatedCounters, setAnimatedCounters] = useState({ uptime: 0, users: 0, trades: 0 });
@@ -239,10 +242,18 @@ const FAQSection = () => {
         <div className="mt-16 text-center max-w-md mx-auto">
           <p className="text-gray-600 mb-6 text-lg" style={{fontWeight: 300, letterSpacing: '0.01em'}}>Still have questions?</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 w-full sm:w-auto tracking-wide" style={{fontWeight: 600}}>
+            <button 
+              onClick={() => navigate('/contact-us')}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 w-full sm:w-auto tracking-wide" 
+              style={{fontWeight: 600}}
+            >
               Contact Support
             </button>
-            <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto tracking-wide" style={{fontWeight: 600}}>
+            <button 
+              onClick={() => navigate('/schedule-demo')}
+              className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto tracking-wide" 
+              style={{fontWeight: 600}}
+            >
               Schedule a Call
             </button>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from "@/components/Header";
 import AppFooter from "@/components/AppFooter";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,11 @@ const ScheduleDemo = () => {
     meetingType: '',
     message: ''
   });
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

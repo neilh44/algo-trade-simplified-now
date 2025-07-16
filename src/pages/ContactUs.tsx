@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from "@/components/Header";
 import AppFooter from "@/components/AppFooter";
 import { Button } from "@/components/ui/button";
@@ -21,8 +21,12 @@ const ContactUs = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleSubmit = () => {
     // Handle form submission here
     toast({
       title: "Message Sent!",
@@ -118,7 +122,7 @@ const ContactUs = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="name">Full Name *</Label>
@@ -194,10 +198,10 @@ const ContactUs = () => {
                       />
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full">
+                    <Button type="button" onClick={handleSubmit} size="lg" className="w-full">
                       Send Message
                     </Button>
-                  </form>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -215,8 +219,8 @@ const ContactUs = () => {
                       <div>
                         <h4 className="font-semibold text-foreground">AutomateAlgos Headquarters</h4>
                         <p className="text-muted-foreground">
-                          Business District, Mumbai<br />
-                          Maharashtra, India 400001
+                          TF-1 Jivabhai Market<br />
+                          Kalol Gujarat
                         </p>
                       </div>
                       <div className="flex items-center gap-2 text-sm">

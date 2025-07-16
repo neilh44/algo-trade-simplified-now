@@ -1,12 +1,18 @@
-
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from 'react-router-dom';
 
 interface PricingSectionProps {
   id?: string;
 }
 
 const PricingSection = ({ id }: PricingSectionProps) => {
+  const navigate = useNavigate();
+
+  const handleContactSales = () => {
+    navigate('/contact-us');
+  };
+
   const plans = [
     {
       name: "Starter",
@@ -191,7 +197,11 @@ const PricingSection = ({ id }: PricingSectionProps) => {
               </ul>
             </div>
             <div className="text-center lg:text-right">
-              <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-100">
+              <Button 
+                size="lg" 
+                className="bg-white text-gray-900 hover:bg-gray-100"
+                onClick={handleContactSales}
+              >
                 Contact Sales Team
               </Button>
               <p className="text-sm text-gray-300 mt-4">

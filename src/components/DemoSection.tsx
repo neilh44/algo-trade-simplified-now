@@ -14,7 +14,7 @@ const DemoSection = ({ id }: DemoSectionProps) => {
   };
 
   const handleScheduleDemo = () => {
-    navigate('/ScheduleDemo');
+    navigate('/schedule-demo');
   };
 
   return (

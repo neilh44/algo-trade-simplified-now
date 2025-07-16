@@ -106,6 +106,18 @@ const TestimonialsSection = () => {
     setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
+  // Handle navigation to case study page
+  const handleCaseStudyClick = () => {
+    // In a real React Router setup, you would use:
+    // import { useNavigate } from 'react-router-dom';
+    // const navigate = useNavigate();
+    // navigate('/case-study');
+    
+    // For demonstration, we'll show an alert
+    // Replace this with actual navigation logic
+    window.location.href = '/case-study';
+  };
+
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -292,7 +304,10 @@ const TestimonialsSection = () => {
                 using our automated swing trading strategies.
               </p>
               <div className="flex space-x-4">
-                <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 hover:scale-105">
+                <button 
+                  onClick={handleCaseStudyClick}
+                  className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 hover:scale-105"
+                >
                   Read Full Case Study
                 </button>
                 <button className="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-all duration-200">
@@ -326,7 +341,10 @@ const TestimonialsSection = () => {
             <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl">
               Join 5,000+ Traders on Telegram
             </button>
-            <button className="border border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-200 hover:scale-105">
+            <button 
+              onClick={() => window.open('https://app.automatealgos.in', '_blank')}
+              className="border border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-200 hover:scale-105"
+            >
               Start Free Trial
             </button>
           </div>
