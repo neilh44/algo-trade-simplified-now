@@ -21,10 +21,22 @@ import About from "./pages/About";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
+import Dashboard from "./pages/Dashboard";
+import Documentation from "./pages/Documentation";
+import APIReference from "./pages/APIReference";
+import Tutorials from "./pages/Tutorials";
+import VideoGuides from "./pages/VideoGuides";
+import StrategyTemplates from "./pages/StrategyTemplates";
+import Blog from "./pages/Blog";
+import HelpCenter from "./pages/HelpCenter";
+import ContactSupport from "./pages/ContactSupport";
+import InteractiveDemo from "./pages/InteractiveDemo";
+import ScheduleDemo from "./pages/ScheduleDemo";
+import ContactUs from "./pages/ContactUs";
+import CaseStudy from "./pages/CaseStudy";
 import NotFound from "./pages/NotFound";
 
 // Dashboard Pages (now standalone)
-import Dashboard from "./pages/Dashboard";
 import FreeCourses from "./pages/FreeCourses";
 import Resources from "./pages/Resources";
 import Progress from "./pages/Progress";
@@ -103,8 +115,26 @@ const App = () => (
               <Route path="support" element={<div className="p-6">Support Page (Coming Soon)</div>} />
               <Route path="upload" element={<div className="p-6">Upload Page (Coming Soon)</div>} />
             </Route>
-
-            {/* Catch-All Route */}
+            
+            {/* Documentation & Resources Routes */}
+            <Route path="/docs" element={<Documentation />} />
+            <Route path="/api-reference" element={<APIReference />} />
+            <Route path="/tutorials" element={<Tutorials />} />
+            <Route path="/video-guides" element={<VideoGuides />} />
+            <Route path="/strategy-templates" element={<StrategyTemplates />} />
+            <Route path="/blog" element={<Blog />} />
+            
+            {/* Support Routes */}
+            <Route path="/help" element={<HelpCenter />} />
+            <Route path="/contact" element={<ContactSupport />} />
+            
+            {/* Landing Page CTA Routes */}
+            <Route path="/interactive-demo" element={<InteractiveDemo />} />
+            <Route path="/schedule-demo" element={<ScheduleDemo />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/case-study" element={<CaseStudy />} />
+            
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
