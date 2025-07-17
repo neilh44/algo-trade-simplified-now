@@ -1,48 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Header from "@/components/Header";
 import AppFooter from "@/components/AppFooter";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calendar, Clock, Phone, Video, CheckCircle } from 'lucide-react';
-import { useToast } from "@/hooks/use-toast";
+import { Calendar, Clock, Phone, CheckCircle } from 'lucide-react';
+
+// Extend Window interface to include jotformEmbedHandler
+declare global {
+  interface Window {
+    jotformEmbedHandler: (selector: string, url: string) => void;
+  }
+}
 
 const ScheduleDemo = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    experience: '',
-    timeSlot: '',
-    meetingType: '',
-    message: ''
-  });
-
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    toast({
-      title: "Demo Scheduled!",
-      description: "We'll contact you shortly to confirm your demo session.",
-    });
-  };
+  // Load JotForm script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js';
+    script.async = true;
+    document.head.appendChild(script);
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
+    script.onload = () => {
+      if (typeof window.jotformEmbedHandler === 'function') {
+        window.jotformEmbedHandler("iframe[id='JotFormIFrame-251964065246057']", "https://form.jotform.com/");
+      }
+    };
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -65,7 +56,7 @@ const ScheduleDemo = () => {
         <section className="py-16 px-6">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12">
-              {/* Form Section */}
+              {/* JotForm Section */}
               <Card className="border-border">
                 <CardHeader>
                   <CardTitle className="text-2xl text-foreground">Book Your Demo</CardTitle>
@@ -74,112 +65,34 @@ const ScheduleDemo = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Full Name *</Label>
-                        <Input
-                          id="name"
-                          value={formData.name}
-                          onChange={(e) => handleInputChange('name', e.target.value)}
-                          placeholder="Enter your full name"
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email Address *</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => handleInputChange('email', e.target.value)}
-                          placeholder="Enter your email"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">Phone Number *</Label>
-                        <Input
-                          id="phone"
-                          value={formData.phone}
-                          onChange={(e) => handleInputChange('phone', e.target.value)}
-                          placeholder="+91 9876543210"
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="company">Company/Organization</Label>
-                        <Input
-                          id="company"
-                          value={formData.company}
-                          onChange={(e) => handleInputChange('company', e.target.value)}
-                          placeholder="Your company name"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="experience">Trading Experience</Label>
-                        <Select onValueChange={(value) => handleInputChange('experience', value)}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select your experience level" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="beginner">Beginner (0-1 years)</SelectItem>
-                            <SelectItem value="intermediate">Intermediate (1-3 years)</SelectItem>
-                            <SelectItem value="advanced">Advanced (3-5 years)</SelectItem>
-                            <SelectItem value="expert">Expert (5+ years)</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="timeSlot">Preferred Time Slot</Label>
-                        <Select onValueChange={(value) => handleInputChange('timeSlot', value)}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select preferred time" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="morning">Morning (9 AM - 12 PM)</SelectItem>
-                            <SelectItem value="afternoon">Afternoon (12 PM - 4 PM)</SelectItem>
-                            <SelectItem value="evening">Evening (4 PM - 7 PM)</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="meetingType">Meeting Type</Label>
-                      <Select onValueChange={(value) => handleInputChange('meetingType', value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select meeting type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="video">Video Call (Zoom/Google Meet)</SelectItem>
-                          <SelectItem value="phone">Phone Call</SelectItem>
-                          <SelectItem value="inperson">In-Person (if available)</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Additional Information</Label>
-                      <Textarea
-                        id="message"
-                        value={formData.message}
-                        onChange={(e) => handleInputChange('message', e.target.value)}
-                        placeholder="Tell us about your specific needs or questions..."
-                        rows={4}
-                      />
-                    </div>
-
-                    <Button type="submit" size="lg" className="w-full">
-                      Schedule My Demo
-                    </Button>
-                  </form>
+                  <div className="bg-white rounded-lg overflow-hidden">
+                    <iframe
+                      id="JotFormIFrame-251964065246057"
+                      title="Signup Form"
+                      onLoad={() => window.parent.scrollTo(0,0)}
+                      allowTransparency={true}
+                      allow="geolocation; microphone; camera; fullscreen; payment"
+                      src="https://form.jotform.com/251964065246057"
+                      frameBorder="0"
+                      style={{
+                        minWidth: '100%',
+                        maxWidth: '100%',
+                        height: '600px',
+                        border: 'none'
+                      }}
+                      scrolling="no"
+                    />
+                  </div>
+                  
+                  {/* Fallback link */}
+                  <div className="text-center mt-4">
+                    <a
+                      href="javascript:void(window.open('https://form.jotform.com/251964065246057', 'blank', 'scrollbars=yes, toolbar=no, width=700, height=500'))"
+                      className="text-primary hover:text-primary/80 text-sm underline"
+                    >
+                      Open form in new window
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
 

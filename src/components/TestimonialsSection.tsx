@@ -118,6 +118,11 @@ const TestimonialsSection = () => {
     window.location.href = '/case-study';
   };
 
+  // Handle Telegram channel join
+  const handleTelegramJoin = () => {
+    window.open('https://t.me/+cQV3FPA406UwMjhl', '_blank');
+  };
+
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -338,7 +343,10 @@ const TestimonialsSection = () => {
         <div className="text-center mt-12">
           <p className="text-gray-600 mb-6 text-lg">Join our growing community of successful traders</p>
           <div className="flex justify-center space-x-4">
-            <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl">
+            <button 
+              onClick={handleTelegramJoin}
+              className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
+            >
               Join 5,000+ Traders on Telegram
             </button>
             <button 

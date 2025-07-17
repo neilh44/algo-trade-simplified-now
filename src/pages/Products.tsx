@@ -257,6 +257,9 @@ const Products = () => {
     }
   ];
 
+
+
+
   const techFeatures = [
     {
       icon: Zap,

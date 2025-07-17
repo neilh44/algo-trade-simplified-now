@@ -13,7 +13,7 @@ const PricingSection = ({ id }: PricingSectionProps) => {
     navigate('/contact-us');
   };
 
-  const handleStartFreeTrial = () => {
+  const handleBuyNow = () => {
     window.location.href = 'https://app.automatealgos.in/authentication/side-register';
   };
 
@@ -32,12 +32,10 @@ const PricingSection = ({ id }: PricingSectionProps) => {
         "Mobile app access"
       ],
       limitations: [
-        "Limited to 100 trades/month",
-        "Basic reporting",
-        "No copy trading"
+       
       ],
       popular: false,
-      cta: "Start Free Trial"
+      cta: "Get Started Free"
     },
     {
       name: "Monthly",
@@ -45,26 +43,25 @@ const PricingSection = ({ id }: PricingSectionProps) => {
       period: "month",
       description: "For serious traders who need advanced features and multiple connections",
       features: [
-        "3 broker connections",
+        "1 broker connections",
         "Unlimited strategies",
         "Advanced backtesting",
         "Priority support",
         "Risk management tools",
-        "Mobile app access",
-        "Copy trading (3 accounts)",
+        "Mobile app access",        
         "Advanced analytics",
         "Custom indicators",
         "API access"
       ],
       limitations: [
-        "Limited to 1,000 trades/month"
+        
       ],
       popular: true,
-      cta: "Start Free Trial"
+      cta: "Buy Now"
     },
     {
       name: "Annualy",
-      price: "₹4,999",
+      price: "₹19,999",
       period: "month",
       description: "For professional traders and institutions requiring unlimited access",
       features: [
@@ -73,8 +70,7 @@ const PricingSection = ({ id }: PricingSectionProps) => {
         "Advanced backtesting",
         "Dedicated support manager",
         "Risk management tools",
-        "Mobile app access",
-        "Copy trading (unlimited)",
+        "Mobile app access",        
         "Advanced analytics",
         "Custom indicators",
         "API access",
@@ -85,7 +81,7 @@ const PricingSection = ({ id }: PricingSectionProps) => {
       ],
       limitations: [],
       popular: false,
-      cta: "Start Free Trial"
+      cta: "Buy Now"
     }
   ];
 
@@ -105,20 +101,9 @@ const PricingSection = ({ id }: PricingSectionProps) => {
             Choose Your <span className="text-blue-600">Trading Plan</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Start with a 7-day free trial. No credit card required. 
+            Start with our free plan or upgrade to unlock advanced features. 
             Upgrade, downgrade, or cancel anytime.
           </p>
-          
-          {/* Pricing Toggle */}
-          <div className="inline-flex items-center bg-white rounded-lg p-1 shadow-md">
-            <button className="px-6 py-2 rounded-md bg-blue-600 text-white font-medium">
-              Monthly
-            </button>
-            <button className="px-6 py-2 rounded-md text-gray-600 font-medium hover:text-gray-900">
-              Annual
-              <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Save 20%</span>
-            </button>
-          </div>
         </div>
 
         {/* Pricing Cards */}
@@ -144,7 +129,7 @@ const PricingSection = ({ id }: PricingSectionProps) => {
                   <Button 
                     size="lg" 
                     className={`w-full ${plan.popular ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-900 hover:bg-gray-800'}`}
-                    onClick={handleStartFreeTrial}
+                    onClick={handleBuyNow}
                   >
                     {plan.cta}
                   </Button>
