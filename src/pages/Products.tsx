@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Badge } from "@/components/ui/badge";
 import {
@@ -203,6 +204,8 @@ const Products = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
+      
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-surface-bright" />
