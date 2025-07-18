@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Play, MousePointer, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface DemoSectionProps {
   id?: string;
@@ -8,6 +9,7 @@ interface DemoSectionProps {
 
 const DemoSection = ({ id }: DemoSectionProps) => {
   const navigate = useNavigate();
+  const [showVideo, setShowVideo] = useState(false);
 
   const handleInteractiveDemo = () => {
     window.open('https://app.automatealgos.in', '_blank');
@@ -15,6 +17,10 @@ const DemoSection = ({ id }: DemoSectionProps) => {
 
   const handleScheduleDemo = () => {
     navigate('/schedule-demo');
+  };
+
+  const handlePlayVideo = () => {
+    setShowVideo(true);
   };
 
   return (
@@ -34,19 +40,42 @@ const DemoSection = ({ id }: DemoSectionProps) => {
           {/* Video Demo */}
           <div className="relative">
             <div className="bg-gray-800 rounded-2xl p-2">
-              <div className="bg-gradient-to-br from-blue-500 to-green-500 rounded-xl aspect-video flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/20"></div>
-                <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-100 relative z-10">
-                  <Play className="w-6 h-6 mr-2" />
-                  Watch 60s Demo
-                </Button>
-                {/* Mock UI Elements */}
-                <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-sm rounded-lg p-2 text-xs">
-                  Strategy: Moving Average Crossover
-                </div>
-                <div className="absolute bottom-4 right-4 bg-green-500/20 backdrop-blur-sm rounded-lg p-2 text-xs">
-                  Status: Active
-                </div>
+              <div className="rounded-xl aspect-video flex items-center justify-center relative overflow-hidden">
+                {!showVideo ? (
+                  <>
+                    {/* YouTube Thumbnail */}
+                    <img 
+                      src="https://img.youtube.com/vi/yjtgComx9xY/maxresdefault.jpg"
+                      alt="Video thumbnail"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/30"></div>
+                    <Button 
+                      size="lg" 
+                      className="bg-white text-gray-900 hover:bg-gray-100 relative z-10 shadow-lg"
+                      onClick={handlePlayVideo}
+                    >
+                      <Play className="w-6 h-6 mr-2" />
+                      Watch Now
+                    </Button>
+                    {/* Mock UI Elements */}
+                    <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-sm rounded-lg p-2 text-xs text-white">
+                    </div>
+                    <div className="absolute bottom-4 right-4 bg-green-500/80 backdrop-blur-sm rounded-lg p-2 text-xs text-white">
+                    </div>
+                  </>
+                ) : (
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/yjtgComx9xY?autoplay=1"
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="rounded-lg"
+                  ></iframe>
+                )}
               </div>
             </div>
             <div className="text-center mt-4">
