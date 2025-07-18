@@ -1,39 +1,182 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from "@/components/Header";
 import AppFooter from "@/components/AppFooter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar, Clock, Phone, CheckCircle } from 'lucide-react';
+import { Calendar, Clock, Phone, CheckCircle, AlertCircle, Loader2, User, Mail, MessageCircle, MapPin } from 'lucide-react';
 
-// Extend Window interface to include jotformEmbedHandler
-declare global {
-  interface Window {
-    jotformEmbedHandler: (selector: string, url: string) => void;
-  }
+// Define proper TypeScript interfaces
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  whatsappNumber: string;
+  city: string;
+}
+
+interface FormErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  whatsappNumber?: string;
+  city?: string;
+}
+
+interface Message {
+  type: 'success' | 'error' | '';
+  text: string;
 }
 
 const ScheduleDemo = () => {
+  // Form state
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    whatsappNumber: '',
+    city: ''
+  });
+  
+  const [loading, setLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<Message>({ type: '', text: '' });
+  const [errors, setErrors] = useState<FormErrors>({});
+
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Load JotForm script
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js';
-    script.async = true;
-    document.head.appendChild(script);
+  // Form validation
+  const validateForm = (): FormErrors => {
+    const newErrors: FormErrors = {};
+    
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required';
+    }
+    
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required';
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    if (!formData.whatsappNumber.trim()) {
+      newErrors.whatsappNumber = 'WhatsApp number is required';
+    } else if (!/^\+?[\d\s-()]+$/.test(formData.whatsappNumber)) {
+      newErrors.whatsappNumber = 'Please enter a valid WhatsApp number';
+    }
+    
+    if (!formData.city.trim()) {
+      newErrors.city = 'City is required';
+    }
+    
+    return newErrors;
+  };
 
-    script.onload = () => {
-      if (typeof window.jotformEmbedHandler === 'function') {
-        window.jotformEmbedHandler("iframe[id='JotFormIFrame-251964065246057']", "https://form.jotform.com/");
-      }
-    };
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Clear error when user starts typing
+    if (errors[name as keyof FormErrors]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
 
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+  // Submit to JotForm
+  const submitToJotForm = async (data: FormData): Promise<{ success: boolean; data?: any }> => {
+    try {
+      // Create FormData object for JotForm submission
+      const formDataToSend = new FormData();
+      
+      // Based on your HTML form structure, here are the correct field mappings:
+      formDataToSend.append('q10_name[first]', data.firstName);        // Name field - first
+      formDataToSend.append('q10_name[last]', data.lastName);          // Name field - last
+      formDataToSend.append('q4_q4_email2', data.email);              // Email field
+      formDataToSend.append('q3_q3_phone1[full]', data.whatsappNumber); // WhatsApp Number field
+      formDataToSend.append('q5_q5_dropdown3', data.city);            // City dropdown field
+      
+      // Add required hidden fields from your form
+      formDataToSend.append('formID', '251964065246057');
+      formDataToSend.append('website', ''); // Honeypot field
+      formDataToSend.append('simple_spc', '251964065246057-251964065246057');
+      
+      // Submit to JotForm using the correct action URL
+      const response = await fetch('https://submit.jotform.com/submit/251964065246057', {
+        method: 'POST',
+        body: formDataToSend,
+        mode: 'no-cors' // JotForm typically requires no-cors mode
+      });
+
+      // Since we're using no-cors, we can't read the response
+      // We'll assume success if no error is thrown
+      return { success: true, data: 'Form submitted successfully' };
+    } catch (error) {
+      console.error('JotForm submission error:', error);
+      throw error;
+    }
+  };
+
+  // Handle form submission
+  const handleSubmit = async (): Promise<void> => {
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setLoading(true);
+    setMessage({ type: '', text: '' });
+
+    try {
+      const result = await submitToJotForm(formData);
+      
+      setMessage({ 
+        type: 'success', 
+        text: 'Form submitted successfully! Our team will contact you soon to schedule your demo.' 
+      });
+      
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        whatsappNumber: '',
+        city: ''
+      });
+      
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+      setMessage({ 
+        type: 'error', 
+        text: errorMessage 
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Common cities for dropdown
+  const cities = [
+    'Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 
+    'Pune', 'Ahmedabad', 'Surat', 'Jaipur', 'Lucknow', 'Kanpur', 
+    'Nagpur', 'Indore', 'Bhopal', 'Visakhapatnam', 'Pimpri-Chinchwad',
+    'Patna', 'Vadodara', 'Ghaziabad', 'Ludhiana', 'Agra', 'Nashik',
+    'Faridabad', 'Meerut', 'Rajkot', 'Kalyan-Dombivli', 'Vasai-Virar',
+    'Varanasi', 'Srinagar', 'Dhanbad', 'Jodhpur', 'Amritsar', 'Raipur',
+    'Allahabad', 'Coimbatore', 'Jabalpur', 'Gwalior', 'Vijayawada',
+    'Madurai', 'Guwahati', 'Chandigarh', 'Hubli-Dharwad', 'Mysore'
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -56,7 +199,7 @@ const ScheduleDemo = () => {
         <section className="py-16 px-6">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12">
-              {/* JotForm Section */}
+              {/* Custom Form Section */}
               <Card className="border-border">
                 <CardHeader>
                   <CardTitle className="text-2xl text-foreground">Book Your Demo</CardTitle>
@@ -65,33 +208,158 @@ const ScheduleDemo = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="bg-white rounded-lg overflow-hidden">
-                    <iframe
-                      id="JotFormIFrame-251964065246057"
-                      title="Signup Form"
-                      onLoad={() => window.parent.scrollTo(0,0)}
-                      allowTransparency={true}
-                      allow="geolocation; microphone; camera; fullscreen; payment"
-                      src="https://form.jotform.com/251964065246057"
-                      frameBorder="0"
-                      style={{
-                        minWidth: '100%',
-                        maxWidth: '100%',
-                        height: '600px',
-                        border: 'none'
-                      }}
-                      scrolling="no"
-                    />
-                  </div>
-                  
-                  {/* Fallback link */}
-                  <div className="text-center mt-4">
-                    <a
-                      href="javascript:void(window.open('https://form.jotform.com/251964065246057', 'blank', 'scrollbars=yes, toolbar=no, width=700, height=500'))"
-                      className="text-primary hover:text-primary/80 text-sm underline"
+                  <div className="space-y-4">
+                    {/* Success/Error Message */}
+                    {message.text && (
+                      <div className={`p-3 rounded-md flex items-center gap-2 ${
+                        message.type === 'success' 
+                          ? 'bg-green-100 text-green-800 border border-green-200' 
+                          : 'bg-red-100 text-red-800 border border-red-200'
+                      }`}>
+                        {message.type === 'success' ? (
+                          <CheckCircle className="w-4 h-4" />
+                        ) : (
+                          <AlertCircle className="w-4 h-4" />
+                        )}
+                        <span className="text-sm">{message.text}</span>
+                      </div>
+                    )}
+
+                    {/* Form Fields */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-1 text-foreground">
+                          First Name
+                        </label>
+                        <div className="relative">
+                          <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                          <input
+                            type="text"
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={handleInputChange}
+                            className={`w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground ${
+                              errors.firstName ? 'border-red-500' : 'border-border'
+                            }`}
+                            placeholder="John"
+                          />
+                        </div>
+                        {errors.firstName && (
+                          <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-1 text-foreground">
+                          Last Name
+                        </label>
+                        <div className="relative">
+                          <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                          <input
+                            type="text"
+                            name="lastName"
+                            value={formData.lastName}
+                            onChange={handleInputChange}
+                            className={`w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground ${
+                              errors.lastName ? 'border-red-500' : 'border-border'
+                            }`}
+                            placeholder="Doe"
+                          />
+                        </div>
+                        {errors.lastName && (
+                          <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-foreground">
+                        Email Address <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className={`w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground ${
+                            errors.email ? 'border-red-500' : 'border-border'
+                          }`}
+                          placeholder="example@example.com"
+                          required
+                        />
+                      </div>
+                      {errors.email && (
+                        <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-foreground">
+                        WhatsApp Number <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <MessageCircle className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <input
+                          type="tel"
+                          name="whatsappNumber"
+                          value={formData.whatsappNumber}
+                          onChange={handleInputChange}
+                          className={`w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground ${
+                            errors.whatsappNumber ? 'border-red-500' : 'border-border'
+                          }`}
+                          placeholder="+91"
+                          required
+                        />
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">Please enter a valid phone number.</p>
+                      {errors.whatsappNumber && (
+                        <p className="text-red-500 text-xs mt-1">{errors.whatsappNumber}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-foreground">
+                        City <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground z-10" />
+                        <select
+                          name="city"
+                          value={formData.city}
+                          onChange={handleInputChange}
+                          className={`w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary appearance-none bg-background text-foreground ${
+                            errors.city ? 'border-red-500' : 'border-border'
+                          }`}
+                          required
+                        >
+                          <option value="">Select your city</option>
+                          {cities.map(city => (
+                            <option key={city} value={city}>{city}</option>
+                          ))}
+                        </select>
+                      </div>
+                      {errors.city && (
+                        <p className="text-red-500 text-xs mt-1">{errors.city}</p>
+                      )}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleSubmit}
+                      disabled={loading}
+                      className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center gap-2"
                     >
-                      Open form in new window
-                    </a>
+                      {loading ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Submitting...
+                        </>
+                      ) : (
+                        'Schedule Demo'
+                      )}
+                    </button>
                   </div>
                 </CardContent>
               </Card>
