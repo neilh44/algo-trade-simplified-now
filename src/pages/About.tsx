@@ -245,7 +245,7 @@ const About = () => {
                   <Phone className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">Phone</h3>
-                <p className="text-muted-foreground">+91 98765 43210</p>
+                <p className="text-muted-foreground">+91 70166 43084</p>
               </div>
               
               <div className="text-center">

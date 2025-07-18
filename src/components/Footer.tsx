@@ -87,7 +87,7 @@ const Footer = ({ id }: FooterProps) => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-green-400" />
-                <span className="text-gray-300">+91 98765 43210</span>
+                <span className="text-gray-300">+91 70166 43084</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-orange-400" />

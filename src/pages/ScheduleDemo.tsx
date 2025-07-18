@@ -377,9 +377,9 @@ const ScheduleDemo = () => {
                     <div className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
                       <div>
-                        <h4 className="font-semibold text-foreground">30-Minute Session</h4>
+                        <h4 className="font-semibold text-foreground">Group Demo</h4>
                         <p className="text-sm text-muted-foreground">
-                          Comprehensive walkthrough tailored to your needs
+                          Gauranted demo every Monday morning at 11 am
                         </p>
                       </div>
                     </div>
@@ -422,8 +422,8 @@ const ScheduleDemo = () => {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="p-3 bg-muted/30 rounded-lg">
-                      <h4 className="font-semibold text-foreground text-sm">Strategy Builder</h4>
-                      <p className="text-xs text-muted-foreground">Create custom trading algorithms</p>
+                      <h4 className="font-semibold text-foreground text-sm">Live Platform Demo</h4>
+                      <p className="text-xs text-muted-foreground">Trading view automation demonstration</p>
                     </div>
                     <div className="p-3 bg-muted/30 rounded-lg">
                       <h4 className="font-semibold text-foreground text-sm">Backtesting Engine</h4>

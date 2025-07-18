@@ -13,15 +13,19 @@ const PricingSection = ({ id }: PricingSectionProps) => {
     navigate('/contact-us');
   };
 
-  const handleBuyNow = () => {
-    window.location.href = 'https://app.automatealgos.in/authentication/side-register';
+  const handleBuyNow = (planName: string) => {
+    if (planName === 'Starter') {
+      window.location.href = 'https://app.automatealgos.in';
+    } else if (planName === 'Monthly') {
+      window.location.href = 'https://wa.me/917016643084?text=I%20need%20help%20with%20monthly%20plan';
+    } else if (planName === 'Annualy') {
+      window.location.href = 'https://wa.me/917016643084?text=I%20need%20help%20with%20annual%20plan';
+    }
   };
 
   const plans = [
     {
-      name: "Free",
-      price: "0",
-      period: "month",
+      name: "Starter",
       description: "Perfect for individual traders getting started with automation",
       features: [
         "1 broker connection",
@@ -35,7 +39,7 @@ const PricingSection = ({ id }: PricingSectionProps) => {
        
       ],
       popular: false,
-      cta: "Get Started Free"
+      cta: "3 Day Free Trial"
     },
     {
       name: "Monthly",
@@ -51,7 +55,6 @@ const PricingSection = ({ id }: PricingSectionProps) => {
         "Mobile app access",        
         "Advanced analytics",
         "Custom indicators",
-        "API access"
       ],
       limitations: [
         
@@ -62,7 +65,7 @@ const PricingSection = ({ id }: PricingSectionProps) => {
     {
       name: "Annualy",
       price: "₹19,999",
-      period: "month",
+      period: "Year",
       description: "For professional traders and institutions requiring unlimited access",
       features: [
         "Unlimited broker connections",
@@ -73,11 +76,6 @@ const PricingSection = ({ id }: PricingSectionProps) => {
         "Mobile app access",        
         "Advanced analytics",
         "Custom indicators",
-        "API access",
-        "White-label options",
-        "Custom integrations",
-        "Priority execution",
-        "Advanced reporting"
       ],
       limitations: [],
       popular: false,
@@ -123,13 +121,19 @@ const PricingSection = ({ id }: PricingSectionProps) => {
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
                   <p className="text-gray-600 mb-6">{plan.description}</p>
                   <div className="mb-6">
-                    <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                    <span className="text-gray-600">/{plan.period}</span>
+                    {plan.price ? (
+                      <>
+                        <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                        <span className="text-gray-600">/{plan.period}</span>
+                      </>
+                    ) : (
+                      <span className="text-4xl font-bold text-gray-900">Free</span>
+                    )}
                   </div>
                   <Button 
                     size="lg" 
                     className={`w-full ${plan.popular ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-900 hover:bg-gray-800'}`}
-                    onClick={handleBuyNow}
+                    onClick={() => handleBuyNow(plan.name)}
                   >
                     {plan.cta}
                   </Button>

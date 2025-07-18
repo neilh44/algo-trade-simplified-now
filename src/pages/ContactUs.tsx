@@ -309,7 +309,7 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
               className={`w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'
               } ${errors.whatsappNumber ? 'border-red-500' : ''}`}
-              placeholder="+91 98765 43210"
+              placeholder="+91 70166 43084"
             />
           </div>
           <p className="text-xs text-gray-500 mt-1">Please enter a valid phone number.</p>
