@@ -48,7 +48,7 @@ import {
 
 const Products = () => {
   const redirectToAuth = () => {
-    window.location.href = "https://www.automatealgos.in/";
+    window.location.href = "https://app.automatealgos.in/authentication/login?returnUrl=%2Fdashboards%2Fdashboard1/";
   };
 
   const subscriptionTiers = [
