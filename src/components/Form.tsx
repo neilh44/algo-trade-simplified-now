@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Header from "@/components/Header";
-import AppFooter from "@/components/AppFooter";
+import React, { useState } from 'react';
 import { AlertCircle, CheckCircle, Loader2, User, Mail, MessageCircle, MapPin } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Phone, Clock, Headphones } from 'lucide-react';
 
-// JotFormSignup Component with API Integration
+// Define proper TypeScript interfaces
 interface FormData {
   firstName: string;
   lastName: string;
@@ -40,8 +35,8 @@ interface JotFormSignupProps {
 
 const JotFormSignup: React.FC<JotFormSignupProps> = ({ 
   formId = '251964065246057',
-  title = '', 
-  subtitle = '',
+  title = 'AutomateAlgos', 
+  subtitle = 'Please fill out the form below to sign up.',
   theme = 'light',
   onSuccess,
   onError,
@@ -105,7 +100,7 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
     }
   };
 
-  // JotForm API submission logic from copy #1
+  // Correct JotForm field mapping based on your HTML
   const submitToJotForm = async (data: FormData): Promise<{ success: boolean; data?: any }> => {
     try {
       // Create FormData object for JotForm submission
@@ -154,7 +149,7 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
       
       setMessage({ 
         type: 'success', 
-        text: 'Thank you for your interest! We\'ll contact you within 24 hours.' 
+        text: 'Form submitted successfully! Thank you for signing up.' 
       });
       
       // Reset form
@@ -186,7 +181,7 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
 
   const isDark = theme === 'dark';
 
-  // Common cities for dropdown (from copy #1)
+  // Common cities for dropdown (you can customize this list)
   const cities = [
     'Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 
     'Pune', 'Ahmedabad', 'Surat', 'Jaipur', 'Lucknow', 'Kanpur', 
@@ -199,17 +194,17 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
   ];
 
   return (
-    <div className={`p-6 rounded-lg border ${isDark ? 'bg-gray-800 text-white border-gray-700' : 'bg-white text-gray-900 border-gray-200'} ${className}`}>
-      {(title || subtitle) && (
-        <div className="text-center mb-6">
-          {title && <h2 className="text-2xl font-bold mb-2">{title}</h2>}
-          {subtitle && (
-            <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-              {subtitle}
-            </p>
-          )}
+    <div className={`max-w-md mx-auto p-6 rounded-lg shadow-lg ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'} ${className}`}>
+      {/* Logo placeholder */}
+      <div className="text-center mb-6">
+        <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+          <span className="text-white font-bold text-lg">AA</span>
         </div>
-      )}
+        <h2 className="text-2xl font-bold mb-2">{title}</h2>
+        <p className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+          {subtitle}
+        </p>
+      </div>
 
       {message.text && (
         <div className={`mb-4 p-3 rounded-md flex items-center gap-2 ${
@@ -275,7 +270,7 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
 
         <div>
           <label className="block text-sm font-medium mb-1">
-            Email Address
+            Email Address <span className="text-red-500">*</span>
           </label>
           <div className="relative">
             <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
@@ -287,7 +282,8 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
               className={`w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'
               } ${errors.email ? 'border-red-500' : ''}`}
-              placeholder="john.doe@example.com"
+              placeholder="example@example.com"
+              required
             />
           </div>
           {errors.email && (
@@ -297,7 +293,7 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
 
         <div>
           <label className="block text-sm font-medium mb-1">
-            WhatsApp Number
+            WhatsApp Number <span className="text-red-500">*</span>
           </label>
           <div className="relative">
             <MessageCircle className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
@@ -309,7 +305,8 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
               className={`w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'
               } ${errors.whatsappNumber ? 'border-red-500' : ''}`}
-              placeholder="+91 98765 43210"
+              placeholder="+91"
+              required
             />
           </div>
           <p className="text-xs text-gray-500 mt-1">Please enter a valid phone number.</p>
@@ -320,7 +317,7 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
 
         <div>
           <label className="block text-sm font-medium mb-1">
-            City
+            City <span className="text-red-500">*</span>
           </label>
           <div className="relative">
             <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400 z-10" />
@@ -331,6 +328,7 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
               className={`w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none ${
                 isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'
               } ${errors.city ? 'border-red-500' : ''}`}
+              required
             >
               <option value="">Select your city</option>
               {cities.map(city => (
@@ -355,212 +353,24 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
               Submitting...
             </>
           ) : (
-            'Get Started Now'
+            'Submit'
           )}
         </button>
+      </div>
+
+      {/* Field mapping information */}
+      <div className="mt-6 p-3 bg-gray-50 rounded-md text-xs">
+        <p className="font-medium mb-2">JotForm Field Mapping:</p>
+        <ul className="space-y-1 text-gray-600">
+          <li>• Name (First): q10_name[first]</li>
+          <li>• Name (Last): q10_name[last]</li>
+          <li>• Email: q4_q4_email2</li>
+          <li>• WhatsApp: q3_q3_phone1[full]</li>
+          <li>• City: q5_q5_dropdown3</li>
+        </ul>
       </div>
     </div>
   );
 };
 
-// Main ContactUs Component - Layout unchanged from copy #2
-const ContactUs = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const handleLeadSuccess = (result: any) => {
-    console.log('Lead captured successfully:', result);
-    // You can add additional tracking or analytics here
-  };
-
-  const handleLeadError = (error: any) => {
-    console.error('Lead capture failed:', error);
-    // You can add error tracking here
-  };
-
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
-      <main className="pt-20">
-        {/* Hero Section */}
-        <section className="py-20 px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Get in Touch with Us
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Have questions about AutomateAlgos? Our team is here to help you succeed 
-              with automated trading solutions.
-            </p>
-          </div>
-        </section>
-
-        <section className="py-16 px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-3 gap-8 mb-12">
-              {/* Contact Cards */}
-              <Card className="border-border text-center">
-                <CardHeader>
-                  <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Phone className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-foreground">Phone Support</CardTitle>
-                  <CardDescription>
-                    Speak directly with our experts
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="font-semibold text-foreground mb-2">+91 9876543210</p>
-                  <p className="text-sm text-muted-foreground">Mon-Fri: 9 AM - 7 PM IST</p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-border text-center">
-                <CardHeader>
-                  <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Mail className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-foreground">Email Support</CardTitle>
-                  <CardDescription>
-                    Get detailed responses via email
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="font-semibold text-foreground mb-2">support@automatealgos.in</p>
-                  <p className="text-sm text-muted-foreground">Response within 4 hours</p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-border text-center">
-                <CardHeader>
-                  <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <MessageCircle className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-foreground">Live Chat</CardTitle>
-                  <CardDescription>
-                    Instant help when you need it
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="font-semibold text-foreground mb-2">Available Now</p>
-                  <p className="text-sm text-muted-foreground">24/7 chatbot + live agents</p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* Contact Form - Using JotFormSignup Component with API Integration */}
-              <Card className="border-border">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-foreground">Send us a Message</CardTitle>
-                  <CardDescription>
-                    Fill out the form below and we'll get back to you as soon as possible
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <JotFormSignup
-                    formId="251964065246057"
-                    title=""
-                    subtitle=""
-                    theme="light"
-                    onSuccess={handleLeadSuccess}
-                    onError={handleLeadError}
-                    className="border-0 shadow-none p-0"
-                  />
-                </CardContent>
-              </Card>
-
-              {/* Company Info & Additional Options */}
-              <div className="space-y-8">
-                <Card className="border-border">
-                  <CardHeader>
-                    <CardTitle className="text-foreground flex items-center gap-2">
-                      <MapPin className="h-5 w-5 text-primary" />
-                      Office Location
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div>
-                        <h4 className="font-semibold text-foreground">AutomateAlgos Headquarters</h4>
-                        <p className="text-muted-foreground">
-                          TF-1 Jivabhai Market<br />
-                          Kalol Gujarat
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm">
-                        <Clock className="h-4 w-4 text-primary" />
-                        <span className="text-muted-foreground">
-                          Monday - Friday: 9:00 AM - 7:00 PM IST
-                        </span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-border">
-                  <CardHeader>
-                    <CardTitle className="text-foreground">Specialized Support</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <Headphones className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <h4 className="font-semibold text-foreground">Technical Support</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Platform issues, API questions, integration help
-                        </p>
-                        <p className="text-sm font-medium text-primary">Support@automatealgos.in</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Phone className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <h4 className="font-semibold text-foreground">Sales Team</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Pricing, demos, enterprise solutions
-                        </p>
-                        <p className="text-sm font-medium text-primary">support@automatealgos.in</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Mail className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <h4 className="font-semibold text-foreground">Partnerships</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Business partnerships, integrations
-                        </p>
-                        <p className="text-sm font-medium text-primary">support@automatealgos.in</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <div className="p-6 bg-primary/5 border border-primary/20 rounded-lg">
-                  <h3 className="font-semibold text-foreground mb-3">Need Immediate Help?</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    For urgent technical issues or account problems, use our priority support channels.
-                  </p>
-                  <div className="space-y-2">
-                    <Button variant="outline" size="sm" className="w-full">
-                      Open Live Chat
-                    </Button>
-                    <Button variant="outline" size="sm" className="w-full">
-                      Schedule Emergency Call
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <AppFooter />
-    </div>
-  );
-};
-
-export default ContactUs;
+export default JotFormSignup;

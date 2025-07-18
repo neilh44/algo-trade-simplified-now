@@ -237,7 +237,7 @@ const About = () => {
                   <Mail className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">Email</h3>
-                <p className="text-muted-foreground">contact@smartwaveacademy.com</p>
+                <p className="text-muted-foreground">support@automatealgos.in</p>
               </div>
               
               <div className="text-center">
@@ -253,7 +253,7 @@ const About = () => {
                   <MapPin className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">Location</h3>
-                <p className="text-muted-foreground">Gurugram, India</p>
+                <p className="text-muted-foreground">Gandhinagar, India</p>
               </div>
             </div>
             
