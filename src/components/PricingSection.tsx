@@ -99,8 +99,7 @@ const PricingSection = ({ id }: PricingSectionProps) => {
             Choose Your <span className="text-blue-600">Trading Plan</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Start with our free plan or upgrade to unlock advanced features. 
-            Upgrade, downgrade, or cancel anytime.
+            Start with our free plan or upgrade to unlock advanced features.           
           </p>
         </div>
 

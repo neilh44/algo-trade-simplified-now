@@ -28,7 +28,7 @@ const FAQSection = () => {
     },
     {
       question: "Which brokers are currently supported?",
-      answer: "We support all major Indian brokers Tradingview, CoinDCX. We're constantly adding new integrations based on user demand. Delta exchange & coinswitch are coming",
+      answer: "We currently support all major Indian brokers, including TradingView and CoinDCX. We're continuously expanding our integrations based on user feedback—support for Delta Exchange and CoinSwitch is on the way.",
       icon: Link,
       color: "from-blue-500 to-indigo-600",
       bgColor: "bg-blue-50",
@@ -36,7 +36,7 @@ const FAQSection = () => {
     },
     {
       question: "Can I use my existing TradingView or Python strategies?",
-      answer: "Yes! You can directly connect your TradingView Pine Script strategies, import your Python algorithms. Our platform translates these into broker-compatible orders automatically. No code changes required.",
+      answer: "Yes! You can directly connect your TradingView, Pine Script strategies & import your Python algorithms. Our platform translates these into broker-compatible orders automatically. No code changes required.",
       icon: Code,
       color: "from-purple-500 to-pink-600",
       bgColor: "bg-purple-50",
@@ -44,7 +44,7 @@ const FAQSection = () => {
     },
     {
       question: "What if I'm not technical? Can I still use this?",
-      answer: "Absolutely. Our no-code interface allows you to create and deploy strategies using visual builders and pre-built templates. We also provide comprehensive tutorials, strategy templates, and personal onboarding sessions for new users.",
+      answer: "Definitely. Our no-code platform lets you build and launch strategies using intuitive visual tools and ready-made templates. Plus, we offer step-by-step tutorials, strategy examples, and personalized onboarding to help you get started with ease.",
       icon: HelpCircle,
       color: "from-teal-500 to-cyan-600",
       bgColor: "bg-teal-50",

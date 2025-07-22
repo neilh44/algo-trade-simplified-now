@@ -482,8 +482,7 @@ const ContactUs = () => {
               <div className="space-y-8">
                 <Card className="border-border">
                   <CardHeader>
-                    <CardTitle className="text-foreground flex items-center gap-2">
-                      <MapPin className="h-5 w-5 text-primary" />
+                    <CardTitle className="text-foreground flex items-center gap-2">                      
                       Office Location
                     </CardTitle>
                   </CardHeader>
@@ -491,10 +490,19 @@ const ContactUs = () => {
                     <div className="space-y-4">
                       <div>
                         <h4 className="font-semibold text-foreground">AutomateAlgos Headquarters</h4>
-                        <p className="text-muted-foreground">
-                          TF-1 Jivabhai Market<br />
-                          Kalol Gujarat
-                        </p>
+                        <div className="space-y-2">
+                          <div className="flex items-start gap-2">
+                            <MapPin className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                            <p className="text-muted-foreground">
+                              TF-1 Jivabhai Market<br />
+                              Kalol Gujarat
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Phone className="h-4 w-4 text-primary flex-shrink-0" />
+                            <p className="text-muted-foreground">+91 70166 43084</p>
+                          </div>
+                        </div>
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <Clock className="h-4 w-4 text-primary" />
