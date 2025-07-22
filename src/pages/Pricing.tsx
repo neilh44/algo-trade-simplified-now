@@ -38,8 +38,7 @@ const Pricing = () => {
         "3 active strategies",
         "Basic backtesting",
         "Email support",
-        "Risk management tools",
-        "Mobile app access"
+        "Risk management tools",        
       ],
       popular: false,
       cta: "Start Free Trial",
@@ -51,14 +50,13 @@ const Pricing = () => {
       monthlyPrice: "₹1,999",
       annualPrice: "₹19,999",
       features: [
-        "1 broker connection",
+        "3 broker connection",
         "25 strategies",
         "Advanced backtesting",
         "Priority support",
         "Risk management tools",
-        "Mobile app access",
+        "Mobile app access (Comming Soon)",
         "Advanced analytics",
-        "Custom indicators"
       ],
       popular: true,
       cta: "Get Started",
@@ -75,7 +73,7 @@ const Pricing = () => {
         "Advanced backtesting",
         "Dedicated support manager",
         "Risk management tools",
-        "Mobile app access",
+        "Mobile app access (Coming Soon)",
         "Advanced analytics",
         "Custom indicators",
         "99.9% uptime SLA",
@@ -108,32 +106,7 @@ const Pricing = () => {
     }
   ];
 
-  const faqs = [
-    {
-      question: "Can I change my plan at any time?",
-      answer: "Yes, you can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle, and we'll prorate any differences."
-    },
-    {
-      question: "Which brokers are supported?",
-      answer: "We support all major Indian brokers including Zerodha, Angel One, Upstox, ICICI Direct, and many more. Check our integrations page for the complete list."
-    },
-    {
-      question: "What happens during the free trial?",
-      answer: "You get full access to all Starter plan features for 3 days. No credit card required. After the trial, you can continue with the free plan or upgrade to a paid plan."
-    },
-    {
-      question: "Is there a refund policy?",
-      answer: "Yes, we offer a 14-day money-back guarantee on all paid plans. If you're not satisfied, contact us for a full refund within 14 days of purchase."
-    },
-    {
-      question: "How secure is my trading data?",
-      answer: "We use bank-grade encryption and never store your broker passwords. All data is encrypted in transit and at rest. We're SOC 2 compliant and regularly audited."
-    },
-    {
-      question: "Do you provide trading strategies?",
-      answer: "We provide strategy templates and examples, but you're responsible for your own trading decisions. Our platform helps automate your strategies, not create them."
-    }
-  ];
+
 
   const comparisonFeatures = [
     { feature: "Broker Connections", starter: "1", professional: "1", enterprise: "Unlimited" },
@@ -272,11 +245,11 @@ const Pricing = () => {
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full bg-card rounded-lg shadow-sm">
               <thead>
-                <tr className="border-b">
-                  <th className="text-left p-6 font-semibold">Features</th>
-                  <th className="text-center p-6 font-semibold">Starter</th>
-                  <th className="text-center p-6 font-semibold bg-primary/5">Professional</th>
-                  <th className="text-center p-6 font-semibold">Enterprise</th>
+                <tr className="border-b bg-muted/50">
+                  <th className="text-left p-6 font-bold text-foreground">Features</th>
+                  <th className="text-center p-6 font-bold text-foreground">Starter</th>
+                  <th className="text-center p-6 font-bold text-foreground bg-primary/10">Pro</th>
+                  <th className="text-center p-6 font-bold text-foreground">Premium</th>
                 </tr>
               </thead>
               <tbody>
@@ -305,11 +278,11 @@ const Pricing = () => {
                         <span>{item.starter}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Professional:</span>
+                        <span>Pro:</span>
                         <span>{item.professional}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Enterprise:</span>
+                        <span>Premium:</span>
                         <span>{item.enterprise}</span>
                       </div>
                     </div>
@@ -356,32 +329,7 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-muted-foreground">
-              Get answers to common questions about our pricing and features
-            </p>
-          </div>
 
-          <Accordion type="single" collapsible>
-            {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`faq-${index}`}>
-                <AccordionTrigger className="text-left text-lg font-semibold">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
 
       {/* Final CTA Banner */}
       <section className="py-16 bg-gradient-to-r from-gray-900 to-blue-900 text-white">
