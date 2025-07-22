@@ -451,7 +451,7 @@ const ScheduleDemo = () => {
                   <div className="space-y-2 text-sm">
                     <div className="flex items-center gap-2">
                       <span className="text-muted-foreground">Phone:</span>
-                      <span className="text-foreground font-medium">+91 9876543210</span>
+                      <span className="text-foreground font-medium">+91 70166 43084</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-muted-foreground">Email:</span>

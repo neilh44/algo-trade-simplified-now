@@ -379,6 +379,12 @@ const ContactUs = () => {
     // You can add error tracking here
   };
 
+  const handleWhatsAppChat = () => {
+    window.open('https://wa.me/917016643084', '_blank');
+  };
+
+
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -412,7 +418,7 @@ const ContactUs = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="font-semibold text-foreground mb-2">+91 9876543210</p>
+                  <p className="font-semibold text-foreground mb-2">+91 70166 43084</p>
                   <p className="text-sm text-muted-foreground">Mon-Fri: 9 AM - 7 PM IST</p>
                 </CardContent>
               </Card>
@@ -500,55 +506,19 @@ const ContactUs = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="border-border">
-                  <CardHeader>
-                    <CardTitle className="text-foreground">Specialized Support</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <Headphones className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <h4 className="font-semibold text-foreground">Technical Support</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Platform issues, API questions, integration help
-                        </p>
-                        <p className="text-sm font-medium text-primary">Support@automatealgos.in</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Phone className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <h4 className="font-semibold text-foreground">Sales Team</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Pricing, demos, enterprise solutions
-                        </p>
-                        <p className="text-sm font-medium text-primary">support@automatealgos.in</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Mail className="h-5 w-5 text-primary mt-0.5" />
-                      <div>
-                        <h4 className="font-semibold text-foreground">Partnerships</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Business partnerships, integrations
-                        </p>
-                        <p className="text-sm font-medium text-primary">support@automatealgos.in</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
                 <div className="p-6 bg-primary/5 border border-primary/20 rounded-lg">
                   <h3 className="font-semibold text-foreground mb-3">Need Immediate Help?</h3>
                   <p className="text-sm text-muted-foreground mb-4">
                     For urgent technical issues or account problems, use our priority support channels.
                   </p>
                   <div className="space-y-2">
-                    <Button variant="outline" size="sm" className="w-full">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full"
+                      onClick={handleWhatsAppChat}
+                    >
                       Open Live Chat
-                    </Button>
-                    <Button variant="outline" size="sm" className="w-full">
-                      Schedule Emergency Call
                     </Button>
                   </div>
                 </div>
