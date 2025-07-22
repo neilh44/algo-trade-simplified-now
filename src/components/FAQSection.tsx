@@ -10,14 +10,7 @@ const FAQSection = () => {
   const [animatedCounters, setAnimatedCounters] = useState({ uptime: 0, users: 0, trades: 0 });
 
   const faqs = [
-    {
-      question: "Is my trading data and account information secure?",
-      answer: "Absolutely. We use bank-grade encryption (AES-256) and never store your trading passwords. All connections are made through official broker APIs with OAuth2 authentication. Your data is encrypted both in transit and at rest, and we're SOC 2 Type II compliant.",
-      icon: Shield,
-      color: "from-green-500 to-emerald-600",
-      bgColor: "bg-green-50",
-      popular: true
-    },
+    
     {
       question: "How fast are trade executions really?",
       answer: "Our infrastructure is designed for speed. Average execution time is under 200ms from signal generation to order placement. We use dedicated servers in major financial hubs and maintain direct connections with broker APIs to minimize latency.",

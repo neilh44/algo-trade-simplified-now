@@ -178,7 +178,6 @@ const TestimonialsSection = () => {
                 <div className="text-gray-600 font-medium">{item.description}</div>
                 {hoveredMetric === index && (
                   <div className="mt-4 text-sm text-gray-500 animate-fade-in">
-                    Click to learn more
                   </div>
                 )}
               </div>

@@ -185,6 +185,7 @@ const HeroSection = ({ id }: HeroSectionProps) => {
             </div>
             
             {/* "No Code Required" Text - Moved Below Video */}
+            
             <div className="mt-6 text-center">
               <h2 className="text-2xl lg:text-6xl font-bold">
                 <span className="text-transparent bg-gradient-to-r from-green-400 to-green-300 bg-clip-text animate-pulse">No Code Required</span>
