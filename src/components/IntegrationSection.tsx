@@ -3,7 +3,7 @@ import { Code, TrendingUp, BarChart3, Calculator, Zap, CheckCircle, Clock, Arrow
 import TradingViewIcon from '../assets/icons/TradingVIew.svg';  // Keep the actual filename case
 import PythonIcon from '../assets/icons/Python.svg';
 import ExcelIcon from '../assets/icons/Excel.svg';
-import CoinDCXIcon from '../assets/icons/Coindcx.svg';  // Changed from @ alias to relative path
+import CoinDCXIcon from '../assets/icons/Coindcx.svg?url';
 import DeltaExchangeIcon from '../assets/icons/Delta_exchange.svg';
 import CoinSwitchIcon from '../assets/icons/CoinSwitch.svg';
 
