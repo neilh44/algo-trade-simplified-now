@@ -38,7 +38,8 @@ const Pricing = () => {
         "3 active strategies",
         "Basic backtesting",
         "Email support",
-        "Risk management tools",        
+        "Risk management tools",
+        "Mobile app access"
       ],
       popular: false,
       cta: "Start Free Trial",
@@ -50,13 +51,14 @@ const Pricing = () => {
       monthlyPrice: "₹1,999",
       annualPrice: "₹19,999",
       features: [
-        "3 broker connection",
-        "25 strategies",
+        "1 broker connections",
+        "Unlimited strategies",
         "Advanced backtesting",
         "Priority support",
         "Risk management tools",
-        "Mobile app access (Comming Soon)",
+        "Mobile app access",
         "Advanced analytics",
+        "Custom indicators"
       ],
       popular: true,
       cta: "Get Started",
@@ -73,11 +75,9 @@ const Pricing = () => {
         "Advanced backtesting",
         "Dedicated support manager",
         "Risk management tools",
-        "Mobile app access (Coming Soon)",
+        "Mobile app access",
         "Advanced analytics",
-        "Custom indicators",
-        "99.9% uptime SLA",
-        "Custom strategy development"
+        "Custom indicators"
       ],
       popular: false,
       cta: "Contact Sales",
