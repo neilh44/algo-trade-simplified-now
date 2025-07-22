@@ -106,8 +106,8 @@ const Pricing = () => {
 
 
   const comparisonFeatures = [
-    { feature: "Broker Connections", starter: "1", professional: "1", enterprise: "Unlimited" },
-    { feature: "Active Strategies", starter: "3", professional: "Unlimited", enterprise: "Unlimited" },
+    { feature: "Broker Connections", starter: "1", professional: "1", enterprise: "1" },
+    { feature: "Active Strategies", starter: "3", professional: "25", enterprise: "Unlimited" },
     { feature: "Backtesting", starter: "Basic", professional: "Advanced", enterprise: "Advanced" },
     { feature: "Support", starter: "Email", professional: "Priority", enterprise: "Dedicated Manager" },
     { feature: "Analytics", starter: "Basic", professional: "Advanced", enterprise: "Advanced + Custom" },
