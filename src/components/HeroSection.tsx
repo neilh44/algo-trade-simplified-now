@@ -38,11 +38,15 @@ const HeroSection = ({ id }: HeroSectionProps) => {
                 </p>
               </div>
               
+              
               <div className="relative group">
                 <p className="text-lg text-blue-100 leading-relaxed font-medium bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10 shadow-lg group-hover:bg-white/10 transition duration-300">
                   Seamlessly Automate Your Crypto Trading Straight From 
                   <span className="relative inline-block mx-2">
-                    <span className="text-white font-bold text-xl bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"> Trading View</span>
+                    <span className="relative overflow-hidden inline-block">
+                      <span className="text-white font-bold text-xl bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent animate-flip-words"> Trading View</span>
+                      <span className="text-white font-bold text-xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent absolute top-0 left-0 animate-flip-words-alt"> Python</span>
+                    </span>
                     <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400"></span>
                   </span> Through Your Broker.
                 </p>
