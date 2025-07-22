@@ -111,9 +111,8 @@ const Pricing = () => {
     { feature: "Backtesting", starter: "Basic", professional: "Advanced", enterprise: "Advanced" },
     { feature: "Support", starter: "Email", professional: "Priority", enterprise: "Dedicated Manager" },
     { feature: "Analytics", starter: "Basic", professional: "Advanced", enterprise: "Advanced + Custom" },
-    { feature: "API Access", starter: "❌", professional: "✓", enterprise: "✓" },
+    { feature: "Risk management tools", starter: "❌", professional: "✓", enterprise: "✓" },
     { feature: "Custom Indicators", starter: "❌", professional: "✓", enterprise: "✓" },
-    { feature: "White-label", starter: "❌", professional: "❌", enterprise: "✓" },
     { feature: "SLA Guarantee", starter: "❌", professional: "❌", enterprise: "99.9%" }
   ];
 
