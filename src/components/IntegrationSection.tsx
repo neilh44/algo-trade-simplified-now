@@ -1,10 +1,9 @@
 import { Code, TrendingUp, BarChart3, Calculator, Zap, CheckCircle, Clock, ArrowRight, Sparkles } from "lucide-react";
 
-// Import SVG icons
-import TradingViewIcon from '../assets/icons/TradingVIew.svg';
+import TradingViewIcon from '../assets/icons/TradingVIew.svg';  // Keep the actual filename case
 import PythonIcon from '../assets/icons/Python.svg';
 import ExcelIcon from '../assets/icons/Excel.svg';
-import CoinDCXIcon from '../assets/icons/Coindcx.svg';
+import CoinDCXIcon from '../assets/icons/Coindcx.svg';  // Changed from @ alias to relative path
 import DeltaExchangeIcon from '../assets/icons/Delta_exchange.svg';
 import CoinSwitchIcon from '../assets/icons/CoinSwitch.svg';
 
