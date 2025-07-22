@@ -18,6 +18,7 @@ import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Products from "./pages/Products";
 import About from "./pages/About";
+import Pricing from "./pages/Pricing";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -69,6 +70,7 @@ const App = () => (
             <Route path="/services" element={<Services />} />
             <Route path="/products" element={<Products />} />
             <Route path="/about" element={<About />} />
+            <Route path="/pricing" element={<Pricing />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
