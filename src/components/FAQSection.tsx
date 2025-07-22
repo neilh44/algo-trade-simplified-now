@@ -28,7 +28,7 @@ const FAQSection = () => {
     },
     {
       question: "Which brokers are currently supported?",
-      answer: "We currently support all major Indian brokers, including TradingView and CoinDCX. We're continuously expanding our integrations based on user feedback—support for Delta Exchange and CoinSwitch is on the way.",
+      answer: "Our no-code interface allows you to create and deploy strategies using famous platforms like TradingView directly. We're continuously expanding our integrations based on user feedback—support for Delta Exchange and CoinSwitch is on the way.",
       icon: Link,
       color: "from-blue-500 to-indigo-600",
       bgColor: "bg-blue-50",
