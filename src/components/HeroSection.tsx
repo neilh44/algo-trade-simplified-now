@@ -194,8 +194,6 @@ const HeroSection = ({ id }: HeroSectionProps) => {
                 className="text-white hover:text-orange-300 hover:bg-white/10 transition duration-300"
                 onClick={() => window.open('https://www.youtube.com/watch?v=yjtgComx9xY&feature=youtu.be', '_blank')}
               >
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Watch Full Demo on YouTube
               </Button>
             </div>
           </div>

@@ -47,7 +47,7 @@ const TestimonialsSection = () => {
     {
       name: "Priya Sharma",
       location: "Delhi",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
       rating: 5,
       text: "As a beginner, the educational resources and support helped me become profitable within 2 months.",
       result: "+18% Returns",
@@ -75,7 +75,7 @@ const TestimonialsSection = () => {
   }, [isPlaying, testimonials.length]);
 
   // Animate numbers on hover
-  const animateNumber = (index, targetValue) => {
+  const animateNumber = (index, targetValue, isPercentage = false, isCrore = false) => {
     let startValue = 0;
     const duration = 1000;
     const increment = targetValue / (duration / 16);
@@ -83,15 +83,31 @@ const TestimonialsSection = () => {
     const animate = () => {
       startValue += increment;
       if (startValue < targetValue) {
+        let displayValue;
+        if (isPercentage) {
+          displayValue = Math.floor(startValue);
+        } else if (isCrore) {
+          displayValue = (startValue / 10).toFixed(1); // Convert to crore format
+        } else {
+          displayValue = Math.floor(startValue);
+        }
         setAnimatedNumbers(prev => ({
           ...prev,
-          [index]: Math.floor(startValue)
+          [index]: displayValue
         }));
         requestAnimationFrame(animate);
       } else {
+        let finalValue;
+        if (isPercentage) {
+          finalValue = targetValue;
+        } else if (isCrore) {
+          finalValue = (targetValue / 10).toFixed(1);
+        } else {
+          finalValue = targetValue;
+        }
         setAnimatedNumbers(prev => ({
           ...prev,
-          [index]: targetValue
+          [index]: finalValue
         }));
       }
     };
@@ -104,18 +120,6 @@ const TestimonialsSection = () => {
 
   const prevTestimonial = () => {
     setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  // Handle navigation to case study page
-  const handleCaseStudyClick = () => {
-    // In a real React Router setup, you would use:
-    // import { useNavigate } from 'react-router-dom';
-    // const navigate = useNavigate();
-    // navigate('/case-study');
-    
-    // For demonstration, we'll show an alert
-    // Replace this with actual navigation logic
-    window.location.href = '/case-study';
   };
 
   // Handle Telegram channel join
@@ -152,7 +156,9 @@ const TestimonialsSection = () => {
                 onMouseEnter={() => {
                   setHoveredMetric(index);
                   if (item.metric.includes('%')) {
-                    animateNumber(index, parseInt(item.metric));
+                    animateNumber(index, parseInt(item.metric), true);
+                  } else if (item.metric.includes('Cr')) {
+                    animateNumber(index, 48, false, true); // 4.8 Cr = 48 (will be divided by 10)
                   }
                 }}
                 onMouseLeave={() => setHoveredMetric(null)}
@@ -165,6 +171,8 @@ const TestimonialsSection = () => {
                 <div className={`text-3xl lg:text-4xl font-bold ${item.color} mb-2 transition-all duration-300`}>
                   {item.metric.includes('%') && animatedNumbers[index] !== undefined 
                     ? `${animatedNumbers[index]}%` 
+                    : item.metric.includes('Cr') && animatedNumbers[index] !== undefined
+                    ? `₹${animatedNumbers[index]} Cr+`
                     : item.metric}
                 </div>
                 <div className="text-gray-600 font-medium">{item.description}</div>
@@ -291,51 +299,6 @@ const TestimonialsSection = () => {
                 }`}
               />
             ))}
-          </div>
-        </div>
-
-        {/* Enhanced Case Study */}
-        <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-3xl p-8 lg:p-12 text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl transform translate-x-32 -translate-y-32"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-3xl transform -translate-x-24 translate-y-24"></div>
-          
-          <div className="grid lg:grid-cols-2 gap-8 items-center relative z-10">
-            <div>
-              <h3 className="text-2xl lg:text-3xl font-bold mb-4">
-                Case Study: How Raj Automated His Swing Trading
-              </h3>
-              <p className="text-blue-100 mb-6 text-lg leading-relaxed">
-                Raj increased his returns by 34% and reduced his daily trading time from 4 hours to 30 minutes 
-                using our automated swing trading strategies.
-              </p>
-              <div className="flex space-x-4">
-                <button 
-                  onClick={handleCaseStudyClick}
-                  className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 hover:scale-105"
-                >
-                  Read Full Case Study
-                </button>
-                <button className="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-all duration-200">
-                  Watch Video
-                </button>
-              </div>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300">
-              <div className="space-y-4">
-                {[
-                  { label: "Time Saved Daily:", value: "3.5 hours", color: "text-yellow-300" },
-                  { label: "Return Improvement:", value: "+34%", color: "text-green-300" },
-                  { label: "Stress Level:", value: "-70%", color: "text-green-300" },
-                  { label: "Win Rate:", value: "68%", color: "text-green-300" }
-                ].map((item, index) => (
-                  <div key={index} className="flex justify-between items-center hover:scale-105 transition-transform duration-200">
-                    <span className="text-blue-100">{item.label}</span>
-                    <span className={`font-bold text-xl ${item.color}`}>{item.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
 
