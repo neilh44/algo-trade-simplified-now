@@ -46,13 +46,13 @@ const Pricing = () => {
       link: "https://app.automatealgos.in/"
     },
     {
-      name: "Professional",
+      name: "Pro",
       description: "For serious traders who need advanced features and multiple connections",
       monthlyPrice: "₹1,999",
       annualPrice: "₹19,999",
       features: [
         "1 broker connection",
-        "Unlimited strategies",
+        "25 strategies",
         "Advanced backtesting",
         "Priority support",
         "Risk management tools",
@@ -65,10 +65,10 @@ const Pricing = () => {
       link: "https://wa.me/917016643084?text=I%20need%20help%20with%20monthly%20plan"
     },
     {
-      name: "Enterprise",
+      name: "Premium",
       description: "For professional traders and institutions requiring unlimited access",
-      monthlyPrice: "₹4,999",
-      annualPrice: "₹49,999",
+      monthlyPrice: "₹2,999",
+      annualPrice: "₹29,999",
       features: [
         "Unlimited broker connections",
         "Unlimited strategies",
@@ -164,7 +164,7 @@ const Pricing = () => {
             Start free or scale with advanced automation features. Join thousands of traders who've automated their success.
           </p>
           <Button size="lg" onClick={handleStartTrial} className="text-lg px-8 py-4">
-            Start 3-Day Free Trial
+            Start 7 Day Free Trial
           </Button>
         </div>
       </section>
@@ -240,6 +240,18 @@ const Pricing = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      
+      </section>
+      
+      {/* GST Disclaimer */}
+      <section className="pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-left">
+            <p className="text-sm text-muted-foreground italic">
+              *Prices are inclusive of GST
+            </p>
           </div>
         </div>
       </section>
@@ -391,14 +403,14 @@ const Pricing = () => {
             <Button 
               size="lg" 
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-gray-900 text-lg px-8 py-4"
+              className="border-white text-gray-900 hover:bg-white hover:text-gray-900 text-lg px-8 py-4"
               onClick={handleContactSales}
             >
               Contact Sales
             </Button>
           </div>
           <p className="text-sm text-gray-400 mt-6">
-            No credit card required • 3-day free trial • Cancel anytime
+            No credit card required • 7-day free trial • Cancel anytime
           </p>
         </div>
       </section>

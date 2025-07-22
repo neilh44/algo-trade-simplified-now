@@ -39,7 +39,7 @@ const PricingSection = ({ id }: PricingSectionProps) => {
        
       ],
       popular: false,
-      cta: "3 Day Free Trial"
+      cta: "7 Day Free Trial"
     },
     {
       name: "Monthly",
