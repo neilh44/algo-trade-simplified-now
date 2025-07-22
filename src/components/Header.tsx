@@ -5,7 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 
 const navigationItems = [
   { id: 'home', label: 'Home', href: '/', external: false },
-  { id: 'services', label: 'Services', href: '/services', external: false },
+  { id: 'courses', label: 'Courses', href: '/courses', external: false },
+  { id: 'pricing', label: 'Pricing', href: '/pricing', external: false },
   { id: 'products', label: 'Products', href: '/products', external: false },
   { id: 'about', label: 'About Us', href: '/about', external: false }
 ];
