@@ -123,22 +123,77 @@ const Pricing = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-background to-muted/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-            Choose Your{" "}
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Trading Plan
-            </span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Start free or scale with advanced automation features. Join thousands of traders who've automated their success.
-          </p>
-          <Button size="lg" onClick={handleStartTrial} className="text-lg px-8 py-4">
-            Start 7 Day Free Trial
-          </Button>
+      {/* Enhanced Hero Banner */}
+      <section className="relative pt-24 pb-20 overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/10"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.1),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(120,119,198,0.08),transparent_50%)]"></div>
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute top-40 right-16 w-16 h-16 bg-secondary/10 rounded-full blur-lg animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-primary/5 rounded-full blur-md animate-pulse delay-2000"></div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Main Content */}
+          <div className="mb-8">
+            <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm font-medium animate-bounce">
+              🚀 Join 10,000+ Successful Traders
+            </Badge>
+            
+            <h1 className="text-4xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
+              Choose Your{" "}
+              <span className="bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent animate-pulse">
+                Trading Plan
+              </span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto mb-8 leading-relaxed">
+              Start free or scale with advanced automation features. Join thousands of traders who've automated their success with our cutting-edge platform.
+            </p>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <Button 
+              size="lg" 
+              onClick={handleStartTrial} 
+              className="text-lg px-10 py-6 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              Start 7 Day Free Trial
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={handleContactSales}
+              className="text-lg px-10 py-6 border-2 hover:bg-primary/5 transform hover:scale-105 transition-all duration-200"
+            >
+              Schedule Demo
+            </Button>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+              <span>4.9/5 from 2,500+ reviews</span>
+            </div>
+            <div className="hidden sm:block w-1 h-1 bg-muted-foreground rounded-full"></div>
+            <div className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-green-500" />
+              <span>No credit card required</span>
+            </div>
+            <div className="hidden sm:block w-1 h-1 bg-muted-foreground rounded-full"></div>
+            <div className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-green-500" />
+              <span>Cancel anytime</span>
+            </div>
+          </div>
         </div>
+
+        {/* Bottom Wave Effect */}
+        <div className="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 blur-sm"></div>
       </section>
 
       {/* Pricing Toggle */}
