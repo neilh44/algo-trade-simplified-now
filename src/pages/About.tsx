@@ -18,10 +18,10 @@ const About = () => {
   }, []);
 
   const stats = [
-    { number: `${animatedStats.users.toLocaleString()}+`, label: "Happy Traders", icon: Users, color: "from-matdash-primary to-matdash-secondary" },
+    { number: `${animatedStats.users.toLocaleString()}+`, label: "Happy Traders", icon: Users, color: "from-blue-500 to-teal-500" },
     { number: `${animatedStats.rate}%`, label: "Success Rate", icon: TrendingUp, color: "from-green-500 to-emerald-600" },
-    { number: `${animatedStats.strategies}+`, label: "Trading Strategies", icon: BookOpen, color: "from-matdash-secondary to-teal-600" },
-    { number: "24/7", label: "Support Available", icon: Shield, color: "from-matdash-primary to-violet-600" }
+    { number: `${animatedStats.strategies}+`, label: "Trading Strategies", icon: BookOpen, color: "from-teal-500 to-teal-600" },
+    { number: "24/7", label: "Support Available", icon: Shield, color: "from-blue-500 to-violet-600" }
   ];
 
   const achievements = [
@@ -38,19 +38,19 @@ const About = () => {
       icon: Target,
       title: "Mission Driven",
       description: "Democratizing algorithmic trading for everyone, regardless of technical background.",
-      gradient: "from-matdash-primary to-violet-600"
+      gradient: "from-blue-500 to-violet-600"
     },
     {
       icon: Eye,
       title: "Visionary Approach", 
       description: "Creating the future where every trader has institutional-grade tools.",
-      gradient: "from-matdash-secondary to-teal-600"
+      gradient: "from-teal-500 to-teal-600"
     },
     {
       icon: Heart,
       title: "Community First",
       description: "Success measured by community growth and long-term member value.",
-      gradient: "from-matdash-primary to-matdash-secondary"
+      gradient: "from-blue-500 to-teal-500"
     }
   ];
 
@@ -67,58 +67,58 @@ const About = () => {
       
       {/* Animated Background */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-matdash-primary-light rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-matdash-secondary-light rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-1000"></div>
-        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-matdash-primary-light rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-2000"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-teal-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-1000"></div>
+        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-2000"></div>
       </div>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-matdash-primary via-matdash-secondary to-matdash-primary opacity-5"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-teal-500 to-blue-500 opacity-5"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
-            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-matdash-primary to-matdash-secondary text-white rounded-full text-sm font-semibold mb-8 shadow-2xl animate-bounce">
-              <Star className="w-5 h-5 mr-2 animate-spin" />
+            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-full text-sm font-medium mb-8 shadow-2xl animate-bounce">
+              <Star className="w-4 h-4 mr-2 animate-spin" />
               Trusted by 5000+ Algorithmic Traders
             </div>
-            
-            <h1 className="text-6xl md:text-8xl font-extrabold text-text-primary mb-8 tracking-tight">
+
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 tracking-tight leading-tight">
               <span className="block">Transforming</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-matdash-primary via-matdash-secondary to-matdash-primary animate-pulse">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-teal-500 to-blue-500 animate-pulse py-2">
                 Trading Forever
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-text-secondary max-w-4xl mx-auto mb-12 leading-relaxed font-medium">
-              Join the <strong className="text-matdash-primary">algorithmic revolution</strong> and build your
-              <strong className="text-matdash-secondary"> profitable automated trading empire</strong> today.
+            <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed">
+              Join the <strong className="text-blue-500">algorithmic revolution</strong> and build your
+              <strong className="text-teal-500"> profitable automated trading empire</strong> today.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-matdash-primary to-matdash-secondary hover:from-matdash-primary hover:to-matdash-secondary hover:opacity-90 text-white px-12 py-6 text-xl font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-2xl"
+                className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white px-8 py-4 text-lg font-medium shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl"
                 onClick={() => window.location.href = "https://app.automatealgos.in/authentication/side-register"}
               >
                 Start Free Today
-                <ArrowRight className="ml-3 h-6 w-6" />
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-2 border-matdash-primary text-matdash-primary hover:bg-matdash-primary-light px-12 py-6 text-xl font-semibold rounded-2xl"
+                className="border-2 border-blue-500 text-blue-500 hover:bg-blue-50 hover:text-blue-700 px-8 py-4 text-lg font-medium rounded-xl"
               >
                 Watch Demo
               </Button>
             </div>
 
             {/* Feature Highlights */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
               {features.map((feature, index) => (
-                <div key={index} className="text-center p-4 bg-surface-container backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-border">
-                  <feature.icon className="h-8 w-8 text-matdash-primary mx-auto mb-2" />
-                  <h4 className="font-semibold text-text-primary text-sm">{feature.title}</h4>
-                  <p className="text-xs text-text-secondary">{feature.desc}</p>
+                <div key={index} className="text-center p-4 bg-card backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-border">
+                  <feature.icon className="h-5 w-5 text-blue-500 mx-auto mb-2" />
+                  <h4 className="font-medium text-foreground text-sm">{feature.title}</h4>
+                  <p className="text-xs text-muted-foreground">{feature.desc}</p>
                 </div>
               ))}
             </div>
@@ -127,18 +127,18 @@ const About = () => {
       </section>
 
       {/* Animated Stats */}
-      <section className="py-16 bg-surface-bright backdrop-blur-sm">
+      <section className="py-16 bg-muted/30 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center group cursor-pointer">
-                <div className={`w-20 h-20 bg-gradient-to-r ${stat.color} rounded-3xl flex items-center justify-center mx-auto mb-4 group-hover:scale-125 transition-all duration-500 shadow-2xl`}>
-                  <stat.icon className="h-10 w-10 text-white" />
+                <div className={`w-16 h-16 bg-gradient-to-r ${stat.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-500 shadow-xl`}>
+                  <stat.icon className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-4xl md:text-5xl font-extrabold text-text-primary mb-2 group-hover:text-matdash-primary transition-colors">
+                <div className="text-3xl md:text-4xl font-bold text-foreground mb-2 group-hover:text-blue-500 transition-colors">
                   {stat.number}
                 </div>
-                <div className="text-text-secondary font-medium">{stat.label}</div>
+                <div className="text-muted-foreground text-sm font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -146,41 +146,41 @@ const About = () => {
       </section>
 
       {/* Our Story */}
-      <section className="py-24 bg-gradient-to-br from-matdash-primary-light to-matdash-secondary-light">
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-teal-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-5xl md:text-6xl font-extrabold text-text-primary mb-6">Our Journey</h2>
-              <p className="text-2xl text-text-secondary leading-relaxed max-w-3xl mx-auto font-medium">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Journey</h2>
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
                 From frustrated traders to algorithmic revolution leaders
               </p>
             </div>
             
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="space-y-8">
-                <div className="bg-surface-container p-8 rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300 border border-border">
-                  <h3 className="text-3xl font-bold text-text-primary mb-4">The Problem We Solved</h3>
-                  <p className="text-lg text-text-secondary leading-relaxed">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <div className="bg-card p-6 rounded-2xl shadow-xl transform hover:scale-105 transition-all duration-300 border border-border">
+                  <h3 className="text-xl font-bold text-foreground mb-3">The Problem We Solved</h3>
+                  <p className="text-muted-foreground leading-relaxed">
                     In 2020, retail traders were stuck with outdated platforms while institutions enjoyed sophisticated algorithmic tools. We changed that forever.
                   </p>
                 </div>
                 
-                <div className="bg-surface-container p-8 rounded-3xl shadow-2xl transform hover:scale-105 transition-all duration-300 border border-border">
-                  <h3 className="text-3xl font-bold text-text-primary mb-4">Today's Impact</h3>
-                  <p className="text-lg text-text-secondary leading-relaxed">
+                <div className="bg-card p-6 rounded-2xl shadow-xl transform hover:scale-105 transition-all duration-300 border border-border">
+                  <h3 className="text-xl font-bold text-foreground mb-3">Today's Impact</h3>
+                  <p className="text-muted-foreground leading-relaxed">
                     5,000+ traders now profit with our 24/7 automated strategies, creating a new generation of successful algorithmic traders.
                   </p>
                 </div>
               </div>
               
-              <Card className="p-10 bg-gradient-to-br from-matdash-primary to-matdash-secondary text-white shadow-2xl transform hover:scale-105 transition-all duration-300 border-0">
+              <Card className="p-8 bg-gradient-to-br from-blue-500 to-teal-500 text-white shadow-2xl transform hover:scale-105 transition-all duration-300 border-0">
                 <CardContent className="p-0">
-                  <h3 className="text-3xl font-bold mb-6">Mission Accomplished</h3>
-                  <div className="space-y-4">
+                  <h3 className="text-2xl font-bold mb-4">Mission Accomplished</h3>
+                  <div className="space-y-3">
                     {["Algorithmic trading for everyone", "Bridge retail-institutional gap", "Education + powerful tools", "24/7 automated profits"].map((item, i) => (
                       <div key={i} className="flex items-center">
-                        <CheckCircle className="h-6 w-6 mr-4 text-green-300" />
-                        <span className="text-lg font-medium">{item}</span>
+                        <CheckCircle className="h-4 w-4 mr-3 text-green-300 flex-shrink-0" />
+                        <span className="font-medium">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -192,22 +192,22 @@ const About = () => {
       </section>
 
       {/* Values */}
-      <section className="py-24 bg-background">
+      <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-extrabold text-text-primary mb-6">What Drives Us</h2>
-            <p className="text-2xl text-text-secondary font-medium">Core principles behind every decision</p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">What Drives Us</h2>
+            <p className="text-lg text-muted-foreground">Core principles behind every decision</p>
           </div>
           
-          <div className="grid lg:grid-cols-3 gap-10">
+          <div className="grid lg:grid-cols-3 gap-8">
             {teamValues.map((value, index) => (
-              <Card key={index} className="group hover:shadow-2xl transition-all duration-500 border-border bg-surface-container transform hover:-translate-y-4">
-                <CardContent className="p-10">
-                  <div className={`w-20 h-20 bg-gradient-to-r ${value.gradient} rounded-3xl flex items-center justify-center mb-6 group-hover:scale-125 transition-transform duration-500 shadow-xl`}>
-                    <value.icon className="h-10 w-10 text-white" />
+              <Card key={index} className="group hover:shadow-2xl transition-all duration-500 border-border bg-card transform hover:-translate-y-4">
+                <CardContent className="p-8">
+                  <div className={`w-14 h-14 bg-gradient-to-r ${value.gradient} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
+                    <value.icon className="h-6 w-6 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-text-primary mb-4 group-hover:text-matdash-primary transition-colors">{value.title}</h3>
-                  <p className="text-text-secondary leading-relaxed text-lg">{value.description}</p>
+                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-blue-500 transition-colors">{value.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{value.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -216,19 +216,19 @@ const About = () => {
       </section>
 
       {/* Achievements */}
-      <section className="py-24 bg-gradient-to-br from-matdash-secondary-light to-matdash-primary-light">
+      <section className="py-20 bg-gradient-to-br from-teal-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-extrabold text-text-primary mb-6">Proud Achievements</h2>
-            <p className="text-2xl text-text-secondary font-medium">Recognition that matters</p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Proud Achievements</h2>
+            <p className="text-lg text-muted-foreground">Recognition that matters</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {achievements.map((achievement, index) => (
-              <Card key={index} className="p-8 bg-surface-container hover:shadow-2xl transition-all duration-300 border-border transform hover:-translate-y-2">
+              <Card key={index} className="p-6 bg-card hover:shadow-2xl transition-all duration-300 border-border transform hover:-translate-y-2">
                 <CardContent className="p-0 flex items-start">
-                  <achievement.icon className="h-8 w-8 text-matdash-primary mr-4 mt-1 flex-shrink-0" />
-                  <span className="text-text-primary font-medium text-lg leading-relaxed">{achievement.text}</span>
+                  <achievement.icon className="h-5 w-5 text-blue-500 mr-3 mt-1 flex-shrink-0" />
+                  <span className="text-foreground font-medium leading-relaxed">{achievement.text}</span>
                 </CardContent>
               </Card>
             ))}
@@ -237,37 +237,37 @@ const About = () => {
       </section>
 
       {/* Team */}
-      <section className="py-24 bg-background">
+      <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-extrabold text-text-primary mb-6">Meet The Visionaries</h2>
-            <p className="text-2xl text-text-secondary font-medium">Leaders who revolutionized trading</p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Meet The Visionaries</h2>
+            <p className="text-lg text-muted-foreground">Leaders who revolutionized trading</p>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Archit Mittal */}
             <Card className="group hover:shadow-2xl transition-all duration-500 border-0 overflow-hidden transform hover:scale-105">
               <CardContent className="p-0">
-                <div className="bg-gradient-to-br from-matdash-primary to-matdash-secondary p-10 text-white">
-                  <div className="flex items-center mb-6">
-                    <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-6 group-hover:scale-110 transition-transform">
-                      <User className="h-12 w-12 text-white" />
+                <div className="bg-gradient-to-br from-blue-500 to-teal-500 p-8 text-white">
+                  <div className="flex items-center mb-4">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                      <User className="h-7 w-7 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-3xl font-bold">Archit Mittal</h3>
-                      <p className="text-white/90 text-lg font-medium">Co-Founder & Lead Algo Trader</p>
+                      <h3 className="text-2xl font-bold">Archit Mittal</h3>
+                      <p className="text-white/90 font-medium">Co-Founder & Lead Algo Trader</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-10 space-y-6 bg-gradient-to-br from-matdash-primary-light to-surface-container">
+                <div className="p-8 space-y-4 bg-gradient-to-br from-blue-50 to-card">
                   <div>
-                    <h4 className="text-xl font-bold text-text-primary mb-3">Trading Expertise</h4>
-                    <p className="text-text-secondary leading-relaxed text-lg">
+                    <h4 className="text-lg font-bold text-foreground mb-2">Trading Expertise</h4>
+                    <p className="text-muted-foreground leading-relaxed">
                       NISM certified derivatives specialist revolutionizing automated intraday options trading.
                     </p>
                   </div>
-                  <blockquote className="text-text-primary italic text-lg border-l-4 border-matdash-primary pl-6 bg-matdash-primary-light p-4 rounded-r-2xl">
+                  <blockquote className="text-foreground italic border-l-4 border-blue-500 pl-4 bg-blue-50 p-3 rounded-r-xl">
                     "Every trader deserves institutional-grade automation."
                   </blockquote>
                 </div>
@@ -277,26 +277,26 @@ const About = () => {
             {/* Hasmukh Prajapati */}
             <Card className="group hover:shadow-2xl transition-all duration-500 border-0 overflow-hidden transform hover:scale-105">
               <CardContent className="p-0">
-                <div className="bg-gradient-to-br from-matdash-secondary to-matdash-primary p-10 text-white">
-                  <div className="flex items-center mb-6">
-                    <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-6 group-hover:scale-110 transition-transform">
-                      <User className="h-12 w-12 text-white" />
+                <div className="bg-gradient-to-br from-teal-500 to-blue-500 p-8 text-white">
+                  <div className="flex items-center mb-4">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                      <User className="h-7 w-7 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-3xl font-bold">Hasmukh Prajapati</h3>
-                      <p className="text-white/90 text-lg font-medium">Co-Founder & Strategic Advisor</p>
+                      <h3 className="text-2xl font-bold">Hasmukh Prajapati</h3>
+                      <p className="text-white/90 font-medium">Co-Founder & Strategic Advisor</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-10 space-y-6 bg-gradient-to-br from-matdash-secondary-light to-surface-container">
+                <div className="p-8 space-y-4 bg-gradient-to-br from-teal-50 to-card">
                   <div>
-                    <h4 className="text-xl font-bold text-text-primary mb-3">Strategic Vision</h4>
-                    <p className="text-text-secondary leading-relaxed text-lg">
+                    <h4 className="text-lg font-bold text-foreground mb-2">Strategic Vision</h4>
+                    <p className="text-muted-foreground leading-relaxed">
                       Growth mastermind making algorithmic trading accessible and profitable for everyone.
                     </p>
                   </div>
-                  <blockquote className="text-text-primary italic text-lg border-l-4 border-matdash-secondary pl-6 bg-matdash-secondary-light p-4 rounded-r-2xl">
+                  <blockquote className="text-foreground italic border-l-4 border-teal-500 pl-4 bg-teal-50 p-3 rounded-r-xl">
                     "Success is building sustainable, stress-free trading."
                   </blockquote>
                 </div>
@@ -307,46 +307,46 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 bg-gradient-to-br from-gray-900 via-matdash-primary to-matdash-secondary text-white relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-br from-gray-900 via-blue-500 to-teal-500 text-white relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-matdash-primary/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-matdash-secondary/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
         
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <h2 className="text-6xl md:text-7xl font-extrabold mb-8 bg-gradient-to-r from-white via-matdash-primary to-matdash-secondary bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-teal-200 bg-clip-text text-transparent">
               Start Your Success Story
             </h2>
-            <p className="text-2xl md:text-3xl text-blue-100 max-w-4xl mx-auto mb-6 leading-relaxed font-medium">
+            <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto mb-4 leading-relaxed">
               Join thousands making <strong className="text-white">consistent profits</strong> on autopilot
             </p>
-            <p className="text-xl text-purple-200 mb-12 font-medium">
+            <p className="text-lg text-purple-200 mb-10">
               Your financial freedom is one click away
             </p>
             
             <div className="max-w-2xl mx-auto">
-              <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-12 border border-white/20 shadow-2xl">
+              <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20 shadow-2xl">
                 <Button
                   size="lg"
-                  className="w-full bg-gradient-to-r from-matdash-primary via-matdash-secondary to-matdash-primary hover:from-matdash-primary hover:via-matdash-secondary hover:to-matdash-primary hover:opacity-90 text-white font-bold py-8 px-12 text-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-2xl animate-pulse"
+                  className="w-full bg-gradient-to-r from-blue-500 via-teal-500 to-blue-500 hover:from-blue-600 hover:via-teal-600 hover:to-blue-600 text-white font-bold py-6 px-8 text-xl shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl animate-pulse"
                   onClick={() => window.location.href = "https://app.automatealgos.in/authentication/side-register"}
                 >
                   Get Started FREE Now
-                  <ArrowRight className="ml-4 h-8 w-8" />
+                  <ArrowRight className="ml-3 h-6 w-6" />
                 </Button>
                 
-                <div className="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-white/20">
+                <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-white/20">
                   <div className="text-center">
-                    <p className="text-3xl font-extrabold text-white">10K+</p>
+                    <p className="text-2xl font-bold text-white">10K+</p>
                     <p className="text-sm text-blue-200">Success Stories</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-3xl font-extrabold text-white">₹50Cr+</p>
+                    <p className="text-2xl font-bold text-white">₹50Cr+</p>
                     <p className="text-sm text-purple-200">Automated</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-3xl font-extrabold text-white">24/7</p>
+                    <p className="text-2xl font-bold text-white">24/7</p>
                     <p className="text-sm text-pink-200">Profits</p>
                   </div>
                 </div>

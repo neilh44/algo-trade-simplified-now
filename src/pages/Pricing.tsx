@@ -244,18 +244,20 @@ const Pricing = () => {
                           {plan.originalAnnualPrice}
                         </span>
                         {/* Discounted Price */}
-                        <span className="text-4xl font-bold text-foreground">
-                          {plan.annualPrice}
-                        </span>
-                        <span className="text-muted-foreground">/year</span>
+                        <div className="flex items-baseline justify-center whitespace-nowrap">
+                          <span className="text-4xl font-bold text-foreground">
+                            {plan.annualPrice}
+                          </span>
+                          <span className="text-muted-foreground ml-1">/year</span>
+                        </div>
                       </div>
                     ) : (
-                      <div>
+                      <div className="flex items-baseline justify-center whitespace-nowrap">
                         <span className="text-4xl font-bold text-foreground">
                           {isAnnual ? plan.annualPrice : plan.monthlyPrice}
                         </span>
                         {plan.monthlyPrice !== "Free" && (
-                          <span className="text-muted-foreground">
+                          <span className="text-muted-foreground ml-1">
                             /{isAnnual ? 'year' : 'month'}
                           </span>
                         )}
