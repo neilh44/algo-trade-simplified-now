@@ -5,9 +5,9 @@ import { Link, useLocation } from "react-router-dom";
 
 const navigationItems = [
   { id: 'home', label: 'Home', href: '/', external: false },
-  { id: 'courses', label: 'Courses', href: '/courses', external: false },
+  { id: 'products', label: 'Product', href: '/products', external: false },
   { id: 'pricing', label: 'Pricing', href: '/pricing', external: false },
-  { id: 'products', label: 'Products', href: '/products', external: false },
+  { id: 'courses', label: 'Courses', href: '/courses', external: false },
   { id: 'about', label: 'About Us', href: '/about', external: false }
 ];
 
@@ -88,7 +88,7 @@ const Header = () => {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-border' 
-          : 'bg-blue-900/80 backdrop-blur-sm'
+          : 'bg-blue-900 backdrop-blur-sm'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">

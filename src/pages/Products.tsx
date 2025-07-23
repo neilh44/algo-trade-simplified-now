@@ -3,7 +3,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import React, { useState, useEffect } from 'react';
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, LineChart, X } from "lucide-react"
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { BookOpen, LineChart, X, Gift, Mail, Clock } from "lucide-react"
 import {
   CheckCircle,
   Star,
@@ -14,7 +16,6 @@ import {
   Bot,
   BarChart3,
   Target,
-  Mail,
   Phone,
   Settings,
   Code,
@@ -24,7 +25,6 @@ import {
   Activity,
   Briefcase,
   PlayCircle,
-  Clock,
   Award,
   MapPin,
   Timer,
@@ -33,10 +33,200 @@ import {
   DollarSign
 } from "lucide-react";
 
+// Compact Email Collection Popup Component
+const EmailCollectionPopup = ({ isOpen, onClose, onEmailSubmit }) => {
+  const [email, setEmail] = useState('');
+  const [timeLeft, setTimeLeft] = useState(24 * 60 * 60); // 24 hours in seconds
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Countdown timer
+  useEffect(() => {
+    if (timeLeft > 0 && isOpen) {
+      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [timeLeft, isOpen]);
+
+  const formatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+    
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    onEmailSubmit(email);
+  };
+
+  if (!isOpen) return null;
+
+  if (isSubmitted) {
+    return (
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-3xl p-6 max-w-md w-full relative shadow-2xl animate-bounce-in">
+          <button 
+            onClick={onClose}
+            className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          <div className="text-center">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Gift className="h-8 w-8 text-green-600" />
+            </div>
+
+            <h3 className="text-xl font-bold text-gray-900 mb-3">
+              🎉 Success! Check Your Email
+            </h3>
+
+            <p className="text-gray-600 mb-4 text-sm">
+              Your free bonuses worth ₹4,999 are on their way to <strong>{email}</strong>
+            </p>
+
+            <div className="bg-green-50 p-3 rounded-xl border border-green-200">
+              <p className="text-green-700 text-xs">
+                💡 <strong>Next Steps:</strong> Check your email (including spam folder) and follow the instructions to access your bonuses!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-3xl p-6 max-w-md w-full relative shadow-2xl border-4 border-yellow-400 animate-scale-in">
+        <button 
+          onClick={onClose}
+          className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors z-10"
+        >
+          <X className="h-5 w-5" />
+        </button>
+
+        {/* Header with urgency */}
+        <div className="text-center mb-4">
+          <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-1.5 rounded-full inline-flex items-center gap-2 mb-3 animate-pulse">
+            <Clock className="h-3 w-3" />
+            <span className="font-bold text-xs">LIMITED TIME: {formatTime(timeLeft)}</span>
+          </div>
+
+          <h2 className="text-2xl font-bold text-gray-900 mb-1">
+            Get Your <span className="text-green-600">FREE</span> Trading Bonuses!
+          </h2>
+          
+          <p className="text-gray-600 text-xs">
+            Join 10,000+ successful traders and unlock exclusive resources
+          </p>
+        </div>
+
+        {/* Compact Value proposition */}
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-xl mb-4 border border-blue-100">
+          <div className="grid grid-cols-1 gap-2 mb-3 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✅</span>
+              <span className="text-gray-700">7-Day Trial of Automated Algo Bridge</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✅</span>
+              <span className="text-gray-700">Ebook on Crypto Trading Strategies</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✅</span>
+              <span className="text-gray-700">Ready-to-Use TradingView Strategy</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✅</span>
+              <span className="text-gray-700">Trading Journal Template</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✅</span>
+              <span className="text-gray-700">Automation Tools for Live Trading</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-600 font-bold">✅</span>
+              <span className="text-gray-700">Exclusive Resources & Priority Support</span>
+            </div>
+          </div>
+
+          <div className="text-center p-2 bg-white rounded-lg border-2 border-dashed border-green-300">
+            <span className="text-gray-500 line-through text-sm">₹4,999</span>
+            <span className="text-green-600 font-bold text-xl ml-2">FREE</span>
+          </div>
+        </div>
+
+        {/* Email input */}
+        <div className="space-y-3">
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email address"
+              className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900 text-sm"
+            />
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            disabled={isSubmitting || !email}
+            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-lg font-bold text-sm
+                      disabled:opacity-50 disabled:cursor-not-allowed
+                      hover:from-green-700 hover:to-emerald-700 transition-all duration-300 
+                      transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+          >
+            {isSubmitting ? (
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span>Sending Bonuses...</span>
+              </div>
+            ) : (
+              '🎁 Send Me My Free Bonuses!'
+            )}
+          </button>
+        </div>
+
+        {/* Compact Trust indicators */}
+        <div className="flex items-center justify-center gap-4 mt-4 text-xs text-gray-500">
+          <div className="flex items-center gap-1">
+            <Shield className="h-3 w-3" />
+            <span>Secure</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Users className="h-3 w-3" />
+            <span>10K+ Users</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Star className="h-3 w-3 text-yellow-500" />
+            <span>4.9/5</span>
+          </div>
+        </div>
+
+        <p className="text-center text-xs text-gray-400 mt-2">
+          No spam, unsubscribe anytime.
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const TradingProductPage = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isEmailPopupOpen, setIsEmailPopupOpen] = useState(false);
   const [timeLeft, setTimeLeft] = useState(24 * 60 * 60); // 24 hours in seconds
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isAnnual, setIsAnnual] = useState(false);
 
   useEffect(() => {
     // Countdown timer
@@ -47,7 +237,7 @@ const TradingProductPage = () => {
     // Exit intent popup
     const handleMouseLeave = (e) => {
       if (e.clientY <= 0) {
-        setIsPopupOpen(true);
+        setIsEmailPopupOpen(true);
       }
     };
 
@@ -56,21 +246,29 @@ const TradingProductPage = () => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    // Show popup after 30 seconds
-    const popupTimer = setTimeout(() => {
-      setIsPopupOpen(true);
+    // Show email popup after 30 seconds
+    const emailPopupTimer = setTimeout(() => {
+      setIsEmailPopupOpen(true);
     }, 30000);
+
+    // Show exit intent popup after 45 seconds
+    const exitPopupTimer = setTimeout(() => {
+      if (!isEmailPopupOpen) {
+        setIsPopupOpen(true);
+      }
+    }, 45000);
 
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mousemove', handleMouseMove);
 
     return () => {
       clearInterval(timer);
-      clearTimeout(popupTimer);
+      clearTimeout(emailPopupTimer);
+      clearTimeout(exitPopupTimer);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [isEmailPopupOpen]);
 
   const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
@@ -81,6 +279,11 @@ const TradingProductPage = () => {
 
   const redirectToAuth = () => {
     window.open("https://app.automatealgos.in", "_blank");
+  };
+
+  const handleEmailSubmit = (email) => {
+    console.log('Email submitted:', email);
+    // Here you can add your email submission logic
   };
 
   const features = [
@@ -124,30 +327,33 @@ const TradingProductPage = () => {
 
   const pricingPlans = [
     {
-      name: 'Basic',
-      price: '₹999',
-      originalPrice: '₹1,999',
-      period: '/month',
+      name: 'Starter',
+      monthlyPrice: 'Free',
+      annualPrice: 'Free',
+      originalAnnualPrice: 'Free',
+      period: '',
       popular: false,
-      features: ['Up to 3 strategies', 'Basic analytics', '1 broker connection', 'Email support'],
-      cta: 'Start Basic Plan'
+      features: ['1 broker connection', '3 live deployment', 'Basic backtesting', 'Email support'],
+      cta: 'Start Free Trial'
     },
     {
       name: 'Pro',
-      price: '₹1,999',
-      originalPrice: '₹4,999',
+      monthlyPrice: '₹1,999',
+      annualPrice: '₹19,199',
+      originalAnnualPrice: '₹23,988',
       period: '/month',
       popular: true,
-      features: ['25 strategies', 'Advanced analytics', '1 broker connections', 'Priority support', 'Risk management tools'],
+      features: ['1 broker connection', '25 live deployment', '5 basic pine script templates', 'Priority support', 'Risk management tools'],
       cta: 'Most Popular - Start Pro'
     },
     {
       name: 'Premium',
-      price: '₹2,999',
-      originalPrice: '₹9,999',
+      monthlyPrice: '₹2,999',
+      annualPrice: '₹28,999',
+      originalAnnualPrice: '₹35,988',
       period: '/month',
       popular: false,
-      features: ['Everything in Pro', 'AI optimization', 'Unlimited brokers', '24/7 phone support', 'Custom strategies'],
+      features: ['1 broker connection', 'Unlimited strategies', 'Advanced backtesting', 'Dedicated support manager', 'Advanced analytics'],
       cta: 'Go Premium'
     }
   ];
@@ -214,9 +420,9 @@ const TradingProductPage = () => {
               SEBI Registered • 500+ Success Stories • Enterprise-Grade Security
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 animate-fade-in">
-              Transform Your Trading with
+              Transform Your Trading with 
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
-                AI-Powered Automation
+                {" "}AI-Powered Automation
               </span>
             </h1>
             <p className="text-xl text-slate-600 mb-8 leading-relaxed animate-fade-in-up">
@@ -270,7 +476,24 @@ const TradingProductPage = () => {
               Choose Your Success Plan
               <span className="block text-lg font-normal text-red-600 mt-2">🔥 50% OFF - Limited Time Only!</span>
             </h2>
+            
+            {/* Pricing Toggle */}
+            <div className="flex items-center justify-center space-x-4 mt-8 mb-12">
+              <Label htmlFor="billing-toggle" className={!isAnnual ? "font-semibold text-slate-900" : "text-slate-600"}>
+                Monthly
+              </Label>
+              <Switch
+                id="billing-toggle"
+                checked={isAnnual}
+                onCheckedChange={setIsAnnual}
+              />
+              <Label htmlFor="billing-toggle" className={isAnnual ? "font-semibold text-slate-900" : "text-slate-600"}>
+                Annual
+              </Label>
+              <Badge variant="secondary" className="ml-2 bg-green-100 text-green-700 border-green-200">Save 20%</Badge>
+            </div>
           </div>
+          
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {pricingPlans.map((plan, index) => (
               <div key={index} className={`relative rounded-2xl p-8 ${plan.popular ? 'bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-500 scale-105' : 'bg-white border border-slate-200'} hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2`}>
@@ -284,9 +507,29 @@ const TradingProductPage = () => {
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-slate-900 mb-4">{plan.name}</h3>
                   <div className="mb-6">
-                    <span className="text-sm text-slate-500 line-through">{plan.originalPrice}</span>
-                    <div className="text-4xl font-bold text-slate-900">{plan.price}</div>
-                    <span className="text-slate-600">{plan.period}</span>
+                    {/* Price Display Logic */}
+                    {isAnnual && plan.originalAnnualPrice !== "Free" && plan.originalAnnualPrice !== plan.annualPrice ? (
+                      <div className="flex flex-col items-center gap-2">
+                        {/* Strikethrough Original Price */}
+                        <span className="text-lg text-slate-500 line-through">
+                          {plan.originalAnnualPrice}
+                        </span>
+                        {/* Discounted Price */}
+                        <div className="text-4xl font-bold text-slate-900">{plan.annualPrice}</div>
+                        <span className="text-slate-600">/year</span>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className="text-4xl font-bold text-slate-900">
+                          {isAnnual ? plan.annualPrice : plan.monthlyPrice}
+                        </div>
+                        {plan.monthlyPrice !== "Free" && (
+                          <span className="text-slate-600">
+                            /{isAnnual ? 'year' : 'month'}
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <ul className="space-y-3 mb-8">
                     {plan.features.map((feature, idx) => (
@@ -398,56 +641,72 @@ const TradingProductPage = () => {
               </div>
             </div>
           </div>
-          <button
-            onClick={redirectToAuth}
-            className="bg-white text-blue-600 px-10 py-5 rounded-xl text-xl font-bold hover:bg-blue-50 transition-all duration-200 transform hover:scale-105 shadow-2xl inline-flex items-center gap-3"
-          >
-            <Sparkles className="h-6 w-6" />
-            Claim Your 50% Discount Now
-            <ArrowRight className="h-6 w-6" />
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              onClick={redirectToAuth}
+              className="bg-white text-blue-600 hover:bg-blue-50 w-80 py-4 text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/20"
+            >
+              <Rocket className="mr-2 h-5 w-5" />
+              Claim Your 50% Discount Now
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <Button 
+              onClick={() => setIsEmailPopupOpen(true)}
+              className="bg-white text-blue-600 hover:bg-blue-50 w-80 py-4 text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/20"
+            >
+              <Gift className="mr-2 h-5 w-5" />
+              Get Free Bonuses First
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
           <p className="text-blue-100 text-sm mt-4">
-            ⚡ Instant Access • 🛡️ Risk-Free Trial • 🎯 Setup in 5 Minutes
+            ⚡ Instant Access • 🔒 Risk-Free Trial • 💰 Money-Back Guarantee
           </p>
         </div>
       </section>
 
       {/* Exit Intent Popup */}
       {isPopupOpen && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full relative animate-scale-in">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-8">
+          <div className="bg-white rounded-3xl p-6 max-w-sm w-full relative shadow-2xl animate-scale-in">
             <button 
               onClick={() => setIsPopupOpen(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
             >
               <X className="h-6 w-6" />
             </button>
             <div className="text-center">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Timer className="h-8 w-8 text-red-600" />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">Wait! Don't Miss Out!</h3>
-              <p className="text-slate-600 mb-6">Get 50% OFF + Free Setup Call worth ₹5,000</p>
-              <button 
-                onClick={redirectToAuth}
-                className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-3 rounded-lg font-bold hover:from-red-700 hover:to-orange-700 transition-colors mb-3"
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Wait! Don't Miss Out</h3>
+              <p className="text-gray-600 mb-6">
+                Get 50% OFF your first month + free bonuses worth ₹4,999
+              </p>
+              <Button 
+                onClick={redirectToAuth} 
+                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 mb-4"
               >
-                Claim Limited Offer Now
-              </button>
+                Claim Limited Offer
+              </Button>
               <button 
                 onClick={() => setIsPopupOpen(false)}
-                className="text-slate-500 text-sm hover:text-slate-700"
+                className="text-gray-500 text-sm hover:text-gray-700"
               >
-                No thanks, I'll pay full price later
+                No thanks, I'll pay full price
               </button>
             </div>
           </div>
         </div>
       )}
 
+      {/* Compact Email Collection Popup */}
+      <EmailCollectionPopup 
+        isOpen={isEmailPopupOpen}
+        onClose={() => setIsEmailPopupOpen(false)}
+        onEmailSubmit={handleEmailSubmit}
+      />
+
       <Footer />
 
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-20px); }
@@ -455,6 +714,10 @@ const TradingProductPage = () => {
         @keyframes float-delayed {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-15px); }
+        }
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
         }
         @keyframes fade-in {
           from { opacity: 0; transform: translateY(20px); }
@@ -464,19 +727,19 @@ const TradingProductPage = () => {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes bounce-slow {
-          0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-          40% { transform: translateY(-5px); }
-          60% { transform: translateY(-3px); }
-        }
         @keyframes gradient {
-          0% { background-position: 0% 50%; }
+          0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
         }
         @keyframes scale-in {
-          from { transform: scale(0.9); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
+          from { opacity: 0; transform: scale(0.9); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes bounce-in {
+          0% { opacity: 0; transform: scale(0.3); }
+          50% { opacity: 1; transform: scale(1.05); }
+          70% { transform: scale(0.9); }
+          100% { opacity: 1; transform: scale(1); }
         }
         .animate-float {
           animation: float 6s ease-in-out infinite;
@@ -484,14 +747,14 @@ const TradingProductPage = () => {
         .animate-float-delayed {
           animation: float-delayed 8s ease-in-out infinite;
         }
+        .animate-bounce-slow {
+          animation: bounce-slow 2s ease-in-out infinite;
+        }
         .animate-fade-in {
-          animation: fade-in 1s ease-out;
+          animation: fade-in 0.8s ease-out;
         }
         .animate-fade-in-up {
           animation: fade-in-up 1s ease-out 0.2s both;
-        }
-        .animate-bounce-slow {
-          animation: bounce-slow 2s infinite;
         }
         .animate-gradient {
           background-size: 200% 200%;
@@ -499,6 +762,9 @@ const TradingProductPage = () => {
         }
         .animate-scale-in {
           animation: scale-in 0.3s ease-out;
+        }
+        .animate-bounce-in {
+          animation: bounce-in 0.6s ease-out;
         }
       `}</style>
     </div>
