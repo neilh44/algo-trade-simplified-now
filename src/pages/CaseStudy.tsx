@@ -37,6 +37,7 @@ interface JotFormSignupProps {
   onSuccess?: (result: any) => void;
   onError?: (error: any) => void;
   className?: string;
+  pageName?: string; // Added page name prop
 }
 
 const JotFormSignup: React.FC<JotFormSignupProps> = ({ 
@@ -46,7 +47,8 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
   theme = 'light',
   onSuccess,
   onError,
-  className = ''
+  className = '',
+  pageName = '' // Added with default empty string
 }) => {
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
@@ -117,7 +119,11 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
       formDataToSend.append('q5_q5_dropdown3', data.city);
       
       formDataToSend.append('formID', formId);
-      formDataToSend.append('website', '');
+      
+      // Updated to include page name tracking using JotForm widget field
+      const pageSource = pageName || (typeof window !== 'undefined' ? window.location.pathname : 'unknown-page');
+      formDataToSend.append('typeA', pageSource);
+      
       formDataToSend.append('simple_spc', `${formId}-${formId}`);
       
       const response = await fetch(`https://submit.jotform.com/submit/${formId}`, {
@@ -455,6 +461,7 @@ const CaseStudy = () => {
                       title=""
                       subtitle=""
                       theme="light"
+                      pageName="raj-case-study-video-access" // Added page name tracking
                       onSuccess={handleLeadSuccess}
                       onError={handleLeadError}
                       className="border-0 shadow-none p-0"
