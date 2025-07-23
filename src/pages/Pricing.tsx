@@ -33,9 +33,10 @@ const Pricing = () => {
       description: "Perfect for individual traders getting started with automation",
       monthlyPrice: "Free",
       annualPrice: "Free",
+      originalAnnualPrice: "Free", // No strikethrough for free plan
       features: [
         "1 broker connection",
-        "3 active strategies",
+        "3 live deployment",
         "Basic backtesting",
         "Email support",
         "Risk management tools",
@@ -48,14 +49,16 @@ const Pricing = () => {
       name: "Pro",
       description: "For serious traders who need advanced features and multiple connections",
       monthlyPrice: "₹1,999",
-      annualPrice: "₹19,999",
+      annualPrice: "₹19,199",
+      originalAnnualPrice: "₹23,988", // Original price before discount
       features: [
         "1 broker connections",
-        "25 strategies",
-        "Advanced backtesting",
-        "Priority support",
+        "25 live deployment",
+        "5 basic pine script templates",
+        "Intermediatery backtesting",
+        "Email support",
         "Risk management tools",
-        "Advanced analytics",
+        "Intermediatery analytics",
         "Custom indicators"
       ],
       popular: true,
@@ -66,10 +69,12 @@ const Pricing = () => {
       name: "Premium",
       description: "For professional traders and institutions requiring unlimited access",
       monthlyPrice: "₹2,999",
-      annualPrice: "₹29,999",
+      annualPrice: "₹28,999",
+      originalAnnualPrice: "₹35,988", // Original price before discount
       features: [
         "1 broker connections",
         "Unlimited strategies",
+        "10 Multi-Target pine script templates",
         "Advanced backtesting",
         "Dedicated support manager",
         "Risk management tools",
@@ -103,17 +108,15 @@ const Pricing = () => {
     }
   ];
 
-
-
   const comparisonFeatures = [
     { feature: "Broker Connections", starter: "1", professional: "1", enterprise: "1" },
     { feature: "Active Strategies", starter: "3", professional: "25", enterprise: "Unlimited" },
     { feature: "Backtesting", starter: "Basic", professional: "Advanced", enterprise: "Advanced" },
+    { feature: "Pine Script Template", starter: "❌", professional: "5 Basic Template", enterprise: "10 Multi Target template" },
     { feature: "Support", starter: "Email", professional: "Priority", enterprise: "Dedicated Manager" },
-    { feature: "Analytics", starter: "Basic", professional: "Advanced", enterprise: "Advanced + Custom" },
+    { feature: "Analytics", starter: "Basic", professional: "Intermediatery", enterprise: "Advanced" },
     { feature: "Risk management tools", starter: "❌", professional: "✓", enterprise: "✓" },
     { feature: "Custom Indicators", starter: "❌", professional: "✓", enterprise: "✓" },
-    { feature: "SLA Guarantee", starter: "❌", professional: "❌", enterprise: "99.9%" }
   ];
 
   return (
@@ -178,13 +181,30 @@ const Pricing = () => {
                     {plan.description}
                   </CardDescription>
                   <div className="pt-4">
-                    <span className="text-4xl font-bold text-foreground">
-                      {isAnnual ? plan.annualPrice : plan.monthlyPrice}
-                    </span>
-                    {plan.monthlyPrice !== "Free" && (
-                      <span className="text-muted-foreground">
-                        /{isAnnual ? 'year' : 'month'}
-                      </span>
+                    {/* Price Display Logic */}
+                    {isAnnual && plan.originalAnnualPrice !== "Free" && plan.originalAnnualPrice !== plan.annualPrice ? (
+                      <div className="flex flex-col items-center gap-2">
+                        {/* Strikethrough Original Price */}
+                        <span className="text-2xl text-muted-foreground line-through">
+                          {plan.originalAnnualPrice}
+                        </span>
+                        {/* Discounted Price */}
+                        <span className="text-4xl font-bold text-foreground">
+                          {plan.annualPrice}
+                        </span>
+                        <span className="text-muted-foreground">/year</span>
+                      </div>
+                    ) : (
+                      <div>
+                        <span className="text-4xl font-bold text-foreground">
+                          {isAnnual ? plan.annualPrice : plan.monthlyPrice}
+                        </span>
+                        {plan.monthlyPrice !== "Free" && (
+                          <span className="text-muted-foreground">
+                            /{isAnnual ? 'year' : 'month'}
+                          </span>
+                        )}
+                      </div>
                     )}
                   </div>
                 </CardHeader>
@@ -211,7 +231,6 @@ const Pricing = () => {
             ))}
           </div>
         </div>
-      
       </section>
       
       {/* GST Disclaimer */}
@@ -324,8 +343,6 @@ const Pricing = () => {
           </div>
         </div>
       </section>
-
-
 
       {/* Final CTA Banner */}
       <section className="py-16 bg-gradient-to-r from-gray-900 to-blue-900 text-white">
