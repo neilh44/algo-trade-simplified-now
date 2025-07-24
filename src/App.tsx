@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
+import GlobalPopupIntentExit from "./components/GlobalPopupIntentExit";
+
 // Admin Layout and Pages
 import { AdminLayout } from "./components/admin/AdminLayout";
 import { ProtectedAdminRoute } from "./components/admin/ProtectedAdminRoute";
@@ -13,7 +15,7 @@ import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { UserManagement } from "./pages/admin/UserManagement";
 import { ResourceManagement } from "./pages/admin/ResourceManagement";
 
-// Public Pages
+// All your existing imports...
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Products from "./pages/Products";
@@ -66,7 +68,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            {/* Public Routes */}
+            {/* ALL YOUR EXISTING ROUTES - NO CHANGES NEEDED */}
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<Services />} />
             <Route path="/products" element={<Products />} />
@@ -163,6 +165,9 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          
+          {/* ADD THIS LINE ⬇️ */}
+          <GlobalPopupIntentExit />
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
