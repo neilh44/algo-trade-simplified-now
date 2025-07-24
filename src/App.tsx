@@ -23,6 +23,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
+import Courses from "./pages/Courses";
 import Documentation from "./pages/Documentation";
 import APIReference from "./pages/APIReference";
 import Tutorials from "./pages/Tutorials";
@@ -74,6 +75,7 @@ const App = () => (
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/courses" element={<Courses />} />
 
             {/* Protected Dashboard Routes */}
             <Route path="/dashboard" element={
