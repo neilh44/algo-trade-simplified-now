@@ -35,8 +35,8 @@ const Pricing = () => {
       annualPrice: "Free",
       originalAnnualPrice: "Free", // No strikethrough for free plan
       features: [
-        "1 broker connection",
-        "3 live deployment",
+        "1 Broker Connection",
+        "3 Live Deployment",
         "Basic backtesting",
         "Email support",
         "Risk management tools",
@@ -49,41 +49,41 @@ const Pricing = () => {
       name: "Pro",
       description: "For serious traders who need advanced features and multiple connections",
       monthlyPrice: "₹1,999",
-      annualPrice: "₹19,199",
+      annualPrice: "₹19,999",
       originalAnnualPrice: "₹23,988", // Original price before discount
       features: [
-        "1 broker connections",
-        "25 live deployment",
-        "5 basic pine script templates",
-        "Intermediatery backtesting",
-        "Email support",
-        "Risk management tools",
-        "Intermediatery analytics",
-        "Custom indicators"
+        "1 Broker Connection",
+        "25 Live Deployments", 
+        "5 Basic Pine Script Templates",
+        "Email + Whatsapp Support",
+        "Risk Management Tools",
+        "Custom Indicators",
+        "Intermediate Backtesting",
+        "Intermediate Analytics",
       ],
       popular: true,
       cta: "Get Started",
-      link: "https://wa.me/917016643084?text=I%20need%20help%20with%20monthly%20plan"
+      link: "https://automatealgos.in/contact-us"
     },
     {
       name: "Premium",
       description: "For professional traders and institutions requiring unlimited access",
       monthlyPrice: "₹2,999",
-      annualPrice: "₹28,999",
+      annualPrice: "₹29,999",
       originalAnnualPrice: "₹35,988", // Original price before discount
       features: [
-        "1 broker connections",
-        "Unlimited strategies",
-        "10 Multi-Target pine script templates",
-        "Advanced backtesting",
-        "Dedicated support manager",
-        "Risk management tools",
-        "Advanced analytics",
-        "Custom indicators"
+        "1 Broker Connection",
+        "Unlimited Live Deployments", 
+        "10 Multi-Target Pine Script Templates",
+        "Priority Support",
+        "Risk Management Tools",
+        "Custom Indicators",
+        "Advance Backtesting",
+        "Advanced Analytics",
       ],
       popular: false,
       cta: "Contact Sales",
-      link: "https://wa.me/917016643084?text=I%20need%20help%20with%20enterprise%20plan"
+      link: "https://automatealgos.in/contact-us"
     }
   ];
 
@@ -110,13 +110,13 @@ const Pricing = () => {
 
   const comparisonFeatures = [
     { feature: "Broker Connections", starter: "1", professional: "1", enterprise: "1" },
-    { feature: "Active Strategies", starter: "3", professional: "25", enterprise: "Unlimited" },
-    { feature: "Backtesting", starter: "Basic", professional: "Advanced", enterprise: "Advanced" },
+    { feature: "Live Deployments", starter: "3", professional: "25", enterprise: "Unlimited" },
     { feature: "Pine Script Template", starter: "❌", professional: "5 Basic Template", enterprise: "10 Multi Target template" },
-    { feature: "Support", starter: "Email", professional: "Priority", enterprise: "Dedicated Manager" },
-    { feature: "Analytics", starter: "Basic", professional: "Intermediatery", enterprise: "Advanced" },
+    { feature: "Support", starter: "Email", professional: "Email + Whatsapp", enterprise: "Priority Support" },
     { feature: "Risk management tools", starter: "❌", professional: "✓", enterprise: "✓" },
     { feature: "Custom Indicators", starter: "❌", professional: "✓", enterprise: "✓" },
+    { feature: "Backtesting", starter: "Basic", professional: "Intermediate", enterprise: "Advanced" },
+    { feature: "Analytics", starter: "Basic", professional: "Intermediate", enterprise: "Advanced" },
   ];
 
   return (
@@ -211,7 +211,7 @@ const Pricing = () => {
             <Label htmlFor="billing-toggle" className={isAnnual ? "font-semibold" : ""}>
               Annual
             </Label>
-            <Badge variant="secondary" className="ml-2">Save 20%</Badge>
+            <Badge variant="secondary" className="ml-2">10+ 2 months free</Badge>
           </div>
         </div>
       </section>

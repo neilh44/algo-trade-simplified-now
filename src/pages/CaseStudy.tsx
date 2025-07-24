@@ -122,7 +122,7 @@ const JotFormSignup: React.FC<JotFormSignupProps> = ({
       
       // Updated to include page name tracking using JotForm widget field
       const pageSource = pageName || (typeof window !== 'undefined' ? window.location.pathname : 'unknown-page');
-      formDataToSend.append('typeA', pageSource);
+      formDataToSend.append('pageUrl', pageSource);
       
       formDataToSend.append('simple_spc', `${formId}-${formId}`);
       

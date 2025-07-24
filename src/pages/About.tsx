@@ -1,39 +1,133 @@
-import { User, Lightbulb, GraduationCap, Shield, Mail, MapPin, Phone, Award, TrendingUp, Users, BookOpen, Star, CheckCircle, ArrowRight, Target, Eye, Heart, Zap, Trophy, Clock, DollarSign } from "lucide-react";
+import { User, Lightbulb, GraduationCap, Shield, Mail, MapPin, Phone, Award, TrendingUp, Users, BookOpen, Star, CheckCircle, ArrowRight, Target, Eye, Heart, Zap, Trophy, Clock, DollarSign, LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { useState, useEffect } from "react";
+import AnimatedAchievements from "@/components/AnimatedAchievements";
+import { useState, useEffect, useRef } from "react";
 
-const About = () => {
-  const [isVisible, setIsVisible] = useState({});
-  const [animatedStats, setAnimatedStats] = useState({ users: 0, rate: 0, strategies: 0 });
+interface Stat {
+  number: string;
+  label: string;
+  icon: LucideIcon;
+  color: string;
+  targetValue: number;
+  suffix: string;
+}
 
-  // Animate stats on mount
+interface TeamValue {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  gradient: string;
+}
+
+interface Feature {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+}
+
+interface AnimatedStats {
+  users: number;
+  rate: number;
+  strategies: number;
+}
+
+const About: React.FC = () => {
+  const [isVisible, setIsVisible] = useState<{[key: string]: boolean}>({});
+  const [animatedStats, setAnimatedStats] = useState<AnimatedStats>({ users: 0, rate: 0, strategies: 0 });
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  // Animate stats when section comes into view
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimatedStats({ users: 5000, rate: 98, strategies: 50 });
-    }, 500);
-    return () => clearTimeout(timer);
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
+            // Animate users count
+            let userCount = 0;
+            const userTimer = setInterval(() => {
+              userCount += 125;
+              if (userCount >= 5000) {
+                userCount = 5000;
+                clearInterval(userTimer);
+              }
+              setAnimatedStats(prev => ({ ...prev, users: userCount }));
+            }, 50);
 
-  const stats = [
-    { number: `${animatedStats.users.toLocaleString()}+`, label: "Happy Traders", icon: Users, color: "from-blue-500 to-teal-500" },
-    { number: `${animatedStats.rate}%`, label: "Success Rate", icon: TrendingUp, color: "from-green-500 to-emerald-600" },
-    { number: `${animatedStats.strategies}+`, label: "Trading Strategies", icon: BookOpen, color: "from-teal-500 to-teal-600" },
-    { number: "24/7", label: "Support Available", icon: Shield, color: "from-blue-500 to-violet-600" }
+            // Animate success rate
+            let rateCount = 0;
+            const rateTimer = setInterval(() => {
+              rateCount += 2;
+              if (rateCount >= 98) {
+                rateCount = 98;
+                clearInterval(rateTimer);
+              }
+              setAnimatedStats(prev => ({ ...prev, rate: rateCount }));
+            }, 50);
+
+            // Animate strategies count
+            let strategyCount = 0;
+            const strategyTimer = setInterval(() => {
+              strategyCount += 1;
+              if (strategyCount >= 50) {
+                strategyCount = 50;
+                clearInterval(strategyTimer);
+              }
+              setAnimatedStats(prev => ({ ...prev, strategies: strategyCount }));
+            }, 80);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasAnimated]);
+
+  const stats: Stat[] = [
+    { 
+      number: `${animatedStats.users.toLocaleString()}+`, 
+      label: "Happy Traders", 
+      icon: Users, 
+      color: "from-blue-500 to-teal-500",
+      targetValue: 5000,
+      suffix: "+"
+    },
+    { 
+      number: `${animatedStats.rate}%`, 
+      label: "Success Rate", 
+      icon: TrendingUp, 
+      color: "from-green-500 to-emerald-600",
+      targetValue: 98,
+      suffix: "%"
+    },
+    { 
+      number: `${animatedStats.strategies}+`, 
+      label: "Trading Strategies", 
+      icon: BookOpen, 
+      color: "from-teal-500 to-teal-600",
+      targetValue: 50,
+      suffix: "+"
+    },
+    { 
+      number: "24/7", 
+      label: "Support Available", 
+      icon: Shield, 
+      color: "from-blue-500 to-violet-600",
+      targetValue: 0,
+      suffix: ""
+    }
   ];
 
-  const achievements = [
-    { text: "NISM Certified Training Programs", icon: Award },
-    { text: "Featured in Leading Trading Publications", icon: Trophy },
-    { text: "Winner of Best Algo Trading Platform 2024", icon: Star },
-    { text: "Trusted by 5000+ Active Traders", icon: Users },
-    { text: "99.9% Platform Uptime Guarantee", icon: Shield },
-    { text: "ISO 27001 Security Certified", icon: CheckCircle }
-  ];
-
-  const teamValues = [
+  const teamValues: TeamValue[] = [
     {
       icon: Target,
       title: "Mission Driven",
@@ -54,11 +148,18 @@ const About = () => {
     }
   ];
 
-  const features = [
+  const features: Feature[] = [
     { icon: Zap, title: "Lightning Fast", desc: "Execute trades in milliseconds" },
-    { icon: Shield, title: "Bank-Grade Security", desc: "Your funds are always protected" },
+    { icon: TrendingUp, title: "Smart Analytics", desc: "AI-powered market insights" },
     { icon: Clock, title: "24/7 Automation", desc: "Trade while you sleep" },
-    { icon: DollarSign, title: "Maximize Profits", desc: "Optimize every trading opportunity" }
+    { icon: DollarSign, title: "Maximize Trade", desc: "Optimize every trading opportunity" }
+  ];
+
+  const missionItems: string[] = [
+    "Algorithmic trading for everyone", 
+    "Bridge retail-institutional gap", 
+    "Education + powerful tools", 
+    "24/7 automated trading"
   ];
 
   return (
@@ -91,7 +192,7 @@ const About = () => {
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed">
               Join the <strong className="text-blue-500">algorithmic revolution</strong> and build your
-              <strong className="text-teal-500"> profitable automated trading empire</strong> today.
+              <strong className="text-teal-500">  automated trading empire</strong> today.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -107,6 +208,7 @@ const About = () => {
                 variant="outline" 
                 size="lg" 
                 className="border-2 border-blue-500 text-blue-500 hover:bg-blue-50 hover:text-blue-700 px-8 py-4 text-lg font-medium rounded-xl"
+                onClick={() => window.open("https://www.youtube.com/watch?v=yjtgComx9xY&feature=youtu.be", "_blank")}
               >
                 Watch Demo
               </Button>
@@ -114,33 +216,49 @@ const About = () => {
 
             {/* Feature Highlights */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-              {features.map((feature, index) => (
-                <div key={index} className="text-center p-4 bg-card backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-border">
-                  <feature.icon className="h-5 w-5 text-blue-500 mx-auto mb-2" />
-                  <h4 className="font-medium text-foreground text-sm">{feature.title}</h4>
-                  <p className="text-xs text-muted-foreground">{feature.desc}</p>
-                </div>
-              ))}
+              {features.map((feature, index) => {
+                const IconComponent = feature.icon;
+                return (
+                  <div key={index} className="text-center p-4 bg-card backdrop-blur-sm rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-border">
+                    <IconComponent className="h-5 w-5 text-blue-500 mx-auto mb-2" />
+                    <h4 className="font-medium text-foreground text-sm">{feature.title}</h4>
+                    <p className="text-xs text-muted-foreground">{feature.desc}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Animated Stats */}
-      <section className="py-16 bg-muted/30 backdrop-blur-sm">
+      {/* Animated Stats - THIS IS THE SECTION YOU WANT ANIMATED */}
+      <section ref={statsRef} className="py-16 bg-muted/30 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group cursor-pointer">
-                <div className={`w-16 h-16 bg-gradient-to-r ${stat.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-500 shadow-xl`}>
-                  <stat.icon className="h-6 w-6 text-white" />
+            {stats.map((stat, index) => {
+              const IconComponent = stat.icon;
+              return (
+                <div key={index} className="text-center group cursor-pointer">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${stat.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-500 shadow-xl group-hover:shadow-2xl`}>
+                    <IconComponent className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-3xl md:text-4xl font-bold text-foreground mb-2 group-hover:text-blue-500 transition-colors transform group-hover:scale-105 duration-300">
+                    {stat.number}
+                  </div>
+                  <div className="text-muted-foreground text-sm font-medium">{stat.label}</div>
+                  
+                  {/* Progress bar effect */}
+                  <div className="mt-2 w-full bg-gray-200 rounded-full h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div 
+                      className={`h-1 bg-gradient-to-r ${stat.color} rounded-full transition-all duration-1000 ease-out`}
+                      style={{ 
+                        width: hasAnimated ? "100%" : "0%"
+                      }}
+                    ></div>
+                  </div>
                 </div>
-                <div className="text-3xl md:text-4xl font-bold text-foreground mb-2 group-hover:text-blue-500 transition-colors">
-                  {stat.number}
-                </div>
-                <div className="text-muted-foreground text-sm font-medium">{stat.label}</div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -168,7 +286,7 @@ const About = () => {
                 <div className="bg-card p-6 rounded-2xl shadow-xl transform hover:scale-105 transition-all duration-300 border border-border">
                   <h3 className="text-xl font-bold text-foreground mb-3">Today's Impact</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    5,000+ traders now profit with our 24/7 automated strategies, creating a new generation of successful algorithmic traders.
+                    5,000+ traders now take advantage with our 24/7 automated strategies, creating a new generation of successful algorithmic traders.
                   </p>
                 </div>
               </div>
@@ -177,7 +295,7 @@ const About = () => {
                 <CardContent className="p-0">
                   <h3 className="text-2xl font-bold mb-4">Mission Accomplished</h3>
                   <div className="space-y-3">
-                    {["Algorithmic trading for everyone", "Bridge retail-institutional gap", "Education + powerful tools", "24/7 automated profits"].map((item, i) => (
+                    {missionItems.map((item, i) => (
                       <div key={i} className="flex items-center">
                         <CheckCircle className="h-4 w-4 mr-3 text-green-300 flex-shrink-0" />
                         <span className="font-medium">{item}</span>
@@ -200,41 +318,26 @@ const About = () => {
           </div>
           
           <div className="grid lg:grid-cols-3 gap-8">
-            {teamValues.map((value, index) => (
-              <Card key={index} className="group hover:shadow-2xl transition-all duration-500 border-border bg-card transform hover:-translate-y-4">
-                <CardContent className="p-8">
-                  <div className={`w-14 h-14 bg-gradient-to-r ${value.gradient} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
-                    <value.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-blue-500 transition-colors">{value.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{value.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+            {teamValues.map((value, index) => {
+              const IconComponent = value.icon;
+              return (
+                <Card key={index} className="group hover:shadow-2xl transition-all duration-500 border-border bg-card transform hover:-translate-y-4">
+                  <CardContent className="p-8">
+                    <div className={`w-14 h-14 bg-gradient-to-r ${value.gradient} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
+                      <IconComponent className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-blue-500 transition-colors">{value.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Achievements */}
-      <section className="py-20 bg-gradient-to-br from-teal-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Proud Achievements</h2>
-            <p className="text-lg text-muted-foreground">Recognition that matters</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {achievements.map((achievement, index) => (
-              <Card key={index} className="p-6 bg-card hover:shadow-2xl transition-all duration-300 border-border transform hover:-translate-y-2">
-                <CardContent className="p-0 flex items-start">
-                  <achievement.icon className="h-5 w-5 text-blue-500 mr-3 mt-1 flex-shrink-0" />
-                  <span className="text-foreground font-medium leading-relaxed">{achievement.text}</span>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Platform Advantages - NO NUMBER ANIMATIONS */}
+      <AnimatedAchievements />
 
       {/* Team */}
       <section className="py-20 bg-background">
@@ -264,7 +367,7 @@ const About = () => {
                   <div>
                     <h4 className="text-lg font-bold text-foreground mb-2">Trading Expertise</h4>
                     <p className="text-muted-foreground leading-relaxed">
-                      NISM certified derivatives specialist revolutionizing automated intraday options trading.
+                      Experienced derivatives specialist revolutionizing automated intraday options trading.
                     </p>
                   </div>
                   <blockquote className="text-foreground italic border-l-4 border-blue-500 pl-4 bg-blue-50 p-3 rounded-r-xl">
@@ -319,7 +422,7 @@ const About = () => {
               Start Your Success Story
             </h2>
             <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto mb-4 leading-relaxed">
-              Join thousands making <strong className="text-white">consistent profits</strong> on autopilot
+              Join thousands making <strong className="text-white">consistent trading</strong> on autopilot
             </p>
             <p className="text-lg text-purple-200 mb-10">
               Your financial freedom is one click away
@@ -327,9 +430,9 @@ const About = () => {
             
             <div className="max-w-2xl mx-auto">
               <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20 shadow-2xl">
-                <Button
+              <Button
                   size="lg"
-                  className="w-full bg-gradient-to-r from-blue-500 via-teal-500 to-blue-500 hover:from-blue-600 hover:via-teal-600 hover:to-blue-600 text-white font-bold py-6 px-8 text-xl shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl animate-pulse"
+                  className="w-full bg-gradient-to-r from-blue-500 via-teal-500 to-blue-500 hover:from-blue-600 hover:via-teal-600 hover:to-blue-600 text-white font-bold py-6 px-8 text-xl shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-xl"
                   onClick={() => window.location.href = "https://app.automatealgos.in/authentication/side-register"}
                 >
                   Get Started FREE Now
@@ -347,7 +450,7 @@ const About = () => {
                   </div>
                   <div className="text-center">
                     <p className="text-2xl font-bold text-white">24/7</p>
-                    <p className="text-sm text-pink-200">Profits</p>
+                    <p className="text-sm text-pink-200">Trading</p>
                   </div>
                 </div>
               </div>

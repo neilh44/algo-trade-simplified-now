@@ -397,7 +397,7 @@ const ContactUs = () => {
               Get in Touch with Us
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              Have questions about AutomateAlgos? Our team is here to help you succeed 
+              Have questions about Automate Algos? Our team is here to help you succeed 
               with automated trading solutions.
             </p>
           </div>
@@ -489,7 +489,7 @@ const ContactUs = () => {
                   <CardContent>
                     <div className="space-y-4">
                       <div>
-                        <h4 className="font-semibold text-foreground">AutomateAlgos Headquarters</h4>
+                        <h4 className="font-semibold text-foreground">Automate Algos Headquarters</h4>
                         <div className="space-y-2">
                           <div className="flex items-start gap-2">
                             <MapPin className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />

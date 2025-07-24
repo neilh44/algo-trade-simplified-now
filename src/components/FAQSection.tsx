@@ -54,14 +54,7 @@ const FAQSection = () => {
       counter: 99.9,
       suffix: "%"
     },
-    {
-      title: "256-bit SSL Encryption",
-      description: "Bank-grade security protects all your data and trading communications.",
-      icon: Shield,
-      color: "from-blue-400 to-indigo-500",
-      counter: 256,
-      suffix: "-bit"
-    },
+
     {
       title: "24/7 Market Monitoring",
       description: "Our systems monitor market conditions and your strategies around the clock.",
