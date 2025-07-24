@@ -1,8 +1,108 @@
+/* Theme Variables - Integrated with your MatDash design system */
+:root {
+  /* Light theme variables - using your MatDash palette */
+  --background: 255 255 255; /* #fff */
+  --foreground: 41 52 61; /* #29343d */
+  --card: 255 255 255; /* #fff */
+  --card-foreground: 41 52 61; /* #29343d */
+  --popover: 255 255 255; /* #fff */
+  --popover-foreground: 41 52 61; /* #29343d */
+  --primary: 99 91 255; /* rgb(99, 91, 255) */
+  --primary-foreground: 255 255 255; /* white */
+  --primary-light: 99 91 255 / 0.15; /* rgba(99, 91, 255, 0.15) */
+  --secondary: 22 205 199; /* rgb(22, 205, 199) */
+  --secondary-foreground: 255 255 255; /* white */
+  --secondary-light: 22 205 199 / 0.15; /* rgba(22, 205, 199, 0.15) */
+  --muted: 242 246 250; /* #f2f6fa */
+  --muted-foreground: 41 52 61 / 0.7; /* rgba(41, 52, 61, 0.7) */
+  --accent: 246 249 252; /* #f6f9fc */
+  --accent-foreground: 41 52 61; /* #29343d */
+  --destructive: 239 68 68; /* #ef4444 */
+  --destructive-foreground: 255 255 255; /* white */
+  --border: 224 230 235; /* #e0e6eb */
+  --input: 224 230 235; /* #e0e6eb */
+  --ring: 99 91 255; /* rgb(99, 91, 255) */
+  --radius: 0.5rem;
+  
+  /* Surface colors from your MatDash system */
+  --surface-bright: 242 246 250; /* #f2f6fa */
+  --surface-container: 255 255 255; /* #fff */
+  --surface-container-lowest: 246 247 249; /* #f6f7f9 */
+  --hover-background: 246 249 252; /* #f6f9fc */
+  
+  /* Sidebar colors */
+  --sidebar-background: 255 255 255;
+  --sidebar-foreground: 41 52 61;
+  --sidebar-primary: 99 91 255;
+  --sidebar-primary-foreground: 255 255 255;
+  --sidebar-accent: 246 249 252;
+  --sidebar-accent-foreground: 41 52 61;
+  --sidebar-border: 224 230 235;
+  --sidebar-ring: 99 91 255;
+}
+
+[data-theme="dark"] {
+  /* Dark theme variables */
+  --background: 15 23 42; /* #0f172a */
+  --foreground: 248 250 252; /* #f8fafc */
+  --card: 30 41 59; /* #1e293b */
+  --card-foreground: 248 250 252; /* #f8fafc */
+  --popover: 30 41 59; /* #1e293b */
+  --popover-foreground: 248 250 252; /* #f8fafc */
+  --primary: 99 91 255; /* Keep your brand primary */
+  --primary-foreground: 248 250 252; /* #f8fafc */
+  --primary-light: 99 91 255 / 0.2; /* Slightly more visible in dark */
+  --secondary: 22 205 199; /* Keep your brand secondary */
+  --secondary-foreground: 248 250 252; /* #f8fafc */
+  --secondary-light: 22 205 199 / 0.2; /* Slightly more visible in dark */
+  --muted: 30 41 59; /* #1e293b */
+  --muted-foreground: 148 163 184; /* #94a3b8 */
+  --accent: 51 65 85; /* #334155 */
+  --accent-foreground: 248 250 252; /* #f8fafc */
+  --destructive: 239 68 68; /* #ef4444 */
+  --destructive-foreground: 248 250 252; /* #f8fafc */
+  --border: 51 65 85; /* #334155 */
+  --input: 51 65 85; /* #334155 */
+  --ring: 99 91 255; /* rgb(99, 91, 255) */
+  
+  /* Dark surface colors */
+  --surface-bright: 30 41 59; /* #1e293b */
+  --surface-container: 30 41 59; /* #1e293b */
+  --surface-container-lowest: 15 23 42; /* #0f172a */
+  --hover-background: 51 65 85; /* #334155 */
+  
+  /* Dark sidebar colors */
+  --sidebar-background: 15 23 42;
+  --sidebar-foreground: 248 250 252;
+  --sidebar-primary: 99 91 255;
+  --sidebar-primary-foreground: 248 250 252;
+  --sidebar-accent: 51 65 85;
+  --sidebar-accent-foreground: 248 250 252;
+  --sidebar-border: 51 65 85;
+  --sidebar-ring: 99 91 255;
+}
+
+/* Apply theme variables to body */
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Your existing styles - preserved and enhanced */
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
 }
 
 .logo {
@@ -11,9 +111,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -35,8 +137,245 @@
 
 .card {
   padding: 2em;
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .read-the-docs {
-  color: #888;
+  color: hsl(var(--muted-foreground));
+  transition: color 0.3s ease;
+}
+
+/* Additional theme-aware styles for better integration */
+* {
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Smooth transitions for theme switching */
+*, *::before, *::after {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+/* Override for elements that shouldn't animate */
+.no-theme-transition,
+.no-theme-transition * {
+  transition: none !important;
+}
+
+/* Dark mode specific adjustments */
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+/* Ensure proper contrast for links */
+a {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Make sure form elements inherit theme */
+input, 
+textarea, 
+select {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) - 2px);
+  padding: 0.5rem 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input:focus, 
+textarea:focus, 
+select:focus {
+  outline: none;
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Button base styles */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button:focus {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: hsl(var(--accent));
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.6);
+}
+
+/* Selection styling */
+::selection {
+  background-color: hsl(var(--primary) / 0.2);
+  color: hsl(var(--foreground));
+}
+
+[data-theme="dark"] ::selection {
+  background-color: hsl(var(--primary) / 0.3);
+}
+
+/* Focus visible for better accessibility */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Ensure images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Utility classes for theme-aware styling */
+.bg-background {
+  background-color: hsl(var(--background));
+}
+
+.bg-surface-bright {
+  background-color: hsl(var(--surface-bright));
+}
+
+.bg-surface-container {
+  background-color: hsl(var(--surface-container));
+}
+
+.text-primary {
+  color: hsl(var(--foreground));
+}
+
+.text-secondary {
+  color: hsl(var(--muted-foreground));
+}
+
+.border-theme {
+  border-color: hsl(var(--border));
+}
+
+/* Loading spinner for theme compatibility */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+  
+  .card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #root {
+    padding: 0.5rem;
+  }
+  
+  .card {
+    padding: 1rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
 }

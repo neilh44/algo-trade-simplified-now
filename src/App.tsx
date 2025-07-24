@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { ThemeProvider } from "@/contexts/ThemeContext"; // ADD THIS IMPORT
 
 import GlobalPopupIntentExit from "./components/GlobalPopupIntentExit";
 
@@ -62,115 +63,117 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            {/* ALL YOUR EXISTING ROUTES - NO CHANGES NEEDED */}
-            <Route path="/" element={<Index />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/courses" element={<Courses />} />
+    <ThemeProvider> {/* ADD THEME PROVIDER WRAPPER */}
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              {/* ALL YOUR EXISTING ROUTES - NO CHANGES NEEDED */}
+              <Route path="/" element={<Index />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/courses" element={<Courses />} />
 
-            {/* Protected Dashboard Routes */}
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/FreeCourses" element={
-              <ProtectedRoute>
-                <FreeCourses />
-              </ProtectedRoute>
-            } />
-            <Route path="/Resources" element={
-              <ProtectedRoute>
-                <Resources />
-              </ProtectedRoute>
-            } />
-            <Route path="/Progress" element={
-              <ProtectedRoute>
-                <Progress />
-              </ProtectedRoute>
-            } />
-            <Route path="/LiveSessions" element={
-              <ProtectedRoute>
-                <LiveSessions />
-              </ProtectedRoute>
-            } />
-            <Route path="/Profile" element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            } />
-            <Route path="/Support" element={
-              <ProtectedRoute>
-                <Support />
-              </ProtectedRoute>
-            } />
+              {/* Protected Dashboard Routes */}
+              <Route path="/dashboard" element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/FreeCourses" element={
+                <ProtectedRoute>
+                  <FreeCourses />
+                </ProtectedRoute>
+              } />
+              <Route path="/Resources" element={
+                <ProtectedRoute>
+                  <Resources />
+                </ProtectedRoute>
+              } />
+              <Route path="/Progress" element={
+                <ProtectedRoute>
+                  <Progress />
+                </ProtectedRoute>
+              } />
+              <Route path="/LiveSessions" element={
+                <ProtectedRoute>
+                  <LiveSessions />
+                </ProtectedRoute>
+              } />
+              <Route path="/Profile" element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              } />
+              <Route path="/Support" element={
+                <ProtectedRoute>
+                  <Support />
+                </ProtectedRoute>
+              } />
 
-            {/* Admin Routes */}
-            <Route path="/admin" element={
-              <ProtectedRoute>
-                <ProtectedAdminRoute>
-                  <AdminLayout />
-                </ProtectedAdminRoute>
-              </ProtectedRoute>
-            }>
-              <Route index element={<AdminDashboard />} />
-              <Route path="users" element={<UserManagement />} />
-              <Route path="resources" element={<ResourceManagement />} />
-              <Route path="activities" element={<div className="p-6">Activities Page (Coming Soon)</div>} />
-              <Route path="support" element={<div className="p-6">Support Page (Coming Soon)</div>} />
-              <Route path="upload" element={<div className="p-6">Upload Page (Coming Soon)</div>} />
-            </Route>
+              {/* Admin Routes */}
+              <Route path="/admin" element={
+                <ProtectedRoute>
+                  <ProtectedAdminRoute>
+                    <AdminLayout />
+                  </ProtectedAdminRoute>
+                </ProtectedRoute>
+              }>
+                <Route index element={<AdminDashboard />} />
+                <Route path="users" element={<UserManagement />} />
+                <Route path="resources" element={<ResourceManagement />} />
+                <Route path="activities" element={<div className="p-6">Activities Page (Coming Soon)</div>} />
+                <Route path="support" element={<div className="p-6">Support Page (Coming Soon)</div>} />
+                <Route path="upload" element={<div className="p-6">Upload Page (Coming Soon)</div>} />
+              </Route>
+              
+              {/* Documentation & Resources Routes */}
+              <Route path="/docs" element={<Documentation />} />
+              <Route path="/api-reference" element={<APIReference />} />
+              <Route path="/tutorials" element={<Tutorials />} />
+              <Route path="/video-guides" element={<VideoGuides />} />
+              <Route path="/strategy-templates" element={<StrategyTemplates />} />
+              <Route path="/blog" element={<Blog />} />
+              
+              {/* Support Routes */}
+              <Route path="/help" element={<HelpCenter />} />
+              <Route path="/contact" element={<ContactSupport />} />
+              <Route path="/status" element={<SystemStatus />} />
+              <Route path="/feature-requests" element={<FeatureRequests />} />
+              <Route path="/bug-reports" element={<BugReports />} />
+              <Route path="/community" element={<CommunityForum />} />
+              
+              {/* Legal Routes */}
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/refund-policy" element={<RefundPolicy />} />
+              <Route path="/risk-disclosure" element={<RiskDisclosure />} />
+              <Route path="/compliance" element={<Compliance />} />
+              <Route path="/data-security" element={<DataSecurity />} />
+              
+              {/* Landing Page CTA Routes */}
+              <Route path="/interactive-demo" element={<InteractiveDemo />} />
+              <Route path="/schedule-demo" element={<ScheduleDemo />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/case-study" element={<CaseStudy />} />
+              
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
             
-            {/* Documentation & Resources Routes */}
-            <Route path="/docs" element={<Documentation />} />
-            <Route path="/api-reference" element={<APIReference />} />
-            <Route path="/tutorials" element={<Tutorials />} />
-            <Route path="/video-guides" element={<VideoGuides />} />
-            <Route path="/strategy-templates" element={<StrategyTemplates />} />
-            <Route path="/blog" element={<Blog />} />
-            
-            {/* Support Routes */}
-            <Route path="/help" element={<HelpCenter />} />
-            <Route path="/contact" element={<ContactSupport />} />
-            <Route path="/status" element={<SystemStatus />} />
-            <Route path="/feature-requests" element={<FeatureRequests />} />
-            <Route path="/bug-reports" element={<BugReports />} />
-            <Route path="/community" element={<CommunityForum />} />
-            
-            {/* Legal Routes */}
-            <Route path="/terms" element={<TermsOfService />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/refund-policy" element={<RefundPolicy />} />
-            <Route path="/risk-disclosure" element={<RiskDisclosure />} />
-            <Route path="/compliance" element={<Compliance />} />
-            <Route path="/data-security" element={<DataSecurity />} />
-            
-            {/* Landing Page CTA Routes */}
-            <Route path="/interactive-demo" element={<InteractiveDemo />} />
-            <Route path="/schedule-demo" element={<ScheduleDemo />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/case-study" element={<CaseStudy />} />
-            
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          
-          {/* ADD THIS LINE ⬇️ */}
-          <GlobalPopupIntentExit />
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
+            {/* ADD THIS LINE ⬇️ */}
+            <GlobalPopupIntentExit />
+          </BrowserRouter>
+        </TooltipProvider>
+      </AuthProvider>
+    </ThemeProvider> {/* CLOSE THEME PROVIDER WRAPPER */}
   </QueryClientProvider>
 );
 

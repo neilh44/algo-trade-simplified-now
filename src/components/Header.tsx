@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link, useLocation } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle"; // ADD THIS IMPORT
+import { useTheme } from "@/contexts/ThemeContext"; // ADD THIS IMPORT
 
 const navigationItems = [
   { id: 'home', label: 'Home', href: '/', external: false },
   { id: 'products', label: 'Product', href: '/products', external: false },
+  { id: 'strategies', label: 'Strategies', href: '/strategies', external: false },
   { id: 'courses', label: 'Courses', href: '/courses', external: false },
   { id: 'pricing', label: 'Pricing', href: '/pricing', external: false },
   { id: 'about', label: 'About Us', href: '/about', external: false }
@@ -16,7 +19,9 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { theme } = useTheme(); // ADD THIS LINE
 
+  // All your existing functions remain the same
   const redirectToAuth = () => {
     window.location.href = "https://app.automatealgos.in/authentication/side-register";
   };
@@ -29,6 +34,7 @@ const Header = () => {
     window.location.href = "https://automatealgos.in";
   };
 
+  // All your existing useEffect and handleNavigation functions remain the same
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -49,7 +55,6 @@ const Header = () => {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
     
-    // Observe all sections
     navigationItems.forEach(item => {
       const element = document.getElementById(item.id);
       if (element) observer.observe(element);
@@ -65,7 +70,6 @@ const Header = () => {
 
   const handleNavigation = (item: any) => {
     if (item.href.startsWith('#')) {
-      // Handle anchor scrolling for same page
       const targetId = item.href.replace('#', '');
       const element = document.getElementById(targetId);
       
@@ -79,7 +83,6 @@ const Header = () => {
         });
       }
     }
-    // For external routes, Link component will handle navigation
     setIsMobileMenuOpen(false);
   };
 
@@ -87,12 +90,12 @@ const Header = () => {
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-border' 
+          ? 'bg-background/95 backdrop-blur-md shadow-sm border-b border-border' 
           : 'bg-blue-900 backdrop-blur-sm'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* Logo - Now clickable */}
+            {/* Logo - remains the same */}
             <button 
               onClick={redirectToHome}
               className="flex items-center space-x-2 transition-opacity hover:opacity-80"
@@ -107,7 +110,7 @@ const Header = () => {
               </span>
             </button>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation - remains the same */}
             <nav className="hidden md:flex items-center space-x-8">
               {navigationItems.map((item) => {
                 const isActive = item.href.startsWith('#') 
@@ -165,23 +168,27 @@ const Header = () => {
               })}
             </nav>
 
-            {/* Desktop CTA */}
-            <div className="hidden md:flex items-center space-x-3">
+            {/* Desktop CTA + Theme Toggle - Enhanced with MatDash styling */}
+            <div className="hidden md:flex items-center space-x-4">
+              {/* Theme Toggle with subtle styling */}
+              <ThemeToggle isScrolled={isScrolled} />
+              
               <Button 
                 onClick={redirectToLogin}
-                className="bg-primary text-primary-foreground hover:bg-white hover:text-primary border border-primary"
+                variant="outline"
+                className="bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 font-medium px-6"
               >
                 Login
               </Button>
               <Button 
                 onClick={redirectToAuth}
-                className="bg-primary hover:bg-white hover:text-primary text-primary-foreground border border-primary"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground border-2 border-primary transition-all duration-300 font-medium px-6 shadow-lg hover:shadow-xl"
               >
                 Sign Up
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - remains the same */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`md:hidden p-2 rounded-md transition-colors ${
@@ -200,7 +207,7 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - ADD THEME TOGGLE */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div className="fixed inset-0 bg-black/50" onClick={() => setIsMobileMenuOpen(false)} />
@@ -245,17 +252,27 @@ const Header = () => {
                   );
                 }
               })}
-              <div className="pt-4 border-t border-border space-y-3">
+              
+              {/* Theme Toggle in Mobile Menu - Enhanced Design */}
+              <div className="flex items-center justify-between px-3 py-4 border-t border-border bg-surface-bright/50 rounded-lg mx-1">
+                <div className="flex flex-col">
+                  <span className="text-base font-medium text-foreground">Theme</span>
+                  <span className="text-sm text-muted-foreground">Switch between light and dark mode</span>
+                </div>
+                <ThemeToggle isScrolled={true} />
+              </div>
+              
+              <div className="pt-4 space-y-3">
                 <Button 
                   onClick={redirectToLogin}
                   variant="outline"
-                  className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 font-medium py-3"
                 >
                   Login
                 </Button>
                 <Button 
                   onClick={redirectToAuth}
-                  className="w-full bg-primary hover:bg-white hover:text-primary text-primary-foreground border border-primary"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground border-2 border-primary transition-all duration-300 font-medium py-3 shadow-lg"
                 >
                   Sign Up
                 </Button>
