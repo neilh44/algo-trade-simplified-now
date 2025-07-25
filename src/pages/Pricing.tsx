@@ -433,7 +433,7 @@ const Pricing = () => {
         </div>
       </section>
 
-      <AppFooter />
+      <Footer />
     </div>
   );
 };

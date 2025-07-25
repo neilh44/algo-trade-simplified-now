@@ -33,7 +33,7 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
     }
   }, [timeLeft, isPopupOpen]);
 
-  // Exit intent and timer logic - MODIFIED TO KEEP SHOWING
+  // Exit intent and timer logic - MODIFIED TO KEEP SHOWING (refreshshow)
   useEffect(() => {
     if (!enabled) return;
 
