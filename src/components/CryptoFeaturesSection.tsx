@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Bot,
   BookOpen,
@@ -7,14 +7,12 @@ import {
   TrendingUp,
   CheckCircle,
   Zap,
-  Target
+  Target,
+  Sun,
+  Moon
 } from "lucide-react";
 
-interface CryptoFeaturesSectionProps {
-  theme?: 'light' | 'dark';
-}
-
-const CryptoFeaturesSection: React.FC<CryptoFeaturesSectionProps> = ({ theme = 'light' }) => {
+const CryptoFeaturesSection = ({ theme = 'light' }) => {
   const isDark = theme === 'dark';
   
   const features = [
@@ -29,7 +27,6 @@ const CryptoFeaturesSection: React.FC<CryptoFeaturesSectionProps> = ({ theme = '
         'Real-time market monitoring',
         'Smart order execution'
       ],
-      imagePath: '/api/images/crypto-automation.jpg', // Your backend image path
       benefits: 'Never miss market opportunities',
       performance: '+32% avg returns'
     },
@@ -44,7 +41,6 @@ const CryptoFeaturesSection: React.FC<CryptoFeaturesSectionProps> = ({ theme = '
         'Market analysis tutorials',
         'Risk management guides'
       ],
-      imagePath: '/api/images/crypto-education.jpg',
       benefits: 'Trade with confidence',
       performance: '95% completion rate'
     },
@@ -59,7 +55,6 @@ const CryptoFeaturesSection: React.FC<CryptoFeaturesSectionProps> = ({ theme = '
         'Market condition filters',
         'One-click deployment'
       ],
-      imagePath: '/api/images/strategy-templates.jpg',
       benefits: 'Start trading instantly',
       performance: '78% win rate average'
     },
@@ -74,7 +69,6 @@ const CryptoFeaturesSection: React.FC<CryptoFeaturesSectionProps> = ({ theme = '
         'Risk metrics analysis',
         'Custom reporting tools'
       ],
-      imagePath: '/api/images/crypto-analytics.jpg',
       benefits: 'Data-driven decisions',
       performance: '40+ key metrics'
     },
@@ -89,7 +83,6 @@ const CryptoFeaturesSection: React.FC<CryptoFeaturesSectionProps> = ({ theme = '
         'Risk-adjusted returns',
         'Strategy optimization'
       ],
-      imagePath: '/api/images/crypto-backtesting.jpg',
       benefits: 'Risk-free validation',
       performance: '5+ years historical data'
     }
@@ -100,7 +93,6 @@ const CryptoFeaturesSection: React.FC<CryptoFeaturesSectionProps> = ({ theme = '
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-
           <h2 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-slate-900'} mb-4`}>
             Everything You Need for Crypto Success
           </h2>
@@ -155,32 +147,17 @@ const CryptoFeaturesSection: React.FC<CryptoFeaturesSectionProps> = ({ theme = '
                       </div>
                     ))}
                   </div>
-
-
                 </div>
 
                 {/* Image Side */}
                 <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''} relative`}>
-                  <div className={`relative rounded-xl overflow-hidden ${isDark ? 'bg-slate-700' : 'bg-slate-100'} aspect-video group-hover:scale-105 transition-transform duration-500`}>
-                    {/* Placeholder for your backend image */}
-                    <img
-                      src={feature.imagePath}
-                      alt={feature.title}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        // Fallback if image doesn't load
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
-                    {/* Fallback content when image is not available */}
-                    <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-br from-slate-700 to-slate-800' : 'bg-gradient-to-br from-slate-200 to-slate-300'} flex items-center justify-center hidden`}>
-                      <div className="text-center">
-                        <feature.icon className={`h-16 w-16 ${isDark ? 'text-slate-500' : 'text-slate-400'} mx-auto mb-4`} />
-                        <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'} font-medium`}>
-                          {feature.title}
-                        </p>
-                      </div>
+                  <div className={`relative rounded-xl overflow-hidden ${isDark ? 'bg-gradient-to-br from-slate-700 to-slate-800' : 'bg-gradient-to-br from-slate-200 to-slate-300'} aspect-video group-hover:scale-105 transition-transform duration-500 flex items-center justify-center`}>
+                    {/* Demo content since we don't have real images */}
+                    <div className="text-center">
+                      <feature.icon className={`h-16 w-16 ${isDark ? 'text-slate-500' : 'text-slate-400'} mx-auto mb-4`} />
+                      <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'} font-medium`}>
+                        {feature.title}
+                      </p>
                     </div>
                     
                     {/* Overlay gradient */}
@@ -206,21 +183,46 @@ const CryptoFeaturesSection: React.FC<CryptoFeaturesSectionProps> = ({ theme = '
             </div>
           ))}
         </div>
-
-
       </div>
-
-      <style>{`
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out;
-        }
-      `}</style>
     </section>
   );
 };
+
+// Demo wrapper with theme toggle
+function CryptoFeaturesDemo() {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    <div className={`min-h-screen transition-colors duration-300 ${theme === 'dark' ? 'bg-slate-900' : 'bg-gray-50'}`}>
+      {/* Theme Toggle Button */}
+      <div className="fixed top-6 right-6 z-50">
+        <button
+          onClick={toggleTheme}
+          className={`p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
+            theme === 'dark'
+              ? 'bg-slate-800 text-yellow-400 hover:bg-slate-700 border border-slate-600'
+              : 'bg-white text-slate-700 hover:bg-gray-50 border border-gray-200'
+          }`}
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? (
+            <Sun className="h-6 w-6" />
+          ) : (
+            <Moon className="h-6 w-6" />
+          )}
+        </button>
+      </div>
+
+
+
+      {/* The themed component */}
+      <CryptoFeaturesSection theme={theme} />
+    </div>
+  );
+}
 
 export default CryptoFeaturesSection;

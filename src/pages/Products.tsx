@@ -22,9 +22,14 @@ import {
   DollarSign
 } from "lucide-react";
 
-const TradingProductPage: React.FC = () => {
+const Products: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState<number>(24 * 60 * 60); // 24 hours in seconds
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  const toggleTheme = (): void => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   useEffect(() => {
     // Countdown timer
@@ -125,11 +130,15 @@ const TradingProductPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 relative overflow-x-hidden">
+    <div className={`min-h-screen relative overflow-x-hidden transition-all duration-500 ${
+      theme === 'dark' ? 'bg-slate-900' : 'bg-slate-50'
+    }`}>
       {/* Animated Background */}
       <div className="fixed inset-0 pointer-events-none">
         <div 
-          className="absolute w-96 h-96 bg-blue-500/5 rounded-full blur-3xl transition-all duration-1000"
+          className={`absolute w-96 h-96 rounded-full blur-3xl transition-all duration-1000 ${
+            theme === 'dark' ? 'bg-blue-500/10' : 'bg-blue-500/5'
+          }`}
           style={{
             left: mousePosition.x - 192,
             top: mousePosition.y - 192,
@@ -137,8 +146,27 @@ const TradingProductPage: React.FC = () => {
         />
       </div>
 
+      {/* Theme Toggle Button */}
+      <div className="fixed top-4 right-4 z-50">
+        <button
+          onClick={toggleTheme}
+          className={`p-3 rounded-full transition-all duration-300 backdrop-blur-sm border ${
+            theme === 'dark'
+              ? 'bg-slate-800/80 border-slate-600 text-yellow-400 hover:bg-slate-700/80'
+              : 'bg-white/80 border-slate-200 text-slate-600 hover:bg-slate-100/80'
+          } shadow-lg hover:shadow-xl transform hover:scale-105`}
+          title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+        >
+          {theme === 'light' ? '🌙' : '☀️'}
+        </button>
+      </div>
+
       {/* Urgency Bar */}
-      <div className="bg-gradient-to-r from-red-600 to-orange-600 text-white text-center py-2 text-sm font-medium animate-pulse">
+      <div className={`text-center py-2 text-sm font-medium animate-pulse transition-all duration-300 ${
+        theme === 'dark'
+          ? 'bg-gradient-to-r from-red-700 to-orange-700 text-red-100'
+          : 'bg-gradient-to-r from-red-600 to-orange-600 text-white'
+      }`}>
         <Timer className="inline h-4 w-4 mr-2" />
         Limited Time Offer: 50% OFF ends in {formatTime(timeLeft)} - Only 47 spots left!
       </div>
@@ -147,30 +175,48 @@ const TradingProductPage: React.FC = () => {
 
       {/* Hero Section - Enhanced */}
       <section className="relative pt-16 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-slate-100" />
+        <div className={`absolute inset-0 transition-all duration-500 ${
+          theme === 'dark'
+            ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'
+            : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-slate-100'
+        }`} />
         {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-blue-200/30 rounded-full blur-xl animate-float" />
-        <div className="absolute top-40 right-16 w-32 h-32 bg-purple-200/30 rounded-full blur-xl animate-float-delayed" />
+        <div className={`absolute top-20 left-10 w-20 h-20 rounded-full blur-xl animate-float ${
+          theme === 'dark' ? 'bg-blue-400/20' : 'bg-blue-200/30'
+        }`} />
+        <div className={`absolute top-40 right-16 w-32 h-32 rounded-full blur-xl animate-float-delayed ${
+          theme === 'dark' ? 'bg-purple-400/20' : 'bg-purple-200/30'
+        }`} />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 px-6 py-3 rounded-full mb-6 font-medium text-sm border border-blue-200/50 shadow-sm animate-bounce-slow">
+            <div className={`inline-flex items-center gap-2 px-6 py-3 rounded-full mb-6 font-medium text-sm border shadow-sm animate-bounce-slow transition-all duration-300 ${
+              theme === 'dark'
+                ? 'bg-gradient-to-r from-blue-900/30 to-indigo-900/30 text-blue-300 border-blue-700/30 backdrop-blur-sm'
+                : 'bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 border-blue-200/50'
+            }`}>
               <Shield className="h-4 w-4" />
                500+ Success Stories • Enterprise-Grade Security
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 animate-fade-in">
+            <h1 className={`text-5xl md:text-6xl font-bold mb-6 animate-fade-in transition-colors duration-300 ${
+              theme === 'dark' ? 'text-white' : 'text-slate-900'
+            }`}>
               Transform Your Trading with 
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
                 {" "}AI-Powered Automation
               </span>
             </h1>
-            <p className="text-xl text-slate-600 mb-8 leading-relaxed animate-fade-in-up">
-              Join 35,000+ traders generating an average of <strong className="text-green-600">28.7% annual returns</strong><br />
+            <p className={`text-xl mb-8 leading-relaxed animate-fade-in-up transition-colors duration-300 ${
+              theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
+            }`}>
+              Join 35,000+ traders generating an average of <strong className="text-green-500">28.7% annual returns</strong><br />
               with our proven algorithmic trading platform. Setup in just 5 minutes.
             </p>
             
             {/* Social Proof */}
-            <div className="flex items-center justify-center gap-8 mb-8 text-sm text-slate-500">
+            <div className={`flex items-center justify-center gap-8 mb-8 text-sm transition-colors duration-300 ${
+              theme === 'dark' ? 'text-slate-400' : 'text-slate-500'
+            }`}>
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4" />
                 35K+ Active Traders
@@ -194,13 +240,19 @@ const TradingProductPage: React.FC = () => {
                 Start Free Trial Now
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
-              <button className="border border-blue-200 hover:bg-blue-50 text-blue-700 px-8 py-4 rounded-lg text-lg font-semibold inline-flex items-center justify-center group transition-all duration-200">
+              <button className={`border px-8 py-4 rounded-lg text-lg font-semibold inline-flex items-center justify-center group transition-all duration-200 ${
+                theme === 'dark'
+                  ? 'border-slate-600 hover:bg-slate-700 text-slate-300 hover:text-white'
+                  : 'border-blue-200 hover:bg-blue-50 text-blue-700'
+              }`}>
                 <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 Watch 2-Min Demo
               </button>
             </div>
 
-            <p className="text-xs text-slate-500 mt-4">
+            <p className={`text-xs mt-4 transition-colors duration-300 ${
+              theme === 'dark' ? 'text-slate-400' : 'text-slate-500'
+            }`}>
               ✅ No Credit Card Required • ✅ 7-Day Free Trial • ✅ Cancel Anytime
             </p>
           </div>
@@ -210,30 +262,62 @@ const TradingProductPage: React.FC = () => {
 
 
       {/* 🚀 NEW: Everything You Need for Crypto Success */}
-      <CryptoFeaturesSection theme="light" />
+      <CryptoFeaturesSection theme={theme} />
 
       {/* Features Section - Why 35,000+ Traders Choose Us */}
-      <section className="py-20 bg-slate-50">
+      <section className={`py-20 transition-all duration-500 ${
+        theme === 'dark' ? 'bg-slate-800/50' : 'bg-slate-50'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Why 35,000+ Traders Choose Us</h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <h2 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
+              theme === 'dark' ? 'text-white' : 'text-slate-900'
+            }`}>
+              Why 35,000+ Traders Choose Us
+            </h2>
+            <p className={`text-xl max-w-3xl mx-auto transition-colors duration-300 ${
+              theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
+            }`}>
               Enterprise-grade technology meets user-friendly design
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="group bg-white rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div key={index} className={`group rounded-xl p-6 border hover:shadow-lg transition-all duration-300 hover:-translate-y-1 ${
+                theme === 'dark'
+                  ? 'bg-slate-800/80 border-slate-600/50 hover:border-blue-500/30'
+                  : 'bg-white border-slate-200 hover:border-blue-200/50'
+              }`}>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-3 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg group-hover:from-blue-500 group-hover:to-indigo-500 transition-all duration-300">
-                    <feature.icon className="h-6 w-6 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                  <div className={`p-3 rounded-lg transition-all duration-300 ${
+                    theme === 'dark'
+                      ? 'bg-gradient-to-r from-blue-900/50 to-indigo-900/50 group-hover:from-blue-600 group-hover:to-indigo-600'
+                      : 'bg-gradient-to-r from-blue-100 to-indigo-100 group-hover:from-blue-500 group-hover:to-indigo-500'
+                  }`}>
+                    <feature.icon className={`h-6 w-6 transition-colors duration-300 ${
+                      theme === 'dark'
+                        ? 'text-blue-400 group-hover:text-white'
+                        : 'text-blue-600 group-hover:text-white'
+                    }`} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-slate-900">{feature.title}</h3>
-                    <span className="text-sm font-medium text-green-600">{feature.benefit}</span>
+                    <h3 className={`text-xl font-semibold transition-colors duration-300 ${
+                      theme === 'dark' ? 'text-white' : 'text-slate-900'
+                    }`}>
+                      {feature.title}
+                    </h3>
+                    <span className={`text-sm font-medium transition-colors duration-300 ${
+                      theme === 'dark' ? 'text-green-400' : 'text-green-600'
+                    }`}>
+                      {feature.benefit}
+                    </span>
                   </div>
                 </div>
-                <p className="text-slate-600">{feature.description}</p>
+                <p className={`transition-colors duration-300 ${
+                  theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
+                }`}>
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>
@@ -241,22 +325,44 @@ const TradingProductPage: React.FC = () => {
       </section>
 
       {/* Testimonials - Enhanced */}
-      <section className="py-20 bg-white">
+      <section className={`py-20 transition-all duration-500 ${
+        theme === 'dark' ? 'bg-slate-900' : 'bg-white'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Real Success Stories</h2>
-            <p className="text-xl text-slate-600">See how traders are transforming their financial future</p>
+            <h2 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
+              theme === 'dark' ? 'text-white' : 'text-slate-900'
+            }`}>
+              Real Success Stories
+            </h2>
+            <p className={`text-xl transition-colors duration-300 ${
+              theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
+            }`}>
+              See how traders are transforming their financial future
+            </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gradient-to-br from-white to-slate-50 rounded-xl p-6 border border-slate-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <div key={index} className={`rounded-xl p-6 border hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 ${
+                theme === 'dark'
+                  ? 'bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600/50'
+                  : 'bg-gradient-to-br from-white to-slate-50 border-slate-200'
+              }`}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold">
                     {testimonial.image}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-900">{testimonial.name}</h4>
-                    <p className="text-sm text-slate-600">{testimonial.role}</p>
+                    <h4 className={`font-semibold transition-colors duration-300 ${
+                      theme === 'dark' ? 'text-white' : 'text-slate-900'
+                    }`}>
+                      {testimonial.name}
+                    </h4>
+                    <p className={`text-sm transition-colors duration-300 ${
+                      theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
+                    }`}>
+                      {testimonial.role}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1 mb-4">
@@ -264,8 +370,16 @@ const TradingProductPage: React.FC = () => {
                     <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-slate-700 mb-4 leading-relaxed">"{testimonial.content}"</p>
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 px-3 py-2 rounded-full text-sm font-bold">
+                <p className={`mb-4 leading-relaxed transition-colors duration-300 ${
+                  theme === 'dark' ? 'text-slate-300' : 'text-slate-700'
+                }`}>
+                  "{testimonial.content}"
+                </p>
+                <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
+                  theme === 'dark'
+                    ? 'bg-gradient-to-r from-green-900/50 to-emerald-900/50 text-green-400 border border-green-700/30'
+                    : 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-700'
+                }`}>
                   <TrendingUp className="h-4 w-4" />
                   {testimonial.return}
                 </div>
@@ -276,35 +390,65 @@ const TradingProductPage: React.FC = () => {
       </section>
 
       {/* Final CTA - Enhanced */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20" />
+      <section className={`py-20 relative overflow-hidden transition-all duration-500 ${
+        theme === 'dark'
+          ? 'bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800'
+          : 'bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700'
+      }`}>
+        <div className={`absolute inset-0 ${
+          theme === 'dark' ? 'bg-black/10' : 'bg-black/20'
+        }`} />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
+          <h2 className={`text-4xl font-bold mb-6 transition-colors duration-300 ${
+            theme === 'dark' ? 'text-white' : 'text-white'
+          }`}>
             Don't Miss This Limited-Time Opportunity!
           </h2>
-          <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+          <p className={`text-xl mb-8 leading-relaxed transition-colors duration-300 ${
+            theme === 'dark' ? 'text-slate-300' : 'text-blue-100'
+          }`}>
             Join the automated trading revolution today. Our traders see results within the first week.
           </p>
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8">
+          <div className={`backdrop-blur-sm rounded-2xl p-8 mb-8 transition-all duration-300 ${
+            theme === 'dark'
+              ? 'bg-slate-800/30 border border-slate-600/30'
+              : 'bg-white/10'
+          }`}>
             <div className="grid grid-cols-3 gap-8 text-white">
               <div>
                 <div className="text-3xl font-bold">7 Days</div>
-                <div className="text-sm opacity-80">Free Trial</div>
+                <div className={`text-sm transition-colors duration-300 ${
+                  theme === 'dark' ? 'opacity-70' : 'opacity-80'
+                }`}>
+                  Free Trial
+                </div>
               </div>
               <div>
                 <div className="text-3xl font-bold">28.7%</div>
-                <div className="text-sm opacity-80">Avg. Returns</div>
+                <div className={`text-sm transition-colors duration-300 ${
+                  theme === 'dark' ? 'opacity-70' : 'opacity-80'
+                }`}>
+                  Avg. Returns
+                </div>
               </div>
               <div>
                 <div className="text-3xl font-bold">5 Min</div>
-                <div className="text-sm opacity-80">Setup Time</div>
+                <div className={`text-sm transition-colors duration-300 ${
+                  theme === 'dark' ? 'opacity-70' : 'opacity-80'
+                }`}>
+                  Setup Time
+                </div>
               </div>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               onClick={redirectToAuth}
-              className="bg-white text-blue-600 hover:bg-blue-50 w-80 py-4 text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/20"
+              className={`w-80 py-4 text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border ${
+                theme === 'dark'
+                  ? 'bg-white text-slate-900 hover:bg-slate-100 border-white/20'
+                  : 'bg-white text-blue-600 hover:bg-blue-50 border-white/20'
+              }`}
             >
               <Rocket className="mr-2 h-5 w-5" />
               Claim Your 50% Discount Now
@@ -312,14 +456,20 @@ const TradingProductPage: React.FC = () => {
             </Button>
             <Button 
               onClick={redirectToAuth}
-              className="bg-white text-blue-600 hover:bg-blue-50 w-80 py-4 text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border border-white/20"
+              className={`w-80 py-4 text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border ${
+                theme === 'dark'
+                  ? 'bg-white text-slate-900 hover:bg-slate-100 border-white/20'
+                  : 'bg-white text-blue-600 hover:bg-blue-50 border-white/20'
+              }`}
             >
               <Rocket className="mr-2 h-5 w-5" />
               Start Free Trial
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
-          <p className="text-blue-100 text-sm mt-4">
+          <p className={`text-sm mt-4 transition-colors duration-300 ${
+            theme === 'dark' ? 'text-slate-400' : 'text-blue-100'
+          }`}>
             ⚡ Instant Access • 🔒 Risk-Free Trial • 💰 Money-Back Guarantee
           </p>
         </div>
@@ -392,4 +542,4 @@ const TradingProductPage: React.FC = () => {
   );
 };
 
-export default TradingProductPage;
+export default Products;
