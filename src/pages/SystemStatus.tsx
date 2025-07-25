@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import AppFooter from "@/components/AppFooter";
+import Footer from "@/components/Footer";
 import { ArrowLeft, CheckCircle, AlertTriangle, Clock, Activity, Server, Database, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -308,7 +308,7 @@ const SystemStatus = () => {
         </div>
       </div>
 
-      <AppFooter />
+      <Footer />
     </div>
   );
 };

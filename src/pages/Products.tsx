@@ -1,10 +1,8 @@
+import CryptoFeaturesSection from "@/components/CryptoFeaturesSection";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import React, { useState, useEffect } from 'react';
-import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 import {
   CheckCircle,
   Star,
@@ -24,10 +22,9 @@ import {
   DollarSign
 } from "lucide-react";
 
-const TradingProductPage = () => {
-  const [timeLeft, setTimeLeft] = useState(24 * 60 * 60); // 24 hours in seconds
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isAnnual, setIsAnnual] = useState(false);
+const TradingProductPage: React.FC = () => {
+  const [timeLeft, setTimeLeft] = useState<number>(24 * 60 * 60); // 24 hours in seconds
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   useEffect(() => {
     // Countdown timer
@@ -36,7 +33,7 @@ const TradingProductPage = () => {
     }, 1000);
 
     // Mouse move effect
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
@@ -48,14 +45,14 @@ const TradingProductPage = () => {
     };
   }, []);
 
-  const formatTime = (seconds) => {
+  const formatTime = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const redirectToAuth = () => {
+  const redirectToAuth = (): void => {
     window.open("https://app.automatealgos.in", "_blank");
   };
 
@@ -98,38 +95,7 @@ const TradingProductPage = () => {
     }
   ];
 
-  const pricingPlans = [
-    {
-      name: 'Starter',
-      monthlyPrice: 'Free',
-      annualPrice: 'Free',
-      originalAnnualPrice: 'Free',
-      period: '',
-      popular: false,
-      features: ['1 broker connection', '3 live deployment', 'Basic backtesting', 'Email support'],
-      cta: 'Start Free Trial'
-    },
-    {
-      name: 'Pro',
-      monthlyPrice: '₹1,999',
-      annualPrice: '₹19,199',
-      originalAnnualPrice: '₹23,988',
-      period: '/month',
-      popular: true,
-      features: ['1 broker connection', '25 live deployment', '5 basic pine script templates', 'Priority support', 'Risk management tools'],
-      cta: 'Most Popular - Start Pro'
-    },
-    {
-      name: 'Premium',
-      monthlyPrice: '₹2,999',
-      annualPrice: '₹28,999',
-      originalAnnualPrice: '₹35,988',
-      period: '/month',
-      popular: false,
-      features: ['1 broker connection', 'Unlimited strategies', 'Advanced backtesting', 'Dedicated support manager', 'Advanced analytics'],
-      cta: 'Go Premium'
-    }
-  ];
+
 
   const testimonials = [
     {
@@ -241,91 +207,12 @@ const TradingProductPage = () => {
         </div>
       </section>
 
-      {/* Pricing Section - Early Placement for Higher Conversion */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              Choose Your Success Plan
-              <span className="block text-lg font-normal text-red-600 mt-2">🔥 50% OFF - Limited Time Only!</span>
-            </h2>
-            
-            {/* Pricing Toggle */}
-            <div className="flex items-center justify-center space-x-4 mt-8 mb-12">
-              <Label htmlFor="billing-toggle" className={!isAnnual ? "font-semibold text-slate-900" : "text-slate-600"}>
-                Monthly
-              </Label>
-              <Switch
-                id="billing-toggle"
-                checked={isAnnual}
-                onCheckedChange={setIsAnnual}
-              />
-              <Label htmlFor="billing-toggle" className={isAnnual ? "font-semibold text-slate-900" : "text-slate-600"}>
-                Annual
-              </Label>
-              <Badge variant="secondary" className="ml-2 bg-green-100 text-green-700 border-green-200">Save 20%</Badge>
-            </div>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {pricingPlans.map((plan, index) => (
-              <div key={index} className={`relative rounded-2xl p-8 ${plan.popular ? 'bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-500 scale-105' : 'bg-white border border-slate-200'} hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2`}>
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-full text-sm font-bold animate-pulse">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-                <div className="text-center">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4">{plan.name}</h3>
-                  <div className="mb-6">
-                    {/* Price Display Logic */}
-                    {isAnnual && plan.originalAnnualPrice !== "Free" && plan.originalAnnualPrice !== plan.annualPrice ? (
-                      <div className="flex flex-col items-center gap-2">
-                        {/* Strikethrough Original Price */}
-                        <span className="text-lg text-slate-500 line-through">
-                          {plan.originalAnnualPrice}
-                        </span>
-                        {/* Discounted Price */}
-                        <div className="text-4xl font-bold text-slate-900">{plan.annualPrice}</div>
-                        <span className="text-slate-600">/year</span>
-                      </div>
-                    ) : (
-                      <div>
-                        <div className="text-4xl font-bold text-slate-900">
-                          {isAnnual ? plan.annualPrice : plan.monthlyPrice}
-                        </div>
-                        {plan.monthlyPrice !== "Free" && (
-                          <span className="text-slate-600">
-                            /{isAnnual ? 'year' : 'month'}
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                  <ul className="space-y-3 mb-8">
-                    {plan.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-green-500" />
-                        <span className="text-slate-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button 
-                    onClick={redirectToAuth}
-                    className={`w-full py-3 text-lg font-semibold ${plan.popular ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700' : 'bg-slate-900 hover:bg-slate-800'} transform hover:scale-105 transition-all duration-200`}
-                  >
-                    {plan.cta}
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Features Section - Enhanced with Benefits */}
+
+      {/* 🚀 NEW: Everything You Need for Crypto Success */}
+      <CryptoFeaturesSection theme="light" />
+
+      {/* Features Section - Why 35,000+ Traders Choose Us */}
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">

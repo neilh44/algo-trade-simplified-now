@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from "@/components/Header";
-import AppFooter from "@/components/AppFooter";
+import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Clock, Phone, CheckCircle, AlertCircle, Loader2, User, Mail, MessageCircle, MapPin } from 'lucide-react';
 
@@ -465,7 +465,7 @@ const ScheduleDemo = () => {
         </section>
       </main>
 
-      <AppFooter />
+      <Footer />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import AppFooter from "@/components/AppFooter";
+import Footer from "@/components/Footer";
 import { ArrowLeft, AlertTriangle, TrendingDown, Shield, Info, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -277,7 +277,7 @@ const RiskDisclosure = () => {
         </Card>
       </div>
 
-      <AppFooter />
+      <Footer />
     </div>
   );
 };

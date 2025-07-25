@@ -12,7 +12,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Header from "@/components/Header";
-import AppFooter from "@/components/AppFooter";
+import Footer from "@/components/Footer";
 import { useNavigate } from 'react-router-dom';
 
 const Pricing = () => {

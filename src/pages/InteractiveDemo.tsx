@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from "@/components/Header";
-import AppFooter from "@/components/AppFooter";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Play, TrendingUp, BarChart3, Zap, CheckCircle } from 'lucide-react';
@@ -188,7 +188,7 @@ const InteractiveDemo = () => {
         </section>
       </main>
 
-      <AppFooter />
+      <Footer />
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import AppFooter from "@/components/AppFooter";
+import Footer from "@/components/Footer";
 import { ArrowLeft, Plus, ThumbsUp, MessageCircle, Clock, CheckCircle, ArrowUpDown } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -328,7 +328,7 @@ const FeatureRequests = () => {
         </div>
       </div>
 
-      <AppFooter />
+      <Footer />
     </div>
   );
 };

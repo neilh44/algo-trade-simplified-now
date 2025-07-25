@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Header from '@/components/Header';
-import AppFooter from '@/components/AppFooter';
+import Footer from '@/components/Footer';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -81,7 +81,7 @@ export default function HelpCenter() {
           </div>
         </section>
       </main>
-      <AppFooter />
+      <Footer />
     </div>
   );
 }

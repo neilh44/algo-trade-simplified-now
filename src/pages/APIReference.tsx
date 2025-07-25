@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Header from '@/components/Header';
-import AppFooter from '@/components/AppFooter';
+import Footer from '@/components/Footer';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -391,7 +391,7 @@ console.log(\`Order placed: \${order.id}\`);
         </section>
       </main>
 
-      <AppFooter />
+      <Footer />
     </div>
   );
 }

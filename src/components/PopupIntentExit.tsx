@@ -3,21 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { X, Gift, Mail, Clock, Shield, Users, Star } from 'lucide-react';
 
 interface PopupIntentExitProps {
-  showAfterSeconds?: number;
   enabled?: boolean;
   onEmailSubmit?: (email: string) => void;
   onPopupShow?: () => void;
   onPopupClose?: () => void;
-  onDismissPermanently?: () => void;
+  onDismissUntilRefresh?: () => void;
 }
 
 const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
-  showAfterSeconds = 30,
   enabled = true,
   onEmailSubmit = () => {},
   onPopupShow = () => {},
   onPopupClose = () => {},
-  onDismissPermanently = () => {}
+  onDismissUntilRefresh = () => {}
 }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [email, setEmail] = useState('');
@@ -33,43 +31,45 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
     }
   }, [timeLeft, isPopupOpen]);
 
-  // Exit intent and timer logic - MODIFIED TO KEEP SHOWING (refreshshow)
+  // Exit intent detection only
   useEffect(() => {
     if (!enabled) return;
 
-    let timerTimeout: NodeJS.Timeout;
-    let exitIntentTimeout: NodeJS.Timeout;
+    // Clean up any old localStorage keys from previous implementation
+    localStorage.removeItem('popup_dismissed');
+
+    // Check if popup is dismissed until refresh
+    const isDismissedUntilRefresh = sessionStorage.getItem('popup_dismissed_until_refresh') === 'true';
+    
+    // Check if popup is in cooldown period (5 minutes after close)
+    const cooldownEnd = localStorage.getItem('popup_cooldown_end');
+    const isCooldownActive = cooldownEnd && Date.now() < parseInt(cooldownEnd);
+
+    if (isDismissedUntilRefresh || isCooldownActive) {
+      return;
+    }
 
     const handleMouseLeave = (e: MouseEvent) => {
+      // Detect exit intent - mouse leaving from top of page
       if (e.clientY <= 0 && !isPopupOpen) {
-        setIsPopupOpen(true);
-        onPopupShow();
-      }
-    };
-
-    // Show popup after specified time - REPEATING TIMER
-    const showPopupTimer = () => {
-      if (!isPopupOpen) {
-        timerTimeout = setTimeout(() => {
+        // Double check cooldown and session dismissal right before showing
+        const currentCooldownEnd = localStorage.getItem('popup_cooldown_end');
+        const isCurrentlyCooldown = currentCooldownEnd && Date.now() < parseInt(currentCooldownEnd);
+        const isCurrentlyDismissed = sessionStorage.getItem('popup_dismissed_until_refresh') === 'true';
+        
+        if (!isCurrentlyCooldown && !isCurrentlyDismissed) {
           setIsPopupOpen(true);
           onPopupShow();
-          // Set another timer for next show (e.g., every 2 minutes)
-          exitIntentTimeout = setTimeout(showPopupTimer, 120000); // 2 minutes
-        }, showAfterSeconds * 1000);
+        }
       }
     };
-
-    // Start the timer cycle
-    showPopupTimer();
 
     document.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
-      if (timerTimeout) clearTimeout(timerTimeout);
-      if (exitIntentTimeout) clearTimeout(exitIntentTimeout);
     };
-  }, [enabled, showAfterSeconds, onPopupShow, isPopupOpen]);
+  }, [enabled, onPopupShow, isPopupOpen]);
 
   const formatTime = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
@@ -89,21 +89,27 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
     setIsSubmitted(true);
     onEmailSubmit(email);
     
-    // Mark as permanently dismissed after form submission
-    localStorage.setItem('popup_dismissed', 'true');
+    // After successful submission, dismiss until refresh
+    sessionStorage.setItem('popup_dismissed_until_refresh', 'true');
   };
 
-  // MODIFIED: Only close temporarily, don't dismiss permanently
+  // Close button - sets 5 minute cooldown
   const handleClose = () => {
     setIsPopupOpen(false);
     onPopupClose();
-    // DO NOT set localStorage here - popup should show again later
+    
+    // Set 5 minute cooldown (5 * 60 * 1000 = 300000 ms)
+    const cooldownEnd = Date.now() + (5 * 60 * 1000);
+    localStorage.setItem('popup_cooldown_end', cooldownEnd.toString());
   };
 
-  // ONLY this function permanently dismisses
-  const handleDismissPermanently = () => {
-    localStorage.setItem('popup_dismissed', 'true');
-    onDismissPermanently();
+  // Don't show again until refresh
+  const handleDismissUntilRefresh = () => {
+    // Clear any existing cooldown since user explicitly chose "don't show again"
+    localStorage.removeItem('popup_cooldown_end');
+    // Set session dismissal
+    sessionStorage.setItem('popup_dismissed_until_refresh', 'true');
+    onDismissUntilRefresh();
     setIsPopupOpen(false);
   };
 
@@ -153,6 +159,7 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
           <button 
             onClick={handleClose}
             className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors z-10"
+            title="Close (won't show for 5 minutes)"
           >
             <X className="h-5 w-5" />
           </button>
@@ -261,13 +268,14 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
             No spam, unsubscribe anytime.
           </p>
 
-          {/* Do not show again button */}
+          {/* Don't show again until refresh button */}
           <div className="text-center mt-3">
             <button 
-              onClick={handleDismissPermanently}
+              onClick={handleDismissUntilRefresh}
               className="text-xs text-gray-400 hover:text-gray-600 underline transition-colors"
+              title="Hide until page refresh"
             >
-              Do not show again
+              Don't show again
             </button>
           </div>
         </div>
