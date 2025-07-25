@@ -72,7 +72,7 @@ const Products: React.FC = () => {
       icon: Shield,
       title: 'Advanced Risk Management',
       description: '20+ predefined risk controls including daily loss limits, position sizing, and drawdown protection',
-      benefit: 'Protect 100% of capital'
+      benefit: 'Protect your capital'
     },
     {
       icon: Bot,
