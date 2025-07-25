@@ -222,7 +222,7 @@ const Products: React.FC = () => {
             <p className={`text-xl mb-8 leading-relaxed animate-fade-in-up transition-colors duration-300 ${
               theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
             }`}>
-              Join 5,000+ traders  <strong className="text-green-500">optimizing profits </strong><br />
+              Join 5,000+ traders in <strong className="text-green-500"> Maximizing Trading Potential  </strong><br />
               with our proven algorithmic trading platform. Setup in just 5 minutes.
             </p>
             
@@ -236,7 +236,7 @@ const Products: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <DollarSign className="h-4 w-4" />
-                
+                Maximizing Profits
               </div>
               <div className="flex items-center gap-2">
                 <Award className="h-4 w-4" />
