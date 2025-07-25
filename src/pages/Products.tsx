@@ -1,3 +1,4 @@
+import GlobalPopupIntentExit from "@/components/GlobalPopupIntentExit";
 import CryptoFeaturesSection from "@/components/CryptoFeaturesSection";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
@@ -22,10 +23,13 @@ import {
   DollarSign
 } from "lucide-react";
 
+
 const Products: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState<number>(24 * 60 * 60); // 24 hours in seconds
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [showExitPopup, setShowExitPopup] = useState<boolean>(false);
+
 
   const toggleTheme = (): void => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
@@ -60,6 +64,15 @@ const Products: React.FC = () => {
   const redirectToAuth = (): void => {
     window.open("https://app.automatealgos.in", "_blank");
   };
+
+  const redirectToDemo = (): void => {
+    window.open("https://www.youtube.com/watch?v=yjtgComx9xY&feature=youtu.be", "_blank");
+  };
+
+  const showExitIntentPopup = (): void => {
+    setShowExitPopup(true);
+  };
+  
 
   const features = [
     {
@@ -209,7 +222,7 @@ const Products: React.FC = () => {
             <p className={`text-xl mb-8 leading-relaxed animate-fade-in-up transition-colors duration-300 ${
               theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
             }`}>
-              Join 35,000+ traders generating an average of <strong className="text-green-500">28.7% annual returns</strong><br />
+              Join 5,000+ traders  <strong className="text-green-500">optimizing profits </strong><br />
               with our proven algorithmic trading platform. Setup in just 5 minutes.
             </p>
             
@@ -219,11 +232,11 @@ const Products: React.FC = () => {
             }`}>
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4" />
-                35K+ Active Traders
+                5K+ Active Traders
               </div>
               <div className="flex items-center gap-2">
                 <DollarSign className="h-4 w-4" />
-                ₹2,500 Cr+ AUM
+                
               </div>
               <div className="flex items-center gap-2">
                 <Award className="h-4 w-4" />
@@ -240,14 +253,17 @@ const Products: React.FC = () => {
                 Start Free Trial Now
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
-              <button className={`border px-8 py-4 rounded-lg text-lg font-semibold inline-flex items-center justify-center group transition-all duration-200 ${
+              <button 
+              onClick={redirectToDemo}
+              className={`border px-8 py-4 rounded-lg text-lg font-semibold inline-flex items-center justify-center group transition-all duration-200 ${
                 theme === 'dark'
                   ? 'border-slate-600 hover:bg-slate-700 text-slate-300 hover:text-white'
                   : 'border-blue-200 hover:bg-blue-50 text-blue-700'
-              }`}>
-                <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                Watch 2-Min Demo
-              </button>
+              }`}
+            >
+              <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+              Watch 2-Min Demo
+            </button>         
             </div>
 
             <p className={`text-xs mt-4 transition-colors duration-300 ${
@@ -424,11 +440,11 @@ const Products: React.FC = () => {
                 </div>
               </div>
               <div>
-                <div className="text-3xl font-bold">28.7%</div>
+                <div className="text-3xl font-bold">5000+</div>
                 <div className={`text-sm transition-colors duration-300 ${
                   theme === 'dark' ? 'opacity-70' : 'opacity-80'
                 }`}>
-                  Avg. Returns
+                  Trusted Traders
                 </div>
               </div>
               <div>
@@ -443,37 +459,35 @@ const Products: React.FC = () => {
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
-              onClick={redirectToAuth}
-              className={`w-80 py-4 text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border ${
+              onClick={showExitIntentPopup}
+              className={`px-6 py-4 text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl rounded-xl border ${
                 theme === 'dark'
                   ? 'bg-white text-slate-900 hover:bg-slate-100 border-white/20'
                   : 'bg-white text-blue-600 hover:bg-blue-50 border-white/20'
               }`}
             >
-              <Rocket className="mr-2 h-5 w-5" />
-              Claim Your 50% Discount Now
-              <ArrowRight className="ml-2 h-5 w-5" />
+              Claim Your Bonus Now
             </Button>
             <Button 
               onClick={redirectToAuth}
-              className={`w-80 py-4 text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl border ${
+              className={`px-6 py-4 text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl rounded-xl border ${
                 theme === 'dark'
                   ? 'bg-white text-slate-900 hover:bg-slate-100 border-white/20'
                   : 'bg-white text-blue-600 hover:bg-blue-50 border-white/20'
               }`}
             >
-              <Rocket className="mr-2 h-5 w-5" />
               Start Free Trial
-              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-          </div>
+          </div>  
+
           <p className={`text-sm mt-4 transition-colors duration-300 ${
             theme === 'dark' ? 'text-slate-400' : 'text-blue-100'
           }`}>
-            ⚡ Instant Access • 🔒 Risk-Free Trial • 💰 Money-Back Guarantee
+            ⚡ Instant Access • 🔒 Risk-Free Trial • 🎯 Results-Driven Support
           </p>
         </div>
       </section>
+      {showExitPopup && <GlobalPopupIntentExit />}
 
       <Footer />
 
