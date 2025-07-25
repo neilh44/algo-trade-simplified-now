@@ -229,9 +229,16 @@ const Courses = () => {
 
             {/* Hero Section */}
             <section className="relative bg-gradient-to-br from-background via-primary/5 to-secondary/10 px-6 py-16 rounded-2xl">
+            <div className="max-w-4xl mx-auto text-center">
+        <h1 className="text-4xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
+          Master{" "}
+          <span className="bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent animate-pulse">
+            Algorithmic Trading
+          </span>
+        </h1>
+      </div>
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6 leading-relaxed">
-            Master Algorithmic Trading
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto">
             Learn from industry experts and transform your trading with comprehensive courses designed for every skill level.
