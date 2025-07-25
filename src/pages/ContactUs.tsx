@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from "@/components/Header";
-import AppFooter from "@/components/AppFooter";
+import Footer from "@/components/Footer";
 import { AlertCircle, CheckCircle, Loader2, User, Mail, MessageCircle, MapPin } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -536,7 +536,7 @@ const ContactUs = () => {
         </section>
       </main>
 
-      <AppFooter />
+      <Footer />
     </div>
   );
 };

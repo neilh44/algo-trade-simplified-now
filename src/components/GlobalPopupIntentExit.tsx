@@ -7,30 +7,27 @@ const GlobalPopupIntentExit: React.FC = () => {
   const config = usePopupConfig();
   const [isPermanentlyDismissed, setIsPermanentlyDismissed] = useState(false);
 
-  // Check if popup should show - 1 day expiry system
+  // Check if popup should show - MODIFIED TO USE SESSION STORAGE
   useEffect(() => {
-    const dismissedUntil = localStorage.getItem('popup_dismissed_until');
+    // Using sessionStorage instead of localStorage - clears on page refresh
+    const dismissedInSession = sessionStorage.getItem('popup_dismissed_session');
     
-    if (!dismissedUntil) {
-      // Never dismissed
-      setIsPermanentlyDismissed(false);
-      return;
-    }
-    
-    const dismissalExpiry = parseInt(dismissedUntil);
-    const now = Date.now();
-    
-    if (now > dismissalExpiry) {
-      // Dismissal expired - show popup again
-      localStorage.removeItem('popup_dismissed_until');
-      setIsPermanentlyDismissed(false);
-      console.log('Popup dismissal expired (24h) - showing again');
-    } else {
-      // Still dismissed
+    if (dismissedInSession) {
       setIsPermanentlyDismissed(true);
-      const hoursLeft = Math.ceil((dismissalExpiry - now) / (60 * 60 * 1000));
-      console.log(`Popup dismissed for ${hoursLeft} more hours`);
+      console.log('Popup dismissed for this session');
+    } else {
+      setIsPermanentlyDismissed(false);
+      console.log('Popup can be shown in this session');
     }
+
+    // ALTERNATIVE APPROACH: Clear localStorage on page load/refresh
+    // Uncomment these lines if you prefer to use localStorage but clear it on refresh
+    
+    localStorage.removeItem('popup_dismissed_until');
+    localStorage.removeItem('popup_dismissed');
+    console.log('Popup dismissal cleared on page refresh');
+    setIsPermanentlyDismissed(false);
+    
   }, [config.enabled]);
 
   const handleEmailSubmit = async (email: string) => {
@@ -54,9 +51,9 @@ const GlobalPopupIntentExit: React.FC = () => {
       if (response.ok) {
         console.log('Email subscription successful');
         
-        // Set dismissal with 1-day expiry (24 hours) after successful submission
-        const oneDayFromNow = Date.now() + (1 * 24 * 60 * 60 * 1000);
-        localStorage.setItem('popup_dismissed_until', oneDayFromNow.toString());
+        // MODIFIED: Use sessionStorage instead of localStorage for email submission
+        // This way popup won't show again in current session but will show on refresh
+        sessionStorage.setItem('popup_dismissed_session', 'true');
         setIsPermanentlyDismissed(true);
         
         // Track conversion analytics
@@ -103,12 +100,12 @@ const GlobalPopupIntentExit: React.FC = () => {
   };
 
   const handleDismissPermanently = () => {
-    // Set dismissal with 1-day expiry (24 hours) - not truly permanent
-    const oneDayFromNow = Date.now() + (1 * 24 * 60 * 60 * 1000);
-    localStorage.setItem('popup_dismissed_until', oneDayFromNow.toString());
+    // MODIFIED: Use sessionStorage instead of localStorage
+    // This will only dismiss for current session, not across page refreshes
+    sessionStorage.setItem('popup_dismissed_session', 'true');
     setIsPermanentlyDismissed(true);
     
-    console.log('Popup dismissed for 24 hours');
+    console.log('Popup dismissed for current session only (will show again on refresh)');
     
     // Track permanent dismissal
     if (typeof gtag !== 'undefined') {

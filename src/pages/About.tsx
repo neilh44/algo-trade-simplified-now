@@ -268,8 +268,8 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Journey</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground dark:text-black mb-4">Our Journey</h2>
+              <p className="text-lg text-muted-foreground dark:text-black leading-relaxed max-w-3xl mx-auto">
                 From frustrated traders to algorithmic revolution leaders
               </p>
             </div>
@@ -339,26 +339,22 @@ const About: React.FC = () => {
       {/* Platform Advantages - NO NUMBER ANIMATIONS */}
       <AnimatedAchievements />
 
-      {/* Team */}
-      <section className="py-20 bg-background">
+            {/* Team */}
+            <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Meet The Visionaries</h2>
-            <p className="text-lg text-muted-foreground">Leaders who revolutionized trading</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Meet The Visionaries</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">Leaders who revolutionized trading</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Archit Mittal */}
-            <Card className="group hover:shadow-2xl transition-all duration-500 border-0 overflow-hidden transform hover:scale-105">
+            <Card className="group hover:shadow-2xl transition-all duration-500 border-0 overflow-hidden transform hover:scale-105 bg-white dark:bg-gray-800">
               <CardContent className="p-0">
                 <div className="bg-gradient-to-br from-blue-500 to-teal-500 p-8 text-white">
                   <div className="flex items-center mb-4">
                     <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform overflow-hidden">
-                      <img 
-                        src="./src/asset/icon/archit.svg" 
-                        alt="Archit Mittal"
-                        className="w-full h-full object-cover rounded-full"
-                      />
+                      <User className="h-8 w-8 text-white" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold">Archit Mittal</h3>
@@ -367,25 +363,25 @@ const About: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="p-8 space-y-6 bg-gradient-to-br from-blue-50 to-card">
+                <div className="p-8 space-y-6 bg-gradient-to-br from-blue-50/50 to-white dark:from-blue-900/10 dark:to-gray-800">
                   <div>
-                    <h4 className="text-lg font-bold text-foreground mb-2">Background & Expertise</h4>
-                    <p className="text-muted-foreground leading-relaxed mb-3">
+                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Background & Expertise</h4>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-3">
                       With a B.Tech in Computer Science and a PGP in Research Analysis from NISM, Archit brings 5+ years of experience in the trading industry, having worked as a Quant at a hedge fund.
                     </p>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                       He has trained over 5,000 students in multi-asset strategy development and is a certified speaker featured at BOTS, Finbridge, and Findoc events, plus guest speaking at IIT Bombay.
                     </p>
                   </div>
                   
                   <div>
-                    <h4 className="text-lg font-bold text-foreground mb-2">Trading Focus</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Trading Focus</h4>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                       Experienced derivatives specialist revolutionizing automated intraday options trading.
                     </p>
                   </div>
                   
-                  <blockquote className="text-foreground italic border-l-4 border-blue-500 pl-4 bg-blue-50 p-3 rounded-r-xl">
+                  <blockquote className="text-gray-900 dark:text-white italic border-l-4 border-blue-500 pl-4 bg-blue-50/50 dark:bg-blue-900/20 p-3 rounded-r-xl">
                     "Every trader deserves institutional-grade automation."
                   </blockquote>
                 </div>
@@ -393,7 +389,7 @@ const About: React.FC = () => {
             </Card>
 
             {/* Hasmukh Prajapati */}
-            <Card className="group hover:shadow-2xl transition-all duration-500 border-0 overflow-hidden transform hover:scale-105">
+            <Card className="group hover:shadow-2xl transition-all duration-500 border-0 overflow-hidden transform hover:scale-105 bg-white dark:bg-gray-800">
               <CardContent className="p-0">
                 <div className="bg-gradient-to-br from-teal-500 to-blue-500 p-8 text-white">
                   <div className="flex items-center mb-4">
@@ -407,14 +403,14 @@ const About: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="p-8 space-y-4 bg-gradient-to-br from-teal-50 to-card">
+                <div className="p-8 space-y-4 bg-gradient-to-br from-teal-50/50 to-white dark:from-teal-900/10 dark:to-gray-800">
                   <div>
-                    <h4 className="text-lg font-bold text-foreground mb-2">Strategic Vision</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Strategic Vision</h4>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                       Growth mastermind making algorithmic trading accessible and profitable for everyone.
                     </p>
                   </div>
-                  <blockquote className="text-foreground italic border-l-4 border-teal-500 pl-4 bg-teal-50 p-3 rounded-r-xl">
+                  <blockquote className="text-gray-900 dark:text-white italic border-l-4 border-teal-500 pl-4 bg-teal-50/50 dark:bg-teal-900/20 p-3 rounded-r-xl">
                     "Success is building sustainable, stress-free trading."
                   </blockquote>
                 </div>

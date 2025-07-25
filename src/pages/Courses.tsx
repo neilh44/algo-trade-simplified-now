@@ -20,12 +20,11 @@ import {
   Lock,
   Search,
   Filter,
-  Grid,
-  List,
   ArrowRight,
   Trophy,
   Target,
-  Lightbulb
+  Lightbulb,
+  ExternalLink
 } from 'lucide-react';
 
 interface Course {
@@ -46,6 +45,9 @@ interface Course {
   modules: Module[];
   progress?: number;
   isEnrolled?: boolean;
+  redirectUrl: string;
+  sessions?: string;
+  validity?: string;
 }
 
 interface Module {
@@ -66,111 +68,152 @@ interface Lesson {
 }
 
 const Courses = () => {
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [activeModule, setActiveModule] = useState(0);
   const [activeLesson, setActiveLesson] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterLevel, setFilterLevel] = useState<string>('all');
 
+  const handleStartLearning = () => {
+    window.open('https://smartwaveacademy.com/', '_blank');
+  };
+
+  const handleCourseClick = (course: Course) => {
+    window.open(course.redirectUrl, '_blank');
+  };
+
   const courses: Course[] = [
     {
       id: '1',
-      title: 'Complete Algorithmic Trading Mastery',
-      description: 'Master the fundamentals of algorithmic trading from strategy development to live deployment.',
+      title: 'ChatGPT for Python Algo Trading Development Masterclass',
+      description: 'Master Python algorithmic trading development using ChatGPT for enhanced productivity and automation.',
       instructor: {
-        name: 'Dr. Sarah Chen',
+        name: 'SmartWave Academy',
         avatar: '/api/placeholder/40/40',
-        credentials: 'PhD in Finance, Former Goldman Sachs Quant'
+        credentials: 'Expert Trading Instructors'
       },
-      duration: '12 hours',
+      duration: '2 hrs',
       difficulty: 'Intermediate',
-      students: 2847,
+      students: 1500,
       rating: 4.8,
-      image: '/api/placeholder/400/200',
-      price: 299,
-      progress: 65,
-      isEnrolled: true,
-      modules: [
-        {
-          id: 'm1',
-          title: 'Introduction & Setup',
-          duration: '2 hours',
-          isCompleted: true,
-          lessons: [
-            { id: 'l1', title: 'Course Overview', duration: '15 min', type: 'video', isCompleted: true },
-            { id: 'l2', title: 'Platform Setup', duration: '30 min', type: 'video', isCompleted: true },
-            { id: 'l3', title: 'API Configuration', duration: '45 min', type: 'exercise', isCompleted: true }
-          ]
-        },
-        {
-          id: 'm2',
-          title: 'Strategy Development',
-          duration: '4 hours',
-          isCompleted: false,
-          lessons: [
-            { id: 'l4', title: 'Market Analysis', duration: '60 min', type: 'video', isCompleted: true },
-            { id: 'l5', title: 'Strategy Design', duration: '90 min', type: 'video', isCompleted: false },
-            { id: 'l6', title: 'Backtesting Basics', duration: '90 min', type: 'exercise', isCompleted: false, isLocked: true }
-          ]
-        },
-        {
-          id: 'm3',
-          title: 'Risk Management',
-          duration: '3 hours',
-          isCompleted: false,
-          lessons: [
-            { id: 'l7', title: 'Position Sizing', duration: '45 min', type: 'video', isCompleted: false, isLocked: true },
-            { id: 'l8', title: 'Stop Loss Strategies', duration: '60 min', type: 'video', isCompleted: false, isLocked: true },
-            { id: 'l9', title: 'Portfolio Optimization', duration: '75 min', type: 'exercise', isCompleted: false, isLocked: true }
-          ]
-        },
-        {
-          id: 'm4',
-          title: 'Live Trading',
-          duration: '3 hours',
-          isCompleted: false,
-          lessons: [
-            { id: 'l10', title: 'Paper Trading', duration: '60 min', type: 'video', isCompleted: false, isLocked: true },
-            { id: 'l11', title: 'Going Live', duration: '45 min', type: 'video', isCompleted: false, isLocked: true },
-            { id: 'l12', title: 'Performance Monitoring', duration: '75 min', type: 'exercise', isCompleted: false, isLocked: true }
-          ]
-        }
-      ]
+      image: '/Users/nileshhanotia/Projects/AlgoTrade/algo-trade-simplified-now/src/assets/thumbnail/ChatGPT for Python Algo Trading.jpg',
+      price: 9999,
+      sessions: 'Multiple Sessions',
+      modules: [],
+      redirectUrl: 'https://smartwaveacademy.com/fcafd845-7b32-4ee5-8f6f-a7a4656f4571'
     },
     {
       id: '2',
-      title: 'Python for Trading Automation',
-      description: 'Learn Python programming specifically for trading applications and automation.',
+      title: 'ChatGPT for PineScript Development Masterclass',
+      description: 'Learn to develop PineScript strategies efficiently using ChatGPT for TradingView automation.',
       instructor: {
-        name: 'Mike Rodriguez',
+        name: 'SmartWave Academy',
         avatar: '/api/placeholder/40/40',
-        credentials: 'Senior Software Engineer, Trading Systems Expert'
+        credentials: 'Expert Trading Instructors'
       },
-      duration: '8 hours',
-      difficulty: 'Beginner',
-      students: 1924,
-      rating: 4.6,
+      duration: '2 hrs',
+      difficulty: 'Intermediate',
+      students: 1200,
+      rating: 4.7,
       image: '/api/placeholder/400/200',
-      price: 199,
-      modules: []
+      price: 9999,
+      sessions: 'Multiple Sessions',
+      modules: [],
+      redirectUrl: 'https://smartwaveacademy.com/4616d461-731e-4276-9835-7af12ca1224d'
     },
     {
       id: '3',
-      title: 'Advanced Options Strategies',
-      description: 'Master complex options strategies and automated execution techniques.',
+      title: 'Basics Of Indian Equities',
+      description: 'Comprehensive guide to understanding Indian equity markets and investment fundamentals.',
       instructor: {
-        name: 'Jennifer Park',
+        name: 'SmartWave Academy',
         avatar: '/api/placeholder/40/40',
-        credentials: 'CFA, Options Trading Specialist'
+        credentials: 'Expert Trading Instructors'
       },
-      duration: '15 hours',
+      duration: '6 Links',
+      difficulty: 'Beginner',
+      students: 2800,
+      rating: 4.6,
+      image: '/api/placeholder/400/200',
+      price: 2499,
+      validity: 'Valid Indefinitely',
+      modules: [],
+      redirectUrl: 'https://smartwaveacademy.com/69008cad-1557-4be4-adb3-7d99966ff0d4'
+    },
+    {
+      id: '4',
+      title: 'Technical Analysis',
+      description: 'Master technical analysis techniques for effective trading decisions and market analysis.',
+      instructor: {
+        name: 'SmartWave Academy',
+        avatar: '/api/placeholder/40/40',
+        credentials: 'Expert Trading Instructors'
+      },
+      duration: '14 Links',
+      difficulty: 'Intermediate',
+      students: 3200,
+      rating: 4.8,
+      image: '/api/placeholder/400/200',
+      price: 2499,
+      validity: 'Valid Indefinitely',
+      modules: [],
+      redirectUrl: 'https://smartwaveacademy.com/10a13f2b-f9b6-4ad7-819d-e2da41b0c0bc'
+    },
+    {
+      id: '5',
+      title: 'Options Greeks, IV, PCR Ratio',
+      description: 'Deep dive into options Greeks, implied volatility, and Put-Call ratio for advanced options trading.',
+      instructor: {
+        name: 'SmartWave Academy',
+        avatar: '/api/placeholder/40/40',
+        credentials: 'Expert Trading Instructors'
+      },
+      duration: '5 Links',
       difficulty: 'Advanced',
-      students: 856,
+      students: 1800,
       rating: 4.9,
       image: '/api/placeholder/400/200',
-      price: 499,
-      modules: []
+      price: 4999,
+      validity: 'Valid Indefinitely',
+      modules: [],
+      redirectUrl: 'https://smartwaveacademy.com/d323f49c-1d39-4122-b9ab-ecac1b00c5c0'
+    },
+    {
+      id: '6',
+      title: 'Advance Options Spreads',
+      description: 'Master complex options spread strategies for professional-level options trading.',
+      instructor: {
+        name: 'SmartWave Academy',
+        avatar: '/api/placeholder/40/40',
+        credentials: 'Expert Trading Instructors'
+      },
+      duration: '6 Links',
+      difficulty: 'Advanced',
+      students: 950,
+      rating: 4.8,
+      image: '/api/placeholder/400/200',
+      price: 7999,
+      validity: 'Valid Indefinitely',
+      modules: [],
+      redirectUrl: 'https://smartwaveacademy.com/69a8f9f9-4ce5-447d-a8ba-c30452fbf239'
+    },
+    {
+      id: '7',
+      title: 'No Code Options Automation Webinar',
+      description: 'Learn to automate options trading without coding using advanced no-code solutions.',
+      instructor: {
+        name: 'SmartWave Academy',
+        avatar: '/api/placeholder/40/40',
+        credentials: 'Expert Trading Instructors'
+      },
+      duration: 'Webinar',
+      difficulty: 'Beginner',
+      students: 2500,
+      rating: 4.7,
+      image: '/api/placeholder/400/200',
+      price: 0,
+      modules: [],
+      redirectUrl: 'https://smartwaveacademy.com/89ca20f8-9f00-41a2-9c8e-f8e4e6141ffe'
     }
   ];
 
@@ -186,27 +229,27 @@ const Courses = () => {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-background via-primary/5 to-secondary/10 px-6 py-16 rounded-2xl">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-6">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-6 leading-tight">
             Master Algorithmic Trading
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto">
             Learn from industry experts and transform your trading with comprehensive courses designed for every skill level.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <div className="flex items-center gap-2 bg-white/10 rounded-lg px-4 py-2">
-              <Trophy className="h-5 w-5 text-primary" />
+          <div className="flex flex-wrap justify-center gap-3 mb-6">
+            <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2">
+              <Trophy className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">5,000+ Students</span>
             </div>
-            <div className="flex items-center gap-2 bg-white/10 rounded-lg px-4 py-2">
-              <Target className="h-5 w-5 text-primary" />
+            <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2">
+              <Target className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">95% Success Rate</span>
             </div>
-            <div className="flex items-center gap-2 bg-white/10 rounded-lg px-4 py-2">
-              <Lightbulb className="h-5 w-5 text-primary" />
+            <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2">
+              <Lightbulb className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Expert Instructors</span>
             </div>
           </div>
-          <Button size="lg" className="text-lg px-8 py-3">
+          <Button size="lg" className="text-lg px-6 py-3" onClick={handleStartLearning}>
             Start Learning Today
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
@@ -225,7 +268,7 @@ const Courses = () => {
             className="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
-        <div className="flex gap-2">
+        <div>
           <select
             value={filterLevel}
             onChange={(e) => setFilterLevel(e.target.value)}
@@ -236,28 +279,14 @@ const Courses = () => {
             <option value="intermediate">Intermediate</option>
             <option value="advanced">Advanced</option>
           </select>
-          <div className="flex border border-border rounded-lg">
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`p-2 ${viewMode === 'grid' ? 'bg-primary text-primary-foreground' : ''}`}
-            >
-              <Grid className="h-4 w-4" />
-            </button>
-            <button
-              onClick={() => setViewMode('list')}
-              className={`p-2 ${viewMode === 'list' ? 'bg-primary text-primary-foreground' : ''}`}
-            >
-              <List className="h-4 w-4" />
-            </button>
-          </div>
         </div>
       </div>
 
       {/* Course Grid */}
-      <div className={`grid gap-6 ${viewMode === 'grid' ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredCourses.map((course) => (
           <Card key={course.id} className="group hover:shadow-lg transition-all duration-300 cursor-pointer"
-                onClick={() => setSelectedCourse(course)}>
+                onClick={() => handleCourseClick(course)}>
             <div className="relative overflow-hidden rounded-t-lg">
               <img 
                 src={course.image} 
@@ -272,7 +301,7 @@ const Courses = () => {
               </div>
               <div className="absolute top-4 right-4">
                 <Badge variant="outline" className="bg-background/80">
-                  ${course.price}
+                  {course.price === 0 ? 'Free' : `₹ ${course.price}`}
                 </Badge>
               </div>
             </div>
@@ -307,21 +336,21 @@ const Courses = () => {
                 </div>
               </div>
 
-              {course.isEnrolled && course.progress !== undefined && (
-                <div className="mb-4">
-                  <div className="flex justify-between text-sm mb-1">
-                    <span>Progress</span>
-                    <span>{course.progress}%</span>
-                  </div>
-                  <Progress value={course.progress} className="h-2" />
+              {course.sessions && (
+                <div className="text-sm text-muted-foreground mb-2">
+                  <span className="font-medium">Sessions:</span> {course.sessions}
                 </div>
               )}
 
-              <Button 
-                className="w-full" 
-                variant={course.isEnrolled ? "outline" : "default"}
-              >
-                {course.isEnrolled ? "Continue Learning" : "Enroll Now"}
+              {course.validity && (
+                <div className="text-sm text-muted-foreground mb-4">
+                  <span className="font-medium">Validity:</span> {course.validity}
+                </div>
+              )}
+
+              <Button className="w-full group">
+                <span>Enroll Now</span>
+                <ExternalLink className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </CardContent>
           </Card>

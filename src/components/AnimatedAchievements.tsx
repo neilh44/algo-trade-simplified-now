@@ -1,10 +1,10 @@
-import { Award, Trophy, Star, Users, Shield, CheckCircle, LucideIcon, Clock, Target, Zap, TrendingUp, BookOpen } from "lucide-react";
+import { Award, Trophy, Star, Users, Shield, CheckCircle, Clock, Target, Zap, TrendingUp, BookOpen } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 
 interface Achievement {
   text: string;
-  icon: LucideIcon;
+  icon: any;
   color: string;
   hoverColor: string;
   description?: string;
@@ -70,8 +70,8 @@ const AnimatedAchievements: React.FC = () => {
     <section className="py-20 bg-gradient-to-br from-teal-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Platform Advantages</h2>
-          <p className="text-lg text-muted-foreground">Built for serious algorithmic traders</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Platform Advantages</h2>
+          <p className="text-lg text-gray-600">Built for serious algorithmic traders</p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -90,36 +90,18 @@ const AnimatedAchievements: React.FC = () => {
                   {/* Animated background gradient */}
                   <div className={`absolute inset-0 bg-gradient-to-r ${achievement.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
                   
-                  {/* Floating particles effect on hover */}
-                  {isHovered && (
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                      {[...Array(8)].map((_, i) => (
-                        <div
-                          key={i}
-                          className={`absolute w-2 h-2 bg-gradient-to-r ${achievement.color} rounded-full animate-bounce`}
-                          style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            animationDelay: `${i * 0.3}s`,
-                            animationDuration: '2s'
-                          }}
-                        ></div>
-                      ))}
-                    </div>
-                  )}
-                  
                   <div className="relative z-10 flex items-start">
                     <div className={`w-12 h-12 bg-gradient-to-r ${achievement.color} rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg`}>
                       <IconComponent className="h-6 w-6 text-white" />
                     </div>
                     
                     <div className="flex-1">
-                      <h3 className="text-foreground font-semibold leading-relaxed mb-2 group-hover:text-gray-900 transition-colors duration-300">
+                      <h3 className="text-gray-900 font-semibold leading-relaxed mb-2 group-hover:text-gray-900 transition-colors duration-300">
                         {achievement.text}
                       </h3>
                       
                       {achievement.description && (
-                        <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-gray-600 transition-colors duration-300">
+                        <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-600 transition-colors duration-300">
                           {achievement.description}
                         </p>
                       )}

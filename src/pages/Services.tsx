@@ -176,7 +176,7 @@ const Services = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
           <div className="text-center max-w-4xl mx-auto">
             <Badge variant="outline" className="mb-4 text-primary border-primary/20 font-medium">
-              SEBI Registered • 500+ Success Stories • Industry-Recognized Certification
+               500+ Success Stories • Industry-Recognized Certification
             </Badge>
             <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 font-manrope">
               Master Trading with Professional 

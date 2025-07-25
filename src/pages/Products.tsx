@@ -190,7 +190,7 @@ const TradingProductPage = () => {
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 px-6 py-3 rounded-full mb-6 font-medium text-sm border border-blue-200/50 shadow-sm animate-bounce-slow">
               <Shield className="h-4 w-4" />
-              SEBI Registered • 500+ Success Stories • Enterprise-Grade Security
+               500+ Success Stories • Enterprise-Grade Security
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 animate-fade-in">
               Transform Your Trading with 

@@ -421,7 +421,7 @@ const Pricing = () => {
             <Button 
               size="lg" 
               variant="outline"
-              className="border-white text-gray-900 hover:bg-white hover:text-gray-900 text-lg px-8 py-4"
+              className="bg-white text-gray-900 hover:bg-white hover:text-gray-900 text-lg px-8 py-4"
               onClick={handleContactSales}
             >
               Contact Sales
