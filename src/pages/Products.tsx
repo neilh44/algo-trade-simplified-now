@@ -174,16 +174,6 @@ const Products: React.FC = () => {
         </button>
       </div>
 
-      {/* Urgency Bar */}
-      <div className={`text-center py-2 text-sm font-medium animate-pulse transition-all duration-300 ${
-        theme === 'dark'
-          ? 'bg-gradient-to-r from-red-700 to-orange-700 text-red-100'
-          : 'bg-gradient-to-r from-red-600 to-orange-600 text-white'
-      }`}>
-        <Timer className="inline h-4 w-4 mr-2" />
-        Limited Time Offer: 50% OFF ends in {formatTime(timeLeft)} - Only 47 spots left!
-      </div>
-
       <Header />
 
       {/* Hero Section - Enhanced */}

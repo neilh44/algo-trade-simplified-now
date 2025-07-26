@@ -50,6 +50,8 @@ import RiskDisclosure from "./pages/RiskDisclosure";
 import Compliance from "./pages/Compliance";
 import DataSecurity from "./pages/DataSecurity";
 import NotFound from "./pages/NotFound";
+import BonusPage from './pages/BonusPage';
+
 
 // Dashboard Pages (now standalone)
 import FreeCourses from "./pages/FreeCourses";
@@ -80,6 +82,8 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/courses" element={<Courses />} />
+              <Route path="/bonus" element={<BonusPage />} />
+
 
               {/* Protected Dashboard Routes */}
               <Route path="/dashboard" element={
