@@ -277,16 +277,16 @@ const Courses = () => {
           />
         </div>
         <div>
-          <select
-            value={filterLevel}
-            onChange={(e) => setFilterLevel(e.target.value)}
-            className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-          >
-            <option value="all">All Levels</option>
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
-          </select>
+        <select
+          value={filterLevel}
+          onChange={(e) => setFilterLevel(e.target.value)}
+          className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground"
+        >
+          <option value="all" className="bg-background text-foreground">All Levels</option>
+          <option value="beginner" className="bg-background text-foreground">Beginner</option>
+          <option value="intermediate" className="bg-background text-foreground">Intermediate</option>
+          <option value="advanced" className="bg-background text-foreground">Advanced</option>
+        </select>
         </div>
       </div>
 
@@ -569,9 +569,10 @@ const Courses = () => {
           <CourseBrowser />
         )}
       </main>
-      {!selectedCourse && <Footer />}
+      <Footer />
     </div>
   );
+  
 };
 
 export default Courses;
