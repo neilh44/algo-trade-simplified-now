@@ -69,6 +69,14 @@ const BonusPage: React.FC = () => {
 
   const bonusItems = [
     {
+      icon: Zap,
+      title: '7-Day Trial of Automated Algo Bridge',
+      description: 'Experience real-time algo trading with live market execution and performance tracking',
+      value: '₹1,499',
+      highlight: 'Free Trial',
+      color: 'from-blue-600 to-indigo-700'
+    },    
+    {
       icon: BookOpen,
       title: 'Ebook on Crypto Trading Strategies',
       description: 'Comprehensive guide with 50+ proven strategies used by professional crypto traders',
@@ -317,8 +325,7 @@ const BonusPage: React.FC = () => {
                   }`}>
                     {item.description}
                   </CardDescription>
-                  
-                  <div className="mt-6">
+                  <div className="mt-8"> 
                     <Button 
                       variant="outline" 
                       className={`w-full group/btn transition-all duration-300 ${

@@ -65,6 +65,24 @@ const GlobalPopupIntentExit: React.FC = () => {
             page_title: document.title
           });
         }
+
+        // ✅ NEW: Redirect to bonus page after successful submission
+        console.log('Redirecting to bonus page...');
+        
+        // Small delay to ensure analytics are tracked
+        setTimeout(() => {
+          // Use window.location.href for full page redirect
+          window.location.href = '/bonus';
+          
+          // Alternative: If using React Router, you could use:
+          // navigate('/bonus');
+          // But you'd need to import useNavigate from react-router-dom
+        }, 500); // 500ms delay to ensure analytics tracking completes
+
+      } else {
+        console.error('API response not ok:', response.status, response.statusText);
+        // Don't dismiss on API error - give user another chance
+        console.log('Not dismissing popup due to API error');
       }
     } catch (error) {
       console.error('Error submitting email:', error);

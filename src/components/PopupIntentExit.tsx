@@ -77,23 +77,28 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
     const secs = seconds % 60;
     return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     
+    console.log('Form submitted, redirecting to bonus page');
+    console.log('Email:', email);
+    
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    
+    // Call parent handler for analytics/storage
     onEmailSubmit(email);
     
-    // After successful submission, dismiss until refresh
+    // Set popup as dismissed
     sessionStorage.setItem('popup_dismissed_until_refresh', 'true');
+    
+    // Simulate brief loading, then redirect
+    setTimeout(() => {
+      console.log('Redirecting to /bonus');
+      window.location.href = '/bonus';
+    }, 1500); // Show loading for 1.5 seconds then redirect
   };
-
-  // Close button - sets 5 minute cooldown
+  
   const handleClose = () => {
     setIsPopupOpen(false);
     onPopupClose();
@@ -243,7 +248,7 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
                   <span>Sending Bonuses...</span>
                 </div>
               ) : (
-                '🎁 Send Me My Free Bonuses!'
+                '🎁 Send Me To My Bonuses!'
               )}
             </button>
           </form>
