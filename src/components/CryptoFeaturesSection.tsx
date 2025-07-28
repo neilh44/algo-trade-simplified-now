@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import automationImage from '/images/product/C_automation.png';
 import {
   Bot,
   BookOpen,
@@ -151,34 +152,32 @@ const CryptoFeaturesSection = ({ theme = 'light' }) => {
 
                 {/* Image Side */}
                 <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''} relative`}>
-                  <div className={`relative rounded-xl overflow-hidden ${isDark ? 'bg-gradient-to-br from-slate-700 to-slate-800' : 'bg-gradient-to-br from-slate-200 to-slate-300'} aspect-video group-hover:scale-105 transition-transform duration-500 flex items-center justify-center`}>
-                    {/* Demo content since we don't have real images */}
-                    <div className="text-center">
-                      <feature.icon className={`h-16 w-16 ${isDark ? 'text-slate-500' : 'text-slate-400'} mx-auto mb-4`} />
-                      <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'} font-medium`}>
-                        {feature.title}
-                      </p>
-                    </div>
-                    
-                    {/* Overlay gradient */}
-                    <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-t from-slate-900/20 to-transparent' : 'bg-gradient-to-t from-black/10 to-transparent'} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                    
-                    {/* Feature badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className={`${isDark ? 'bg-slate-900/80 text-white border-slate-700' : 'bg-white/90 text-slate-900 border-white/20'} px-3 py-1 rounded-full text-xs font-bold border backdrop-blur-sm`}>
-                        {feature.title}
-                      </span>
-                    </div>
+                <div className={`relative rounded-xl overflow-hidden aspect-video group-hover:scale-105 transition-transform duration-500`}>
+                  <img 
+                    src={automationImage} 
+                    alt="Live Crypto Automation Dashboard"
+                    className="w-full h-full object-cover"
+                  />
+                  
+                  {/* Overlay gradient */}
+                  <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-t from-slate-900/20 to-transparent' : 'bg-gradient-to-t from-black/10 to-transparent'} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                  
+                  {/* Feature badge */}
+                  <div className="absolute top-4 left-4">
+                    <span className={`${isDark ? 'bg-slate-900/80 text-white border-slate-700' : 'bg-white/90 text-slate-900 border-white/20'} px-3 py-1 rounded-full text-xs font-bold border backdrop-blur-sm`}>
+                      Live Crypto Automation
+                    </span>
+                  </div>
 
-                    {/* Performance indicator */}
-                    <div className="absolute bottom-4 right-4">
-                      <div className={`${isDark ? 'bg-green-900/80 text-green-300 border-green-700/50' : 'bg-green-100/90 text-green-700 border-green-200/50'} px-3 py-1 rounded-full text-xs font-bold border backdrop-blur-sm flex items-center gap-1`}>
-                        <TrendingUp className="h-3 w-3" />
-                        {feature.performance}
-                      </div>
+                  {/* Performance indicator */}
+                  <div className="absolute bottom-4 right-4">
+                    <div className={`${isDark ? 'bg-green-900/80 text-green-300 border-green-700/50' : 'bg-green-100/90 text-green-700 border-green-200/50'} px-3 py-1 rounded-full text-xs font-bold border backdrop-blur-sm flex items-center gap-1`}>
+                      <TrendingUp className="h-3 w-3" />
+                      +32% avg returns
                     </div>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           ))}
