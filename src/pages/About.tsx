@@ -39,6 +39,9 @@ const About: React.FC = () => {
   const [animatedStats, setAnimatedStats] = useState<AnimatedStats>({ users: 0, rate: 0, strategies: 0 });
   const [hasAnimated, setHasAnimated] = useState(false);
   const statsRef = useRef<HTMLDivElement>(null);
+  const [architImageError, setArchitImageError] = useState(false);
+
+
 
   // Animate stats when section comes into view
   useEffect(() => {
@@ -339,8 +342,8 @@ const About: React.FC = () => {
       {/* Platform Advantages - NO NUMBER ANIMATIONS */}
       <AnimatedAchievements />
 
-            {/* Team */}
-            <section className="py-20 bg-gray-50 dark:bg-gray-800">
+      {/* Team Section - Clean Version */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Meet The Visionaries</h2>
@@ -354,7 +357,20 @@ const About: React.FC = () => {
                 <div className="bg-gradient-to-br from-blue-500 to-teal-500 p-8 text-white">
                   <div className="flex items-center mb-4">
                     <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform overflow-hidden">
-                      <User className="h-8 w-8 text-white" />
+                      {!architImageError ? (
+                        <img 
+                          src="/images/founders/archit-mittal.jpg" 
+                          alt="Archit Mittal" 
+                          className="w-full h-full object-cover rounded-full"
+                          onError={() => {
+                            console.log('Failed to load Archit Mittal image, showing fallback icon');
+                            setArchitImageError(true);
+                          }}
+                          onLoad={() => console.log('Archit Mittal image loaded successfully')}
+                        />
+                      ) : (
+                        <User className="h-8 w-8 text-white" />
+                      )}
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold">Archit Mittal</h3>
@@ -393,8 +409,8 @@ const About: React.FC = () => {
               <CardContent className="p-0">
                 <div className="bg-gradient-to-br from-teal-500 to-blue-500 p-8 text-white">
                   <div className="flex items-center mb-4">
-                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
-                      <User className="h-7 w-7 text-white" />
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform overflow-hidden">
+                      <User className="h-8 w-8 text-white" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold">Hasmukh Prajapati</h3>

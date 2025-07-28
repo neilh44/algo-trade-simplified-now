@@ -82,6 +82,30 @@ const Courses = () => {
     window.open(course.redirectUrl, '_blank');
   };
 
+  const getGoogleDriveImageUrl = (fileId: string, format: 'uc' | 'thumbnail' | 'direct' = 'thumbnail'): string => {
+    switch (format) {
+      case 'uc':
+        return `https://drive.google.com/uc?export=view&id=${fileId}`;
+      case 'thumbnail':
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w400-h200`;
+      case 'direct':
+        return `https://lh3.googleusercontent.com/d/${fileId}`;
+      default:
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w400-h200`;
+    }
+  };
+  
+
+  const convertGDriveUrl = (shareUrl: string): string => {
+    // Extract file ID from Google Drive sharing URL
+    const fileIdMatch = shareUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
+    if (fileIdMatch) {
+      const fileId = fileIdMatch[1];
+      return `https://drive.google.com/uc?export=view&id=${fileId}`;
+    }
+    return shareUrl; // Return original URL if no match found
+  };
+
   const courses: Course[] = [
     {
       id: '1',
@@ -96,7 +120,7 @@ const Courses = () => {
       difficulty: 'Intermediate',
       students: 1500,
       rating: 4.8,
-      image: '/Users/nileshhanotia/Projects/AlgoTrade/algo-trade-simplified-now/src/assets/thumbnail/ChatGPT for Python Algo Trading.jpg',
+      image: '/images/courses/chatgpt-python-algo.jpg', // ← Local path
       price: 9999,
       sessions: 'Multiple Sessions',
       modules: [],
@@ -115,7 +139,7 @@ const Courses = () => {
       difficulty: 'Intermediate',
       students: 1200,
       rating: 4.7,
-      image: '/api/placeholder/400/200',
+      image: '/images/courses/chatgpt-pinescript.jpg', // ← Local path
       price: 9999,
       sessions: 'Multiple Sessions',
       modules: [],
@@ -134,7 +158,7 @@ const Courses = () => {
       difficulty: 'Beginner',
       students: 2800,
       rating: 4.6,
-      image: '/api/placeholder/400/200',
+      image: '/images/courses/basics-indian-equities.jpg', // ← Local path
       price: 2499,
       validity: 'Valid Indefinitely',
       modules: [],
@@ -153,7 +177,7 @@ const Courses = () => {
       difficulty: 'Intermediate',
       students: 3200,
       rating: 4.8,
-      image: '/api/placeholder/400/200',
+      image: '/images/courses/technical-analysis.jpg', // ← Local path
       price: 2499,
       validity: 'Valid Indefinitely',
       modules: [],
@@ -172,7 +196,7 @@ const Courses = () => {
       difficulty: 'Advanced',
       students: 1800,
       rating: 4.9,
-      image: '/api/placeholder/400/200',
+      image: '/images/courses/options-greeks.jpg', // ← Local path
       price: 4999,
       validity: 'Valid Indefinitely',
       modules: [],
@@ -191,7 +215,7 @@ const Courses = () => {
       difficulty: 'Advanced',
       students: 950,
       rating: 4.8,
-      image: '/api/placeholder/400/200',
+      image: '/images/courses/advance-options-spreads.jpg', // ← Local path
       price: 7999,
       validity: 'Valid Indefinitely',
       modules: [],
@@ -210,7 +234,7 @@ const Courses = () => {
       difficulty: 'Beginner',
       students: 2500,
       rating: 4.7,
-      image: '/api/placeholder/400/200',
+      image: '/images/courses/no-code-automation.jpg', // ← Local path
       price: 0,
       modules: [],
       redirectUrl: 'https://smartwaveacademy.com/89ca20f8-9f00-41a2-9c8e-f8e4e6141ffe'
