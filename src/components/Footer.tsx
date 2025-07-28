@@ -6,31 +6,20 @@ interface FooterProps {
 }
 
 const Footer = ({ id }: FooterProps) => {
-  const quickLinks = [
-    { name: "Documentation", href: "/docs" },
-    { name: "API Reference", href: "/api-reference" },
-    { name: "Tutorials", href: "/tutorials" },
-    { name: "Video Guides", href: "/video-guides" },
-    { name: "Strategy Templates", href: "/strategy-templates" },
-    { name: "Blog", href: "/blog" }
-  ];
-
-  const supportLinks = [
-    { name: "Help Center", href: "/help" },
-    { name: "Contact Support", href: "/contact" },
-    { name: "System Status", href: "/status" },
-    { name: "Feature Requests", href: "/feature-requests" },
-    { name: "Bug Reports", href: "/bug-reports" },
-    { name: "Community Forum", href: "/community" }
-  ];
-
   const legalLinks = [
     { name: "Terms of Service", href: "/terms" },
     { name: "Privacy Policy", href: "/privacy" },
-    { name: "Refund Policy", href: "/refund-policy" },
     { name: "Risk Disclosure", href: "/risk-disclosure" },
-    { name: "Compliance", href: "/compliance" },
-    { name: "Data Security", href: "/data-security" }
+    { name: "Refund Policy", href: "/refund-policy" }
+  ];
+
+  const mainNavLinks = [
+    { name: "Home", href: "/" },
+    { name: "Products", href: "/products" },
+    { name: "Strategies", href: "/strategies" },
+    { name: "Courses", href: "/courses" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "About Us", href: "/about" }
   ];
 
   const socialLinks = [
@@ -69,43 +58,48 @@ const Footer = ({ id }: FooterProps) => {
   return (
     <footer id={id} className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-4 gap-12">
-          {/* Company Info */}
-          <div className="lg:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          {/* Company Info - Takes 2 columns on large screens */}
+          <div className="md:col-span-2 lg:col-span-2">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-white mb-2">Automate Algos</h3>
-              <p className="text-gray-400">
+              <h3 className="text-2xl font-bold text-white mb-3">Automate Algos</h3>
+              <p className="text-gray-400 text-base leading-relaxed max-w-md">
                 Automate your trading strategies with institutional-grade infrastructure. 
                 Trusted by 5,000+ traders across India.
               </p>
             </div>
             
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-blue-400" />
+            {/* Contact Info */}
+            <div className="space-y-3 mb-8">
+              <div className="flex items-start space-x-3">
+                <Mail className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
                 <span className="text-gray-300">support@automatealgos.in</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-green-400" />
+                <Phone className="w-5 h-5 text-green-400 flex-shrink-0" />
                 <span className="text-gray-300">+91 70166 43084</span>
               </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-orange-400" />
-                <span className="text-gray-300">TF-1 Jivabhai Market Kalol Gandhinagar Gujarat India</span>
+              <div className="flex items-start space-x-3">
+                <MapPin className="w-5 h-5 text-orange-400 mt-0.5 flex-shrink-0" />
+                <span className="text-gray-300 text-sm leading-relaxed">
+                  TF-1 Jivabhai Market<br />
+                  Kalol, Gandhinagar<br />
+                  Gujarat, India
+                </span>
               </div>
             </div>
 
             {/* Social Media */}
-            <div className="mt-8">
-              <h4 className="font-semibold mb-4">Follow Us</h4>
-              <div className="flex space-x-4">
+            <div>
+              <h4 className="font-semibold mb-4 text-white">Follow Us</h4>
+              <div className="flex space-x-3">
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`bg-gray-800 p-2 rounded-lg ${social.hoverColor} transition-colors`}
+                    className={`bg-gray-800 p-3 rounded-lg ${social.hoverColor} transition-all duration-200 hover:scale-105`}
                     title={social.name}
                   >
                     <social.icon className="w-5 h-5" />
@@ -115,13 +109,16 @@ const Footer = ({ id }: FooterProps) => {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold mb-6">Resources</h4>
+          {/* Navigation Links */}
+          <div className="md:col-span-1 lg:col-span-1">
+            <h4 className="font-semibold mb-6 text-white">Quick Links</h4>
             <ul className="space-y-3">
-              {quickLinks.map((link, index) => (
+              {mainNavLinks.map((link, index) => (
                 <li key={index}>
-                  <Link to={link.href} className="text-gray-400 hover:text-white transition-colors">
+                  <Link 
+                    to={link.href} 
+                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -129,57 +126,48 @@ const Footer = ({ id }: FooterProps) => {
             </ul>
           </div>
 
-          {/* Support */}
-          <div>
-            <h4 className="font-semibold mb-6">Support</h4>
+          {/* Legal Links */}
+          <div className="md:col-span-1 lg:col-span-1">
+            <h4 className="font-semibold mb-6 text-white">Legal</h4>
             <ul className="space-y-3">
-              {supportLinks.map((link, index) => (
-                <li key={index}>
-                  <Link to={link.href} className="text-gray-400 hover:text-white transition-colors">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal & Newsletter */}
-          <div>
-            <h4 className="font-semibold mb-6">Legal</h4>
-            <ul className="space-y-3 mb-8">
               {legalLinks.map((link, index) => (
                 <li key={index}>
-                  <Link to={link.href} className="text-gray-400 hover:text-white transition-colors">
+                  <Link 
+                    to={link.href} 
+                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+                  >
                     {link.name}
                   </Link>
                 </li>
               ))}
-            </ul>           
+            </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-gray-400 text-sm mb-4 md:mb-0">
-            © 2025 Automate Algos. All rights reserved. Trading involves risk of loss.
-          </div>
-          <div className="flex space-x-6 text-sm">
-            <Link to="/data-security" className="text-gray-400 hover:text-white transition-colors">
-              Security
-            </Link>
-            <Link to="/status" className="text-gray-400 hover:text-white transition-colors">
-              Status
-            </Link>
-            <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
-              Support
-            </Link>
+        <div className="mt-12 pt-8 border-t border-gray-800">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <div className="text-gray-400 text-sm text-center sm:text-left">
+              © 2025 Automate Algos. All rights reserved. Trading involves risk of loss.
+            </div>
+            <div className="flex space-x-6 text-sm">
+              <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors duration-200">
+                Privacy
+              </Link>
+              <Link to="/terms" className="text-gray-400 hover:text-white transition-colors duration-200">
+                Terms
+              </Link>
+              <Link to="/contact" className="text-gray-400 hover:text-white transition-colors duration-200">
+                Support
+              </Link>
+            </div>
           </div>
         </div>
 
         {/* Disclaimer */}
-        <div className="mt-8 p-4 bg-gray-800/50 rounded-lg">
+        <div className="mt-8 p-6 bg-gray-800/50 rounded-lg border border-gray-700/50">
           <p className="text-xs text-gray-500 leading-relaxed">
-            <strong>Risk Disclaimer:</strong> Trading in financial instruments involves substantial risk of loss and is not suitable for all investors. 
+            <strong className="text-gray-400">Risk Disclaimer:</strong> Trading in financial instruments involves substantial risk of loss and is not suitable for all investors. 
             Past performance is not indicative of future results. Please consider your financial situation and risk tolerance before trading. 
             Automate Algos provides software tools and does not provide investment advice. All trading decisions are made by the user.
           </p>
