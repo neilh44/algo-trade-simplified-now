@@ -123,7 +123,7 @@ const Products: React.FC = () => {
     {
       name: 'Rajesh Kumar',
       role: 'Software Engineer, Mumbai',
-      content: 'Started with ₹50,000 and grew my portfolio to ₹1.2 lakhs in 8 months using the Pro plan. The automated risk management saved me during market crashes.',
+      content: 'The Pro plan from AutomateAlgos.in gave me everything I needed—ready-to-use strategies, automated execution, and smart risk management. It’s like having a trading desk on autopilot.',
       rating: 5,
       return: '+140%',
       image: 'RK'
@@ -334,71 +334,71 @@ const Products: React.FC = () => {
         </div>
       </section>
 
-      {/* Testimonials - Enhanced */}
-      <section className={`py-20 transition-all duration-500 ${
-        theme === 'dark' ? 'bg-slate-900' : 'bg-white'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
-              theme === 'dark' ? 'text-white' : 'text-slate-900'
-            }`}>
-              Real Success Stories
-            </h2>
-            <p className={`text-xl transition-colors duration-300 ${
-              theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
-            }`}>
-              See how traders are transforming their financial future
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className={`rounded-xl p-6 border hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 ${
-                theme === 'dark'
-                  ? 'bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600/50'
-                  : 'bg-gradient-to-br from-white to-slate-50 border-slate-200'
-              }`}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold">
-                    {testimonial.image}
-                  </div>
-                  <div>
-                    <h4 className={`font-semibold transition-colors duration-300 ${
-                      theme === 'dark' ? 'text-white' : 'text-slate-900'
-                    }`}>
-                      {testimonial.name}
-                    </h4>
-                    <p className={`text-sm transition-colors duration-300 ${
-                      theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
-                    }`}>
-                      {testimonial.role}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className={`mb-4 leading-relaxed transition-colors duration-300 ${
-                  theme === 'dark' ? 'text-slate-300' : 'text-slate-700'
+    {/* Testimonials - Enhanced */}
+    <section className={`py-20 transition-all duration-500 ${
+            theme === 'dark' ? 'bg-slate-900' : 'bg-white'
+          }`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-16">
+                <h2 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
+                  theme === 'dark' ? 'text-white' : 'text-slate-900'
                 }`}>
-                  "{testimonial.content}"
+                  Real Success Stories
+                </h2>
+                <p className={`text-xl transition-colors duration-300 ${
+                  theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
+                }`}>
+                  See how traders are transforming their financial future
                 </p>
-                <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
-                  theme === 'dark'
-                    ? 'bg-gradient-to-r from-green-900/50 to-emerald-900/50 text-green-400 border border-green-700/30'
-                    : 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-700'
-                }`}>
-                  <TrendingUp className="h-4 w-4" />
-                  {testimonial.return}
-                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+              <div className="grid md:grid-cols-3 gap-8">
+                {testimonials.map((testimonial, index) => (
+                  <div key={index} className={`rounded-xl p-6 border hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col ${
+                    theme === 'dark'
+                      ? 'bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600/50'
+                      : 'bg-gradient-to-br from-white to-slate-50 border-slate-200'
+                  }`}>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold">
+                        {testimonial.image}
+                      </div>
+                      <div>
+                        <h4 className={`font-semibold transition-colors duration-300 ${
+                          theme === 'dark' ? 'text-white' : 'text-slate-900'
+                        }`}>
+                          {testimonial.name}
+                        </h4>
+                        <p className={`text-sm transition-colors duration-300 ${
+                          theme === 'dark' ? 'text-slate-400' : 'text-slate-600'
+                        }`}>
+                          {testimonial.role}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <p className={`mb-4 leading-relaxed flex-grow transition-colors duration-300 ${
+                      theme === 'dark' ? 'text-slate-300' : 'text-slate-700'
+                    }`}>
+                      "{testimonial.content}"
+                    </p>
+                    <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-bold transition-all duration-300 mt-auto ${
+                      theme === 'dark'
+                        ? 'bg-gradient-to-r from-green-900/50 to-emerald-900/50 text-green-400 border border-green-700/30'
+                        : 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-700'
+                    }`}>
+                      <TrendingUp className="h-4 w-4" />
+                      {testimonial.return}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+          
       {/* Final CTA - Enhanced */}
       <section className={`py-20 relative overflow-hidden transition-all duration-500 ${
         theme === 'dark'

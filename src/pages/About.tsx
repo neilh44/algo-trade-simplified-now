@@ -194,8 +194,8 @@ const About: React.FC = () => {
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed">
-              Join the <strong className="text-blue-500">algorithmic revolution</strong> and build your
-              <strong className="text-teal-500">  automated trading empire</strong> today.
+              Join the <strong className="text-blue-500">Algorithmic Revolution</strong> and Build Your
+              <strong className="text-teal-500">  Automated Trading Empire</strong> Today.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
