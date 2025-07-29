@@ -29,7 +29,7 @@ const CryptoFeaturesSection = ({ theme = 'light' }) => {
         'Smart order execution'
       ],
       benefits: 'Never miss market opportunities',
-      performance: '+32% avg returns'
+      performance: 'Trusted by 5K+ traders'
     },
     {
       id: 2,
@@ -57,7 +57,7 @@ const CryptoFeaturesSection = ({ theme = 'light' }) => {
         'One-click deployment'
       ],
       benefits: 'Start trading instantly',
-      performance: '78% win rate average'
+      performance: 'No coding required'
     },
     {
       id: 4,

@@ -16,7 +16,7 @@ const Footer = ({ id }: FooterProps) => {
   const mainNavLinks = [
     { name: "Home", href: "/" },
     { name: "Products", href: "/products" },
-    { name: "Strategies", href: "/strategies" },
+    { name: "Strategies", href: "https://strategies.automatealgos.in/", external: true },
     { name: "Courses", href: "/courses" },
     { name: "Pricing", href: "/pricing" },
     { name: "About Us", href: "/about" }
@@ -115,17 +115,28 @@ const Footer = ({ id }: FooterProps) => {
             <ul className="space-y-3">
               {mainNavLinks.map((link, index) => (
                 <li key={index}>
-                  <Link 
-                    to={link.href} 
-                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
-                  >
-                    {link.name}
-                  </Link>
+                  {link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link 
+                      to={link.href} 
+                      className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
           </div>
-
+                  
           {/* Legal Links */}
           <div className="md:col-span-1 lg:col-span-1">
             <h4 className="font-semibold mb-6 text-white">Legal</h4>
@@ -157,7 +168,7 @@ const Footer = ({ id }: FooterProps) => {
               <Link to="/terms" className="text-gray-400 hover:text-white transition-colors duration-200">
                 Terms
               </Link>
-              <Link to="/contact" className="text-gray-400 hover:text-white transition-colors duration-200">
+              <Link to="/Contact-Us" className="text-gray-400 hover:text-white transition-colors duration-200">
                 Support
               </Link>
             </div>

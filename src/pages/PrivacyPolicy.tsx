@@ -17,13 +17,6 @@ const PrivacyPolicy = () => {
               <ArrowLeft className="h-4 w-4" />
               <span className="font-medium">Back to Home</span>
             </Link>
-            <div className="flex gap-2">
-              <Badge variant="secondary">GDPR Compliant</Badge>
-              <Button variant="outline" size="sm">
-                <Download className="h-4 w-4 mr-2" />
-                Download PDF
-              </Button>
-            </div>
           </div>
         </div>
       </div>

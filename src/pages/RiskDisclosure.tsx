@@ -17,13 +17,6 @@ const RiskDisclosure = () => {
               <ArrowLeft className="h-4 w-4" />
               <span className="font-medium">Back to Home</span>
             </Link>
-            <div className="flex gap-2">
-              <Badge variant="destructive">Important Notice</Badge>
-              <Button variant="outline" size="sm">
-                <Download className="h-4 w-4 mr-2" />
-                Download PDF
-              </Button>
-            </div>
           </div>
         </div>
       </div>
@@ -268,7 +261,7 @@ const RiskDisclosure = () => {
                     <Link to="/terms">Terms of Service</Link>
                   </Button>
                   <Button asChild>
-                    <Link to="/contact">Get Professional Advice</Link>
+                    <Link to="/Contact-Us">Get Professional Advice</Link>
                   </Button>
                 </div>
               </div>

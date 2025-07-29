@@ -16,10 +16,6 @@ const TermsOfService = () => {
               <ArrowLeft className="h-4 w-4" />
               <span className="font-medium">Back to Home</span>
             </Link>
-            <Button variant="outline" size="sm">
-              <Download className="h-4 w-4 mr-2" />
-              Download PDF
-            </Button>
           </div>
         </div>
       </div>
@@ -147,7 +143,7 @@ const TermsOfService = () => {
                       <Link to="/refund-policy">View Refund Policy</Link>
                     </Button>
                     <Button asChild variant="outline">
-                      <Link to="/contact">Contact Support</Link>
+                      <Link to="/Contact-Us">Contact Support</Link>
                     </Button>
                   </div>
                 </div>
@@ -159,7 +155,7 @@ const TermsOfService = () => {
               <p className="text-center text-text-secondary">
                 For questions about these Terms, please contact us at{" "}
                 <a href="mailto:legal@automatealgos.in" className="text-primary hover:text-primary/80">
-                  legal@automatealgos.in
+                  support@automatealgos.in
                 </a>
               </p>
             </div>

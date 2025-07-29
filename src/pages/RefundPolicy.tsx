@@ -3,8 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Clock, CheckCircle, AlertCircle, CreditCard, Download } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowLeft, Clock, CheckCircle, AlertCircle, CreditCard, Download, XCircle, Users, Calendar, Mail } from "lucide-react";
+
+// Note: Replace these with your actual Link component or use regular anchor tags
+const Link = ({ to, children, className = "" }) => (
+  <a href={to} className={className}>{children}</a>
+);
 
 const RefundPolicy = () => {
   return (
@@ -17,13 +21,6 @@ const RefundPolicy = () => {
               <ArrowLeft className="h-4 w-4" />
               <span className="font-medium">Back to Home</span>
             </Link>
-            <div className="flex gap-2">
-              <Badge variant="secondary">30-Day Policy</Badge>
-              <Button variant="outline" size="sm">
-                <Download className="h-4 w-4 mr-2" />
-                Download PDF
-              </Button>
-            </div>
           </div>
         </div>
       </div>
@@ -31,78 +28,97 @@ const RefundPolicy = () => {
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-text-primary mb-4">Refund Policy</h1>
+          <h1 className="text-4xl font-bold text-text-primary mb-4">Refund and Return Policy</h1>
           <p className="text-text-secondary max-w-2xl mx-auto">
-            We want you to be completely satisfied with our services. Our refund policy is designed to be fair and transparent.
+            Thank you for enrolling in our educational programs and utilizing our services at AutomateAlgos. We appreciate your trust in our platform and commitment to learning.
           </p>
           <div className="flex items-center justify-center gap-4 text-text-secondary mt-4">
-            <span>Last Updated: January 15, 2024</span>
-            <span className="text-border">•</span>
             <span>Effective Immediately</span>
+            <span className="text-border">•</span>
+            <span>Applies to All Purchases</span>
           </div>
         </div>
 
         {/* Quick Overview */}
         <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <div className="text-center p-4 bg-matdash-primary-light rounded-lg border border-matdash-primary/20">
-            <Clock className="h-8 w-8 text-matdash-primary mx-auto mb-2" />
-            <h3 className="font-semibold text-text-primary">30-Day Window</h3>
-            <p className="text-sm text-text-secondary">Request refunds within 30 days</p>
+          <div className="text-center p-4 bg-red-50 rounded-lg border border-red-200">
+            <XCircle className="h-8 w-8 text-red-600 mx-auto mb-2" />
+            <h3 className="font-semibold text-text-primary">No Refunds</h3>
+            <p className="text-sm text-text-secondary">All purchases are final</p>
           </div>
-          <div className="text-center p-4 bg-matdash-secondary-light rounded-lg border border-matdash-secondary/20">
-            <CheckCircle className="h-8 w-8 text-matdash-secondary mx-auto mb-2" />
-            <h3 className="font-semibold text-text-primary">Full Refunds</h3>
-            <p className="text-sm text-text-secondary">100% refund for eligible cases</p>
+          <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <Users className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+            <h3 className="font-semibold text-text-primary">Transfer Options</h3>
+            <p className="text-sm text-text-secondary">Batch & enrollment transfers available</p>
           </div>
-          <div className="text-center p-4 bg-surface-container rounded-lg border border-border">
-            <CreditCard className="h-8 w-8 text-primary mx-auto mb-2" />
-            <h3 className="font-semibold text-text-primary">Fast Processing</h3>
-            <p className="text-sm text-text-secondary">5-7 business days to process</p>
+          <div className="text-center p-4 bg-amber-50 rounded-lg border border-amber-200">
+            <Calendar className="h-8 w-8 text-amber-600 mx-auto mb-2" />
+            <h3 className="font-semibold text-text-primary">48-Hour Rule</h3>
+            <p className="text-sm text-text-secondary">Request changes before deadline</p>
           </div>
         </div>
 
         {/* Content */}
         <Card className="bg-background border-border shadow-sm">
           <CardHeader>
-            <CardTitle className="text-text-primary">Refund Eligibility & Process</CardTitle>
+            <CardTitle className="text-text-primary">Complete Refund Policy</CardTitle>
           </CardHeader>
           <CardContent className="prose max-w-none">
             <div className="space-y-8">
-              {/* Eligibility Criteria */}
+              {/* Main Policy Statement */}
               <section>
-                <h2 className="text-2xl font-semibold text-text-primary mb-4">1. Refund Eligibility</h2>
+                <div className="bg-red-50 border border-red-200 p-6 rounded-lg mb-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <AlertCircle className="h-6 w-6 text-red-600" />
+                    <h3 className="text-xl font-semibold text-red-800">Important Policy Notice</h3>
+                  </div>
+                  <p className="text-red-700 font-medium text-lg mb-3">
+                    All purchases of our courses and services are final and cannot be cancelled or refunded once completed.
+                  </p>
+                  <p className="text-red-600 text-sm">
+                    We understand that circumstances may change, and we offer flexible alternatives as outlined below.
+                  </p>
+                </div>
+              </section>
+
+              <Separator className="bg-border" />
+
+              {/* Available Alternatives */}
+              <section>
+                <h2 className="text-2xl font-semibold text-text-primary mb-4">Available Alternatives</h2>
                 <div className="space-y-4 text-text-secondary">
-                  <p>
-                    We offer refunds under specific circumstances to ensure fair treatment for all users while 
-                    maintaining the integrity of our service.
+                  <p className="mb-6">
+                    While refunds are not available, we provide the following flexible options to accommodate changing circumstances:
                   </p>
                   
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
-                      <h4 className="font-semibold text-green-800 mb-2 flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4" />
-                        Eligible for Refund
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-blue-50 border border-blue-200 p-5 rounded-lg">
+                      <h4 className="font-semibold text-blue-800 mb-3 flex items-center gap-2">
+                        <Calendar className="h-5 w-5" />
+                        Course Batch Transfer
                       </h4>
-                      <ul className="list-disc pl-6 space-y-1 text-sm text-green-700">
-                        <li>Service outages lasting more than 24 hours</li>
-                        <li>Platform malfunction preventing normal use</li>
-                        <li>Unauthorized charges or billing errors</li>
-                        <li>Cancellation within 30 days of subscription</li>
-                        <li>Failure to deliver promised features</li>
+                      <p className="text-sm text-blue-700 mb-3">
+                        For in-person training programs, you may request to switch to an alternative batch schedule that better fits your availability.
+                      </p>
+                      <ul className="space-y-1 text-xs text-blue-600">
+                        <li>• Available for offline/in-person courses</li>
+                        <li>• Subject to batch availability</li>
+                        <li>• Fee adjustments may apply</li>
                       </ul>
                     </div>
                     
-                    <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
-                      <h4 className="font-semibold text-red-800 mb-2 flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4" />
-                        Not Eligible for Refund
+                    <div className="bg-green-50 border border-green-200 p-5 rounded-lg">
+                      <h4 className="font-semibold text-green-800 mb-3 flex items-center gap-2">
+                        <Users className="h-5 w-5" />
+                        Enrollment Transfer
                       </h4>
-                      <ul className="list-disc pl-6 space-y-1 text-sm text-red-700">
-                        <li>Trading losses or poor algorithm performance</li>
-                        <li>Change of mind after 30-day period</li>
-                        <li>Violation of terms of service</li>
-                        <li>Account suspension due to misuse</li>
-                        <li>Partial month usage (prorated instead)</li>
+                      <p className="text-sm text-green-700 mb-3">
+                        You have the option to transfer your course registration to another individual for both online and in-person programs.
+                      </p>
+                      <ul className="space-y-1 text-xs text-green-600">
+                        <li>• Applicable to all course types</li>
+                        <li>• Certificate issued to attending participant</li>
+                        <li>• No additional fees for transfers</li>
                       </ul>
                     </div>
                   </div>
@@ -111,61 +127,52 @@ const RefundPolicy = () => {
 
               <Separator className="bg-border" />
 
-              {/* Refund Process */}
+              {/* Certificate Policy */}
               <section>
-                <h2 className="text-2xl font-semibold text-text-primary mb-4">2. How to Request a Refund</h2>
+                <h2 className="text-2xl font-semibold text-text-primary mb-4">Completion Certificate Policy</h2>
+                <div className="bg-matdash-primary-light p-5 rounded-lg border-l-4 border-matdash-primary">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-matdash-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-text-secondary text-sm leading-relaxed">
+                        Completion certificates are issued only once and will bear the name of the participant who completes the entire program and successfully passes all required assessments. The certificate cannot be reissued or transferred after completion.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <Separator className="bg-border" />
+
+              {/* Fee Adjustment Guidelines */}
+              <section>
+                <h2 className="text-2xl font-semibold text-text-primary mb-4">Fee Adjustment Guidelines</h2>
                 <div className="space-y-4 text-text-secondary">
-                  <p>
-                    Follow these simple steps to request a refund. We aim to process all eligible requests 
-                    within 5-7 business days.
+                  <p className="mb-4">
+                    When transferring between batches with different pricing, the following fee adjustment rules apply:
                   </p>
                   
                   <div className="space-y-4">
-                    <div className="flex gap-4 p-4 bg-surface-container rounded-lg">
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                        1
+                    <div className="flex gap-4 p-4 bg-red-50 rounded-lg border border-red-200">
+                      <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+                        +
                       </div>
                       <div>
-                        <h4 className="font-semibold text-text-primary mb-1">Submit Request</h4>
-                        <p className="text-sm">
-                          Email us at <a href="mailto:refunds@automatealgos.in" className="text-primary hover:text-primary/80">refunds@automatealgos.in</a> or 
-                          use our <Link to="/contact" className="text-primary hover:text-primary/80">contact form</Link>
+                        <h4 className="font-semibold text-red-800 mb-2">Higher-Priced Batch</h4>
+                        <p className="text-sm text-red-700">
+                          Should you choose to transfer to a batch with increased fees, you will be required to pay the additional amount before the transfer is processed.
                         </p>
                       </div>
                     </div>
                     
-                    <div className="flex gap-4 p-4 bg-surface-container rounded-lg">
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                        2
+                    <div className="flex gap-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                      <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+                        -
                       </div>
                       <div>
-                        <h4 className="font-semibold text-text-primary mb-1">Provide Information</h4>
-                        <p className="text-sm">
-                          Include your account email, subscription details, and reason for refund request
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex gap-4 p-4 bg-surface-container rounded-lg">
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                        3
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-text-primary mb-1">Review Process</h4>
-                        <p className="text-sm">
-                          Our team will review your request within 2 business days and contact you with updates
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex gap-4 p-4 bg-surface-container rounded-lg">
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                        4
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-text-primary mb-1">Refund Processing</h4>
-                        <p className="text-sm">
-                          Approved refunds are processed back to the original payment method within 5-7 business days
+                        <h4 className="font-semibold text-green-800 mb-2">Lower-Priced Batch</h4>
+                        <p className="text-sm text-green-700">
+                          If you transfer to a batch with reduced fees, we will provide you with a credit voucher for the difference. This credit can be applied toward partial or complete payment for any future course offerings by AutomateAlgos.
                         </p>
                       </div>
                     </div>
@@ -175,79 +182,41 @@ const RefundPolicy = () => {
 
               <Separator className="bg-border" />
 
-              {/* Processing Times */}
+              {/* Important Deadlines */}
               <section>
-                <h2 className="text-2xl font-semibold text-text-primary mb-4">3. Processing Timeframes</h2>
-                <div className="space-y-4 text-text-secondary">
-                  <p>
-                    Refund processing times vary depending on your payment method and financial institution.
-                  </p>
-                  
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse">
-                      <thead>
-                        <tr className="border-b border-border">
-                          <th className="text-left py-3 px-4 font-semibold text-text-primary">Payment Method</th>
-                          <th className="text-left py-3 px-4 font-semibold text-text-primary">Processing Time</th>
-                          <th className="text-left py-3 px-4 font-semibold text-text-primary">Notes</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="border-b border-border">
-                          <td className="py-3 px-4">Credit Card</td>
-                          <td className="py-3 px-4">5-7 business days</td>
-                          <td className="py-3 px-4 text-sm">May take longer depending on your bank</td>
-                        </tr>
-                        <tr className="border-b border-border">
-                          <td className="py-3 px-4">Debit Card</td>
-                          <td className="py-3 px-4">3-5 business days</td>
-                          <td className="py-3 px-4 text-sm">Usually faster than credit cards</td>
-                        </tr>
-                        <tr className="border-b border-border">
-                          <td className="py-3 px-4">Bank Transfer</td>
-                          <td className="py-3 px-4">7-10 business days</td>
-                          <td className="py-3 px-4 text-sm">Depends on banking institutions</td>
-                        </tr>
-                        <tr className="border-b border-border">
-                          <td className="py-3 px-4">Digital Wallet</td>
-                          <td className="py-3 px-4">1-3 business days</td>
-                          <td className="py-3 px-4 text-sm">Fastest processing option</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                <h2 className="text-2xl font-semibold text-text-primary mb-4">Request Deadlines</h2>
+                <div className="bg-amber-50 border border-amber-200 p-5 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <Clock className="h-6 w-6 text-amber-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-amber-800 mb-2">48-Hour Deadline</h4>
+                      <p className="text-amber-700 text-sm leading-relaxed">
+                        All requests for batch modifications or enrollment transfers must be submitted no later than 48 hours before the scheduled course commencement. After this deadline, no changes to batch assignments or participant names will be permitted.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </section>
 
               <Separator className="bg-border" />
 
-              {/* Special Cases */}
+              {/* Attendance Requirements */}
               <section>
-                <h2 className="text-2xl font-semibold text-text-primary mb-4">4. Special Circumstances</h2>
-                <div className="space-y-4 text-text-secondary">
-                  <div className="space-y-4">
-                    <div className="bg-matdash-primary-light p-4 rounded-lg border-l-4 border-matdash-primary">
-                      <h4 className="font-semibold text-text-primary mb-2">Partial Refunds</h4>
-                      <p className="text-sm">
-                        For mid-cycle cancellations, we provide prorated refunds based on unused service time. 
-                        This ensures you only pay for services actually used.
+                <h2 className="text-2xl font-semibold text-text-primary mb-4">Attendance Requirements</h2>
+                <div className="bg-red-50 border border-red-200 p-5 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <XCircle className="h-6 w-6 text-red-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-red-800 mb-2">Non-Attendance Policy</h4>
+                      <p className="text-red-700 text-sm leading-relaxed mb-3">
+                        Students who do not attend scheduled classes and/or examinations will be recorded as absent. The following consequences apply:
                       </p>
-                    </div>
-                    
-                    <div className="bg-matdash-secondary-light p-4 rounded-lg border-l-4 border-matdash-secondary">
-                      <h4 className="font-semibold text-text-primary mb-2">Annual Subscriptions</h4>
-                      <p className="text-sm">
-                        Annual subscription refunds are calculated based on the unused portion of your subscription, 
-                        minus any discounts applied to the annual rate.
-                      </p>
-                    </div>
-                    
-                    <div className="bg-orange-50 border border-orange-200 p-4 rounded-lg">
-                      <h4 className="font-semibold text-orange-800 mb-2">Chargebacks</h4>
-                      <p className="text-orange-700 text-sm">
-                        Please contact us before initiating a chargeback. Chargebacks may result in account 
-                        suspension and additional fees from payment processors.
-                      </p>
+                      <ul className="text-red-600 text-sm space-y-1">
+                        <li>• No make-up sessions will be provided</li>
+                        <li>• No alternative lectures will be arranged</li>
+                        <li>• No re-examinations will be offered</li>
+                        <li>• Non-attendance does not qualify for any refund consideration</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -257,17 +226,25 @@ const RefundPolicy = () => {
             {/* Contact Section */}
             <div className="mt-12 pt-8 border-t border-border">
               <div className="text-center">
-                <h3 className="text-lg font-semibold text-text-primary mb-2">Need Help with Refunds?</h3>
+                <h3 className="text-lg font-semibold text-text-primary mb-2">Need Assistance?</h3>
                 <p className="text-text-secondary mb-4">
-                  Our refund specialists are here to help you through the process.
+                  For inquiries regarding batch transfers, enrollment changes, or other questions about our policy, please reach out to us.
                 </p>
-                <div className="flex justify-center gap-4">
+                <div className="flex justify-center gap-4 mb-4">
                   <Button asChild variant="outline">
-                    <Link to="/contact">Contact Support</Link>
+                    <Link to="/Contact-Us">Contact Support</Link>
                   </Button>
                   <Button asChild>
-                    <a href="mailto:refunds@automatealgos.in">Email Refunds Team</a>
+                    <a href="mailto:support@automatealgos.in">
+                      <Mail className="h-4 w-4 mr-2" />
+                      Email Us
+                    </a>
                   </Button>
+                </div>
+                <div className="bg-surface-container p-4 rounded-lg inline-block">
+                  <p className="text-sm text-text-secondary">
+                    <strong>Email:</strong> <a href="mailto:support@automatealgos.in" className="text-primary hover:text-primary/80">support@automatealgos.in</a>
+                  </p>
                 </div>
               </div>
             </div>
