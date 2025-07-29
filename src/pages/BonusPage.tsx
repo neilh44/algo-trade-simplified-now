@@ -331,19 +331,20 @@ const BonusPage: React.FC = () => {
                 Lifetime Access
               </div>
             </div>
+            
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Button
-                onClick={() => {
-                  console.log('Main download button clicked');
-                  redirectToAuth();
-                }}
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-xl text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
-              >
-                <Download className="mr-2 h-5 w-5" />
-                Download All Bonuses Now
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+            <Button
+              onClick={() => {
+                console.log('Get started button clicked');
+                redirectToAuth();
+              }}
+              className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-xl text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              <Rocket className="mr-2 h-5 w-5" />
+              Start Trading Now
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
             </div>
 
             <p className={`text-sm transition-colors duration-300 ${
@@ -492,14 +493,14 @@ const BonusPage: React.FC = () => {
               </p>
               <Button
                 onClick={() => {
-                  console.log('Summary download button clicked');
+                  console.log('Start trading button clicked');
                   redirectToAuth();
                 }}
                 size="lg"
                 className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
-                <Download className="mr-2 h-5 w-5" />
-                Download Your Bonuses
+                <Zap className="mr-2 h-5 w-5" />
+                Launch Trading Dashboard
                 <Sparkles className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -578,13 +579,13 @@ const BonusPage: React.FC = () => {
             </div>
             <Button
               onClick={() => {
-                console.log('Final CTA button clicked');
+                console.log('View portfolio button clicked');
                 redirectToAuth();
               }}
               className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
-              <Download className="mr-2 h-5 w-5" />
-              Access Your Bonuses Now
+              <BarChart3 className="mr-2 h-5 w-5" />
+              View My Portfolio
             </Button>
           </div>
         </div>
