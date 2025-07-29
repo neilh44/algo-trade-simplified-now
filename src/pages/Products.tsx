@@ -481,7 +481,7 @@ const Products: React.FC = () => {
           </p>
         </div>
       </section>
-      {showExitPopup && <GlobalPopupIntentExit manualTrigger={true} />}
+      {showExitPopup && <GlobalPopupIntentExit manualTrigger={true} onClose={handlePopupClose} />}
 
       <Footer />
 

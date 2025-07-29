@@ -8,6 +8,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { ThemeProvider } from "@/contexts/ThemeContext"; // ADD THIS IMPORT
 
 import GlobalPopupIntentExit from "./components/GlobalPopupIntentExit";
+import ScrollToTop from "./components/ScrollToTop"; 
 
 // Admin Layout and Pages
 import { AdminLayout } from "./components/admin/AdminLayout";
@@ -71,6 +72,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <ScrollToTop /> 
             <Routes>
               {/* ALL YOUR EXISTING ROUTES - NO CHANGES NEEDED */}
               <Route path="/" element={<Index />} />
