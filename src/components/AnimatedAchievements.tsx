@@ -135,7 +135,7 @@ const AnimatedAchievements: React.FC = () => {
               </div>
               <div className="group cursor-pointer">
                 <div className="text-3xl font-bold text-green-600 mb-2 group-hover:scale-110 transition-transform duration-300">
-                  &lt;50ms
+                  &lt;200ms
                 </div>
                 <div className="text-gray-600">Average Execution Time</div>
                 <div className="text-sm text-gray-500 mt-1">Industry leading speed</div>

@@ -82,7 +82,7 @@ const Products: React.FC = () => {
     {
       icon: Zap,
       title: 'Ultra-Fast Execution',
-      description: 'Lightning-fast order placement with <100ms execution speed and 99.9% uptime guarantee',
+      description: 'Lightning-fast order placement with <200ms execution speed and 99% uptime guarantee',
       benefit: '3x faster than competitors'
     },
     {
@@ -106,13 +106,13 @@ const Products: React.FC = () => {
     {
       icon: Globe,
       title: 'Multi-Broker Support',
-      description: 'Connect with 50+ Indian brokers including Zerodha, Upstox, Angel One, and more',
+      description: 'Connect with Coindcx, Delta Exchange & coinswitch',
       benefit: 'Maximum flexibility'
     },
     {
       icon: Code,
       title: 'No-Code Automation',
-      description: 'Build strategies using TradingView, ChartInk, Excel, or our visual drag-and-drop builder',
+      description: 'Build strategies using TradingView, python & excel',
       benefit: 'Setup in 5 minutes'
     }
   ];
@@ -274,7 +274,7 @@ const Products: React.FC = () => {
       {/* 🚀 NEW: Everything You Need for Crypto Success */}
       <CryptoFeaturesSection theme={theme} />
 
-      {/* Features Section - Why 35,000+ Traders Choose Us */}
+      {/* Features Section - Why 5,000+ Traders Choose Us */}
       <section className={`py-20 transition-all duration-500 ${
         theme === 'dark' ? 'bg-slate-800/50' : 'bg-slate-50'
       }`}>
@@ -283,7 +283,7 @@ const Products: React.FC = () => {
             <h2 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
               theme === 'dark' ? 'text-white' : 'text-slate-900'
             }`}>
-              Why 35,000+ Traders Choose Us
+              Why 5,000+ Traders Choose Us
             </h2>
             <p className={`text-xl max-w-3xl mx-auto transition-colors duration-300 ${
               theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
