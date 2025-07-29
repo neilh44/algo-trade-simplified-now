@@ -4,24 +4,32 @@ import { X, Gift, Mail, Clock, Shield, Users, Star } from 'lucide-react';
 
 interface PopupIntentExitProps {
   enabled?: boolean;
+  showAfterSeconds?: number;  // ← Add this line
   onEmailSubmit?: (email: string) => void;
   onPopupShow?: () => void;
   onPopupClose?: () => void;
   onDismissUntilRefresh?: () => void;
+  manualTrigger?: boolean;
 }
 
+// Update the component props destructuring
 const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
   enabled = true,
+  showAfterSeconds = 0,  // ← Add this line with default value
   onEmailSubmit = () => {},
   onPopupShow = () => {},
   onPopupClose = () => {},
-  onDismissUntilRefresh = () => {}
+  onDismissUntilRefresh = () => {},
+  manualTrigger = false
 }) => {
+
+  
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [timeLeft, setTimeLeft] = useState(10 * 60); // 10 minutes in seconds
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [emailError, setEmailError] = useState('');
 
   // Countdown timer
   useEffect(() => {
@@ -31,9 +39,16 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
     }
   }, [timeLeft, isPopupOpen]);
 
-  // Exit intent detection only
+  // Exit intent detection and manual trigger
   useEffect(() => {
     if (!enabled) return;
+
+    // If manually triggered, show popup immediately
+    if (manualTrigger && !isPopupOpen) {
+      setIsPopupOpen(true);
+      onPopupShow();
+      return;
+    }
 
     // Clean up any old localStorage keys from previous implementation
     localStorage.removeItem('popup_dismissed');
@@ -69,7 +84,7 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
     return () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [enabled, onPopupShow, isPopupOpen]);
+  }, [enabled, onPopupShow, isPopupOpen, manualTrigger]);
 
   const formatTime = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
@@ -77,9 +92,37 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
     const secs = seconds % 60;
     return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    
+    // Clear error when user starts typing
+    if (emailError) {
+      setEmailError('');
+    }
+    
+    // Validate email on blur or when user stops typing
+    if (value && !validateEmail(value)) {
+      setEmailError('Please enter a valid email address');
+    }
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email) {
+      setEmailError('Email is required');
+      return;
+    }
+    
+    if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+      return;
+    }
     
     console.log('Form submitted, redirecting to bonus page');
     console.log('Email:', email);
@@ -227,16 +270,31 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
+                onBlur={() => {
+                  if (email && !validateEmail(email)) {
+                    setEmailError('Please enter a valid email address');
+                  }
+                }}
                 placeholder="Enter your email address"
-                className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none text-gray-900 text-sm"
+                className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none text-gray-900 text-sm transition-colors ${
+                  emailError 
+                    ? 'border-red-300 focus:border-red-500' 
+                    : 'border-gray-200 focus:border-blue-500'
+                }`}
                 required
               />
             </div>
+            {emailError && (
+              <p className="text-red-500 text-xs mt-1 flex items-center gap-1">
+                <span>⚠️</span>
+                {emailError}
+              </p>
+            )}
 
             <button
               type="submit"
-              disabled={isSubmitting || !email}
+              disabled={isSubmitting || !email || emailError !== ''}
               className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-lg font-bold text-sm
                         disabled:opacity-50 disabled:cursor-not-allowed
                         hover:from-green-700 hover:to-emerald-700 transition-all duration-300 

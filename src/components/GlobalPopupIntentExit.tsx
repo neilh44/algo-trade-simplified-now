@@ -3,7 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { usePopupConfig } from '../hooks/usePopupConfig';
 import PopupIntentExit from './PopupIntentExit';
 
-const GlobalPopupIntentExit: React.FC = () => {
+interface GlobalPopupIntentExitProps {
+  manualTrigger?: boolean;
+  onClose?: () => void;
+}
+
+const GlobalPopupIntentExit: React.FC<GlobalPopupIntentExitProps> = ({ 
+  manualTrigger = false,
+  onClose = () => {}
+}) => {
   const config = usePopupConfig();
   const [isPermanentlyDismissed, setIsPermanentlyDismissed] = useState(false);
 
@@ -108,6 +116,9 @@ const GlobalPopupIntentExit: React.FC = () => {
   const handlePopupClose = () => {
     console.log('Exit intent popup closed (temporarily)');
     
+    // Call parent close handler to reset the state
+    onClose();
+    
     // Track popup closes (for optimization)
     if (typeof gtag !== 'undefined') {
       gtag('event', 'exit_intent_closed', {
@@ -123,6 +134,9 @@ const GlobalPopupIntentExit: React.FC = () => {
     sessionStorage.setItem('popup_dismissed_session', 'true');
     setIsPermanentlyDismissed(true);
     
+    // Call parent close handler to reset the state
+    onClose();
+    
     console.log('Popup dismissed for current session only (will show again on refresh)');
     
     // Track permanent dismissal
@@ -134,8 +148,8 @@ const GlobalPopupIntentExit: React.FC = () => {
     }
   };
   
-  // Don't render if disabled for this route OR temporarily dismissed
-  if (!config.enabled || isPermanentlyDismissed) {
+  // Don't render if disabled for this route OR temporarily dismissed (unless manually triggered)
+  if (!config.enabled || (isPermanentlyDismissed && !manualTrigger)) {
     return null;
   }
   
@@ -146,7 +160,8 @@ const GlobalPopupIntentExit: React.FC = () => {
       onEmailSubmit={handleEmailSubmit}
       onPopupShow={handlePopupShow}
       onPopupClose={handlePopupClose}
-      onDismissPermanently={handleDismissPermanently}
+      onDismissUntilRefresh={handleDismissPermanently}
+      manualTrigger={manualTrigger}
     />
   );
 };

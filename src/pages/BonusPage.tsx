@@ -28,6 +28,19 @@ import {
   Clock
 } from "lucide-react";
 
+interface BonusItem {
+  icon: any;
+  title: string;
+  description: string;
+  value: string;
+  highlight: string;
+  color: string;
+  buttonText: string;
+  action: 'download' | 'external' | 'redirect';
+  path?: string;
+  url?: string;
+}
+
 const BonusPage: React.FC = () => {
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -64,17 +77,89 @@ const BonusPage: React.FC = () => {
   };
 
   const redirectToAuth = (): void => {
+    console.log('Redirecting to auth page');
     window.open("https://app.automatealgos.in", "_blank");
   };
 
-  const bonusItems = [
+  const handleBonusAction = (item: BonusItem): void => {
+    console.log('=== BONUS ACTION DEBUG ===');
+    console.log('Full item object:', item);
+    console.log('Item action:', item?.action);
+    console.log('Item path:', item?.path);
+    console.log('Item url:', item?.url);
+    console.log('Item buttonText:', item?.buttonText);
+    
+    if (!item) {
+      console.error('ERROR: Item is null or undefined');
+      return;
+    }
+    
+    if (!item.action) {
+      console.error('ERROR: Item action is missing or undefined');
+      console.log('Available item properties:', Object.keys(item));
+      return;
+    }
+    
+    switch(item.action) {
+      case 'download':
+        console.log('EXECUTING: Download action');
+        console.log('Download path:', item.path);
+        if (!item.path) {
+          console.error('ERROR: Download path is missing');
+          return;
+        }
+        try {
+          const link = document.createElement('a');
+          link.href = item.path;
+          link.download = item.path.split('/').pop() || 'download';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          console.log('SUCCESS: Download initiated');
+        } catch (error) {
+          console.error('ERROR: Download failed', error);
+        }
+        break;
+        
+      case 'external':
+        console.log('EXECUTING: External URL action');
+        console.log('External URL:', item.url);
+        if (!item.url) {
+          console.error('ERROR: External URL is missing');
+          return;
+        }
+        try {
+          window.open(item.url, "_blank");
+          console.log('SUCCESS: External URL opened');
+        } catch (error) {
+          console.error('ERROR: Failed to open external URL', error);
+        }
+        break;
+        
+      case 'redirect':
+        console.log('EXECUTING: Redirect action');
+        redirectToAuth();
+        break;
+        
+      default:
+        console.log('EXECUTING: Default redirect action (fallback)');
+        console.warn('Unknown action type:', item.action);
+        redirectToAuth();
+        break;
+    }
+    console.log('=== END BONUS ACTION DEBUG ===');
+  };
+
+  const bonusItems: BonusItem[] = [
     {
       icon: Zap,
       title: '7-Day Trial of Automated Algo Bridge',
       description: 'Experience real-time algo trading with live market execution and performance tracking',
       value: '₹1,499',
       highlight: 'Free Trial',
-      color: 'from-blue-600 to-indigo-700'
+      color: 'from-blue-600 to-indigo-700',
+      buttonText: 'Start Your Free Trial',
+      action: 'redirect'
     },    
     {
       icon: BookOpen,
@@ -82,7 +167,10 @@ const BonusPage: React.FC = () => {
       description: 'Comprehensive guide with 50+ proven strategies used by professional crypto traders',
       value: '₹2,499',
       highlight: 'New Release',
-      color: 'from-purple-500 to-pink-600'
+      color: 'from-purple-500 to-pink-600',
+      buttonText: 'Download Ebook',
+      action: 'download',
+      path: '/ebook/Basics of Crypto Trading.pdf'
     },
     {
       icon: TrendingUp,
@@ -90,7 +178,10 @@ const BonusPage: React.FC = () => {
       description: 'Pre-configured Pine Script strategies with backtested results and optimization tips',
       value: '₹4,999',
       highlight: 'Exclusive',
-      color: 'from-green-500 to-emerald-600'
+      color: 'from-green-500 to-emerald-600',
+      buttonText: 'View Strategy',
+      action: 'external',
+      url: 'https://www.tradingview.com/script/VkkiheLn-Seasonality-Detailed-Monthly-Table/'
     },
     {
       icon: BarChart3,
@@ -98,7 +189,10 @@ const BonusPage: React.FC = () => {
       description: 'Professional Excel template for tracking trades, analyzing performance, and improving strategies',
       value: '₹1,499',
       highlight: 'Essential',
-      color: 'from-orange-500 to-red-600'
+      color: 'from-orange-500 to-red-600',
+      buttonText: 'Access Template',
+      action: 'external',
+      url: 'https://docs.google.com/spreadsheets/d/141OoxgI614UMRoqWsajXknEsoUU3_HlA6DcBnxC0YMw/edit?gid=391369718#gid=391369718'
     },
     {
       icon: Bot,
@@ -106,7 +200,9 @@ const BonusPage: React.FC = () => {
       description: 'Suite of automation tools including order management, risk control, and position sizing',
       value: '₹7,999',
       highlight: 'Advanced',
-      color: 'from-teal-500 to-cyan-600'
+      color: 'from-teal-500 to-cyan-600',
+      buttonText: 'Get Tools',
+      action: 'redirect'
     },
     {
       icon: Crown,
@@ -114,9 +210,14 @@ const BonusPage: React.FC = () => {
       description: 'VIP access to exclusive webinars, 1-on-1 consultations, and priority customer support',
       value: '₹5,999',
       highlight: 'VIP Only',
-      color: 'from-yellow-500 to-amber-600'
+      color: 'from-yellow-500 to-amber-600',
+      buttonText: 'Access VIP Resources',
+      action: 'redirect'
     }
   ];
+
+  // Debug log to verify bonusItems array
+  console.log('Bonus items array:', bonusItems);
 
   const totalValue = bonusItems.reduce((sum, item) => {
     return sum + parseInt(item.value.replace('₹', '').replace(',', ''));
@@ -219,7 +320,7 @@ const BonusPage: React.FC = () => {
             }`}>
               <div className="flex items-center gap-2">
                 <Gift className="h-4 w-4 text-yellow-500" />
-                5 Premium Bonuses
+                6 Premium Bonuses
               </div>
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-purple-500" />
@@ -233,7 +334,10 @@ const BonusPage: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Button
-                onClick={redirectToAuth}
+                onClick={() => {
+                  console.log('Main download button clicked');
+                  redirectToAuth();
+                }}
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-xl text-lg font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 <Download className="mr-2 h-5 w-5" />
@@ -250,7 +354,7 @@ const BonusPage: React.FC = () => {
           </div>
         </div>
       </section>
-
+    
       {/* Bonus Items Grid */}
       <section className={`py-20 transition-all duration-500 ${
         theme === 'dark' ? 'bg-slate-800/50' : 'bg-white'
@@ -275,72 +379,88 @@ const BonusPage: React.FC = () => {
               gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
               gap: '2rem'
             }}>
-            {bonusItems.map((item, index) => (
-              <Card key={index} className={`group relative overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 ${
-                theme === 'dark'
-                  ? 'bg-slate-800/80 border-slate-600/50 hover:border-blue-500/50'
-                  : 'bg-white border-slate-200 hover:border-blue-300/50'
-              }`}>
-                {/* Highlight Badge */}
-                <div className={`absolute top-4 right-4 z-10`}>
-                  <Badge className={`bg-gradient-to-r ${item.color} text-white border-0 shadow-lg animate-pulse`}>
-                    {item.highlight}
-                  </Badge>
-                </div>
-                
-                {/* Gradient Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-                
-                <CardHeader className="relative">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className={`p-4 rounded-xl bg-gradient-to-r ${item.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                      <item.icon className="h-8 w-8 text-white" />
+            {bonusItems.map((item: BonusItem, index: number) => {
+              return (
+                <div key={index} className={`group relative overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 rounded-lg flex flex-col ${
+                  theme === 'dark'
+                    ? 'bg-slate-800/80 border-slate-600/50 hover:border-blue-500/50'
+                    : 'bg-white border-slate-200 hover:border-blue-300/50'
+                }`}>
+                  {/* Highlight Badge */}
+                  <div className={`absolute top-4 right-4 z-10`}>
+                    <div className={`bg-gradient-to-r ${item.color} text-white border-0 shadow-lg animate-pulse px-3 py-1 rounded-full text-sm font-medium`}>
+                      {item.highlight}
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <CheckCircle className="h-5 w-5 text-green-500" />
-                        <span className={`text-2xl font-bold transition-colors duration-300 ${
-                          theme === 'dark' ? 'text-green-400' : 'text-green-600'
-                        }`}>
-                          {item.value}
-                        </span>
+                  </div>
+
+                  {/* Card Header */}
+                  <div className="relative p-6">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className={`p-4 rounded-xl bg-gradient-to-r ${item.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                        <item.icon className="h-8 w-8 text-white" />
                       </div>
-                      <p className={`text-xs font-medium transition-colors duration-300 ${
-                        theme === 'dark' ? 'text-slate-400' : 'text-slate-500'
-                      }`}>
-                        Retail Value
-                      </p>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <CheckCircle className="h-5 w-5 text-green-500" />
+                          <span className={`text-2xl font-bold transition-colors duration-300 ${
+                            theme === 'dark' ? 'text-green-400' : 'text-green-600'
+                          }`}>
+                            {item.value}
+                          </span>
+                        </div>
+                        <p className={`text-xs font-medium transition-colors duration-300 ${
+                          theme === 'dark' ? 'text-slate-400' : 'text-slate-500'
+                        }`}>
+                          Retail Value
+                        </p>
+                      </div>
+                    </div>
+                    <h3 className={`text-xl font-bold leading-tight transition-colors duration-300 ${
+                      theme === 'dark' ? 'text-white' : 'text-slate-900'
+                    }`}>
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  {/* Card Content - flex-grow pushes button to bottom */}
+                  <div className="px-6 pb-6 flex flex-col flex-grow">
+                    <p className={`text-base leading-relaxed mb-6 flex-grow transition-colors duration-300 ${
+                      theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
+                    }`}>
+                      {item.description}
+                    </p>
+                    
+                    {/* Button container - always at bottom */}
+                    <div className="mt-auto">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          console.log(`CARD BUTTON CLICKED: ${item.title}`);
+                          console.log('Event target:', e.target);
+                          console.log('Current target:', e.currentTarget);
+                          handleBonusAction(item);
+                        }}
+                        className={`w-full px-4 py-3 border rounded-lg transition-colors hover:shadow-md ${
+                          theme === 'dark'
+                            ? 'border-slate-600 hover:bg-slate-700 text-slate-300 hover:text-white'
+                            : 'border-slate-300 hover:bg-slate-50 text-slate-700 hover:text-slate-900'
+                        }`}
+                        style={{ 
+                          position: 'relative', 
+                          zIndex: 10,
+                          pointerEvents: 'auto',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <CheckCircle className="inline mr-2 h-4 w-4 text-green-500" />
+                        {item.buttonText}
+                      </button>
                     </div>
                   </div>
-                  <CardTitle className={`text-xl font-bold leading-tight transition-colors duration-300 ${
-                    theme === 'dark' ? 'text-white' : 'text-slate-900'
-                  }`}>
-                    {item.title}
-                  </CardTitle>
-                </CardHeader>
-                
-                <CardContent>
-                  <CardDescription className={`text-base leading-relaxed transition-colors duration-300 ${
-                    theme === 'dark' ? 'text-slate-300' : 'text-slate-600'
-                  }`}>
-                    {item.description}
-                  </CardDescription>
-                  <div className="mt-8"> 
-                    <Button 
-                      variant="outline" 
-                      className={`w-full group/btn transition-all duration-300 ${
-                        theme === 'dark'
-                          ? 'border-slate-600 hover:bg-slate-700 text-slate-300 hover:text-white'
-                          : 'border-slate-300 hover:bg-slate-50'
-                      }`}
-                    >
-                      <CheckCircle className="mr-2 h-4 w-4 text-green-500" />
-                      Ready to Download
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+              );
+            })}
           </div>
 
           {/* Total Value Summary */}
@@ -371,7 +491,10 @@ const BonusPage: React.FC = () => {
                 Your exclusive bonus package worth ₹{totalValue.toLocaleString()} is ready for instant download!
               </p>
               <Button
-                onClick={redirectToAuth}
+                onClick={() => {
+                  console.log('Summary download button clicked');
+                  redirectToAuth();
+                }}
                 size="lg"
                 className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
@@ -454,7 +577,10 @@ const BonusPage: React.FC = () => {
               </div>
             </div>
             <Button
-              onClick={redirectToAuth}
+              onClick={() => {
+                console.log('Final CTA button clicked');
+                redirectToAuth();
+              }}
               className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               <Download className="mr-2 h-5 w-5" />
@@ -509,6 +635,12 @@ const BonusPage: React.FC = () => {
         .animate-gradient {
           background-size: 200% 200%;
           animation: gradient 3s ease infinite;
+        }
+        
+        /* Ensure buttons are clickable */
+        .group/btn {
+          pointer-events: auto !important;
+          cursor: pointer !important;
         }
       `}</style>
     </div>

@@ -72,6 +72,10 @@ const Products: React.FC = () => {
   const showExitIntentPopup = (): void => {
     setShowExitPopup(true);
   };
+
+  const handlePopupClose = (): void => {
+    setShowExitPopup(false);
+  };  
   
 
   const features = [
@@ -477,7 +481,7 @@ const Products: React.FC = () => {
           </p>
         </div>
       </section>
-      {showExitPopup && <GlobalPopupIntentExit />}
+      {showExitPopup && <GlobalPopupIntentExit manualTrigger={true} />}
 
       <Footer />
 
