@@ -112,6 +112,9 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
       setEmailError('Please enter a valid email address');
     }
   };
+
+  // Fixed PopupIntentExit.tsx - Update your handleSubmit function
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
@@ -124,22 +127,45 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
       return;
     }
     
-    console.log('Form submitted, redirecting to bonus page');
+    console.log('Form submitted - starting email submission process');
     console.log('Email:', email);
     
     setIsSubmitting(true);
+    setEmailError(''); // Clear any previous errors
     
-    // Call parent handler for analytics/storage
-    onEmailSubmit(email);
-    
-    // Set popup as dismissed
-    sessionStorage.setItem('popup_dismissed_until_refresh', 'true');
-    
-    // Simulate brief loading, then redirect
-    setTimeout(() => {
-      console.log('Redirecting to /bonus');
-      window.location.href = '/bonus';
-    }, 1500); // Show loading for 1.5 seconds then redirect
+    try {
+      // Wait for the email submission to complete
+      console.log('Calling onEmailSubmit...');
+      await onEmailSubmit(email);
+      
+      console.log('Email submission successful!');
+      
+      // Only proceed with success actions if email submission succeeded
+      sessionStorage.setItem('popup_dismissed_until_refresh', 'true');
+      setIsSubmitted(true); // Show success state
+      setIsSubmitting(false);
+      
+      // Redirect after showing success message
+      setTimeout(() => {
+        console.log('Redirecting to /bonus');
+        window.location.href = '/bonus';
+      }, 2000); // Give user time to see success message
+      
+    } catch (error) {
+      console.error('Email submission failed:', error);
+      setIsSubmitting(false);
+      
+      // Show error message to user
+      if (error.message.includes('timeout')) {
+        setEmailError('Request timed out. Please try again.');
+      } else if (error.message.includes('Network') || error.message.includes('CORS')) {
+        setEmailError('Connection error. Please check your internet and try again.');
+      } else {
+        setEmailError('Failed to send email. Please try again.');
+      }
+      
+      // Don't redirect on error - let user try again
+    }
   };
   
   const handleClose = () => {
