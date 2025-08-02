@@ -193,26 +193,6 @@ const BonusPage: React.FC = () => {
       buttonText: 'Access Template',
       action: 'external',
       url: 'https://docs.google.com/spreadsheets/d/141OoxgI614UMRoqWsajXknEsoUU3_HlA6DcBnxC0YMw/edit?gid=391369718#gid=391369718'
-    },
-    {
-      icon: Bot,
-      title: 'Automation Tools for Live Trading',
-      description: 'Suite of automation tools including order management, risk control, and position sizing',
-      value: '₹7,999',
-      highlight: 'Advanced',
-      color: 'from-teal-500 to-cyan-600',
-      buttonText: 'Get Tools',
-      action: 'redirect'
-    },
-    {
-      icon: Crown,
-      title: 'Exclusive Resources & Priority Support',
-      description: 'VIP access to exclusive webinars, 1-on-1 consultations, and priority customer support',
-      value: '₹5,999',
-      highlight: 'VIP Only',
-      color: 'from-yellow-500 to-amber-600',
-      buttonText: 'Access VIP Resources',
-      action: 'redirect'
     }
   ];
 
@@ -320,7 +300,7 @@ const BonusPage: React.FC = () => {
             }`}>
               <div className="flex items-center gap-2">
                 <Gift className="h-4 w-4 text-yellow-500" />
-                6 Premium Bonuses
+                4 Premium Bonuses
               </div>
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-purple-500" />
@@ -374,12 +354,8 @@ const BonusPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-              gap: '2rem'
-            }}>
+          {/* 2x2 Grid for 4 cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12">
             {bonusItems.map((item: BonusItem, index: number) => {
               return (
                 <div key={index} className={`group relative overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 rounded-lg flex flex-col ${
