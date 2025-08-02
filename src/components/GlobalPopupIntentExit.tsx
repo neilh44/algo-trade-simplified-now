@@ -38,33 +38,41 @@ const GlobalPopupIntentExit: React.FC<GlobalPopupIntentExitProps> = ({
     
   }, [config.enabled]);
 
+
+  // Update this function in GlobalPopupIntentExit.tsx
+
   const handleEmailSubmit = async (email: string) => {
     try {
-      console.log('Email submitted:', email);
+      console.log('Submitting email to Flask backend:', email);
       
-      // Send to your backend API
-      const response = await fetch('/api/newsletter/subscribe', {
+      const response = await fetch('https://algo-smtp.onrender.com/api/popup-submit', {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json' 
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify({ 
-          email,
-          source: 'exit_intent_popup',
-          page: window.location.pathname,
-          timestamp: new Date().toISOString()
+        body: JSON.stringify({
+          email: email,
+          source_page: window.location.pathname
         })
       });
       
-      if (response.ok) {
-        console.log('Email subscription successful');
+      console.log('Response status:', response.status);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const result = await response.json();
+      console.log('Flask response:', result);
+      
+      if (result.success) {
+        console.log('Email sent successfully via Flask backend');
         
-        // MODIFIED: Use sessionStorage instead of localStorage for email submission
-        // This way popup won't show again in current session but will show on refresh
         sessionStorage.setItem('popup_dismissed_session', 'true');
         setIsPermanentlyDismissed(true);
         
-        // Track conversion analytics
+        // Analytics tracking
         if (typeof gtag !== 'undefined') {
           gtag('event', 'exit_intent_conversion', {
             event_category: 'engagement',
@@ -74,29 +82,21 @@ const GlobalPopupIntentExit: React.FC<GlobalPopupIntentExitProps> = ({
           });
         }
 
-        // ✅ NEW: Redirect to bonus page after successful submission
-        console.log('Redirecting to bonus page...');
-        
-        // Small delay to ensure analytics are tracked
+        // Redirect to bonus page
         setTimeout(() => {
-          // Use window.location.href for full page redirect
           window.location.href = '/bonus';
-          
-          // Alternative: If using React Router, you could use:
-          // navigate('/bonus');
-          // But you'd need to import useNavigate from react-router-dom
-        }, 500); // 500ms delay to ensure analytics tracking completes
-
+        }, 500);
+        
       } else {
-        console.error('API response not ok:', response.status, response.statusText);
-        // Don't dismiss on API error - give user another chance
-        console.log('Not dismissing popup due to API error');
+        console.error('Flask backend error:', result.error);
+        alert('Error: ' + result.error);
+        // Handle error - don't dismiss popup
       }
+
     } catch (error) {
-      console.error('Error submitting email:', error);
-      
-      // Don't dismiss on API error - give user another chance
-      console.log('Not dismissing popup due to API error');
+      console.error('Error submitting email to Flask backend:', error);
+      alert('Network error: ' + error.message);
+      // Don't dismiss popup on error
     }
   };
   
