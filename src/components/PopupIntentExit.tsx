@@ -211,7 +211,7 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
             </h3>
 
             <p className="text-gray-600 mb-4 text-sm">
-              Your free bonuses worth ₹4,999 are on their way to <strong>{email}</strong>
+              Your free bonuses worth ₹10,496 are on their way to <strong>{email}</strong>
             </p>
 
             <div className="bg-green-50 p-3 rounded-xl border border-green-200">
@@ -284,7 +284,7 @@ const PopupIntentExit: React.FC<PopupIntentExitProps> = ({
             </div>
 
             <div className="text-center p-2 bg-white rounded-lg border-2 border-dashed border-green-300">
-              <span className="text-gray-500 line-through text-sm">₹4,999</span>
+              <span className="text-gray-500 line-through text-sm">₹10,496</span>
               <span className="text-green-600 font-bold text-xl ml-2">FREE</span>
             </div>
           </div>
