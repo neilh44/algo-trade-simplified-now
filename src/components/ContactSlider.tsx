@@ -12,7 +12,7 @@ interface ContactSliderProps {
 }
 
 const ContactSlider: React.FC<ContactSliderProps> = ({
-  position = 'right',
+  position = 'right', // Changed back to 'right'
   tabText = 'Claim My Bonus',
   tabIcon = 'gift',
   accentColor = 'from-primary to-primary/90',
@@ -20,6 +20,11 @@ const ContactSlider: React.FC<ContactSliderProps> = ({
   onTriggerPopup = () => console.log('No trigger function provided')
 }) => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  
+  // Log props for debugging
+  useEffect(() => {
+    console.log("ContactSlider Props:", { position, tabText, accentColor, enabled });
+  }, [position, tabText, accentColor, enabled]);
   
   // Scroll detection
   useEffect(() => {
@@ -48,13 +53,22 @@ const ContactSlider: React.FC<ContactSliderProps> = ({
     onTriggerPopup();
   };
 
-  // Don't render if disabled
-  if (!enabled) return null;
+  // IMPORTANT: Force enabled to true for debugging
+  const isEnabled = true; // Override the enabled prop temporarily
+  
+  console.log("ContactSlider rendering with enabled:", isEnabled);
+  console.log("ContactSlider position:", position);
+  
+  // Don't render if disabled (using our forced value for now)
+  if (!isEnabled) {
+    console.log("ContactSlider not rendering because enabled is false");
+    return null;
+  }
 
   // Tab position classes based on position prop
   const tabPositionClasses = position === 'right' 
     ? 'right-0 rounded-l-lg' 
-    : 'left-0 -translate-x-full rounded-r-lg';
+    : 'left-0 rounded-r-lg';
   
   return (
     <div className={`fixed z-40 top-1/3 ${position === 'right' ? 'right-0' : 'left-0'}`}>
