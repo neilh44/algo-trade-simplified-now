@@ -14,6 +14,16 @@ const GlobalPopupIntentExit: React.FC<GlobalPopupIntentExitProps> = ({
 }) => {
   const config = usePopupConfig();
   const [isPermanentlyDismissed, setIsPermanentlyDismissed] = useState(false);
+  const [internalManualTrigger, setInternalManualTrigger] = useState(false);
+
+  // Watch for changes to the manualTrigger prop
+  useEffect(() => {
+    console.log("GlobalPopupIntentExit: manualTrigger prop changed to", manualTrigger);
+    if (manualTrigger && !isPermanentlyDismissed) {
+      console.log("GlobalPopupIntentExit: Setting internal manualTrigger to true");
+      setInternalManualTrigger(true);
+    }
+  }, [manualTrigger, isPermanentlyDismissed]);
 
   // Check if popup should show - MODIFIED TO USE SESSION STORAGE
   useEffect(() => {
@@ -29,19 +39,12 @@ const GlobalPopupIntentExit: React.FC<GlobalPopupIntentExitProps> = ({
     }
 
     // ALTERNATIVE APPROACH: Clear localStorage on page load/refresh
-    // Uncomment these lines if you prefer to use localStorage but clear it on refresh
-    
     localStorage.removeItem('popup_dismissed_until');
     localStorage.removeItem('popup_dismissed');
     console.log('Popup dismissal cleared on page refresh');
     setIsPermanentlyDismissed(false);
     
   }, [config.enabled]);
-
-
-  // Update this function in GlobalPopupIntentExit.tsx
-
-  // Update your GlobalPopupIntentExit.tsx handleEmailSubmit to return a Promise
 
   const handleEmailSubmit = async (email: string): Promise<void> => {
     // Return a Promise that resolves on success and rejects on error
@@ -178,7 +181,6 @@ const GlobalPopupIntentExit: React.FC<GlobalPopupIntentExitProps> = ({
     });
   };
 
-  
   const handlePopupShow = () => {
     console.log('Exit intent popup shown on:', window.location.pathname);
     
@@ -194,6 +196,9 @@ const GlobalPopupIntentExit: React.FC<GlobalPopupIntentExitProps> = ({
   
   const handlePopupClose = () => {
     console.log('Exit intent popup closed (temporarily)');
+    
+    // Reset manual trigger state
+    setInternalManualTrigger(false);
     
     // Call parent close handler to reset the state
     onClose();
@@ -212,6 +217,7 @@ const GlobalPopupIntentExit: React.FC<GlobalPopupIntentExitProps> = ({
     // This will only dismiss for current session, not across page refreshes
     sessionStorage.setItem('popup_dismissed_session', 'true');
     setIsPermanentlyDismissed(true);
+    setInternalManualTrigger(false);
     
     // Call parent close handler to reset the state
     onClose();
@@ -227,10 +233,15 @@ const GlobalPopupIntentExit: React.FC<GlobalPopupIntentExitProps> = ({
     }
   };
   
+  // Use either the prop value or the internal state
+  const finalManualTrigger = manualTrigger || internalManualTrigger;
+  
   // Don't render if disabled for this route OR temporarily dismissed (unless manually triggered)
-  if (!config.enabled || (isPermanentlyDismissed && !manualTrigger)) {
+  if (!config.enabled || (isPermanentlyDismissed && !finalManualTrigger)) {
     return null;
   }
+  
+  console.log("GlobalPopupIntentExit: Rendering PopupIntentExit with manualTrigger =", finalManualTrigger);
   
   return (
     <PopupIntentExit
@@ -240,7 +251,7 @@ const GlobalPopupIntentExit: React.FC<GlobalPopupIntentExitProps> = ({
       onPopupShow={handlePopupShow}
       onPopupClose={handlePopupClose}
       onDismissUntilRefresh={handleDismissPermanently}
-      manualTrigger={manualTrigger}
+      manualTrigger={finalManualTrigger}
     />
   );
 };

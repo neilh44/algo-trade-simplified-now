@@ -1,14 +1,15 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import React, { useState } from 'react';
+import { Toaster } from "./components/ui/toaster";
+import { Toaster as Sonner } from "./components/ui/sonner";
+import { TooltipProvider } from "./components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "@/hooks/useAuth";
-import { ProtectedRoute } from "@/components/ProtectedRoute";
-import { ThemeProvider } from "@/contexts/ThemeContext"; // ADD THIS IMPORT
-
-import GlobalPopupIntentExit from "./components/GlobalPopupIntentExit";
+import { AuthProvider } from "./hooks/useAuth";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import ScrollToTop from "./components/ScrollToTop"; 
+import GlobalContactSlider from "./components/GlobalContactSlider";
+import GlobalPopupIntentExit from "./components/GlobalPopupIntentExit";
 
 // Admin Layout and Pages
 import { AdminLayout } from "./components/admin/AdminLayout";
@@ -17,7 +18,7 @@ import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { UserManagement } from "./pages/admin/UserManagement";
 import { ResourceManagement } from "./pages/admin/ResourceManagement";
 
-// All your existing imports...
+// All existing imports
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Products from "./pages/Products";
@@ -53,8 +54,7 @@ import DataSecurity from "./pages/DataSecurity";
 import NotFound from "./pages/NotFound";
 import BonusPage from './pages/BonusPage';
 
-
-// Dashboard Pages (now standalone)
+// Dashboard Pages (standalone)
 import FreeCourses from "./pages/FreeCourses";
 import Resources from "./pages/Resources";
 import Progress from "./pages/Progress";
@@ -64,123 +64,151 @@ import Support from "./pages/Support";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider> {/* ADD THEME PROVIDER WRAPPER */}
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <ScrollToTop /> 
-            <Routes>
-              {/* ALL YOUR EXISTING ROUTES - NO CHANGES NEEDED */}
-              <Route path="/" element={<Index />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/bonus" element={<BonusPage />} />
+// Create a simple component to manage the state between slider and popup
+const PopupTriggerManager = () => {
+  const [manualTrigger, setManualTrigger] = useState(false);
+  
+  // Function to trigger the popup
+  const handleTriggerPopup = () => {
+    console.log("App: Setting manualTrigger to true");
+    setManualTrigger(true);
+  };
+  
+  // Function to reset trigger when popup is closed
+  const handlePopupClose = () => {
+    console.log("App: Popup closed, resetting trigger state");
+    setManualTrigger(false);
+  };
+  
+  return (
+    <>
+      <GlobalContactSlider onTriggerPopup={handleTriggerPopup} />
+      <GlobalPopupIntentExit 
+        manualTrigger={manualTrigger}
+        onClose={handlePopupClose} 
+      />
+    </>
+  );
+};
 
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <ScrollToTop />
+              <Routes>
+                {/* Main Routes */}
+                <Route path="/" element={<Index />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/courses" element={<Courses />} />
+                <Route path="/bonus" element={<BonusPage />} />
 
-              {/* Protected Dashboard Routes */}
-              <Route path="/dashboard" element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/FreeCourses" element={
-                <ProtectedRoute>
-                  <FreeCourses />
-                </ProtectedRoute>
-              } />
-              <Route path="/Resources" element={
-                <ProtectedRoute>
-                  <Resources />
-                </ProtectedRoute>
-              } />
-              <Route path="/Progress" element={
-                <ProtectedRoute>
-                  <Progress />
-                </ProtectedRoute>
-              } />
-              <Route path="/LiveSessions" element={
-                <ProtectedRoute>
-                  <LiveSessions />
-                </ProtectedRoute>
-              } />
-              <Route path="/Profile" element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              } />
-              <Route path="/Support" element={
-                <ProtectedRoute>
-                  <Support />
-                </ProtectedRoute>
-              } />
+                {/* Protected Dashboard Routes */}
+                <Route path="/dashboard" element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                } />
+                <Route path="/FreeCourses" element={
+                  <ProtectedRoute>
+                    <FreeCourses />
+                  </ProtectedRoute>
+                } />
+                <Route path="/Resources" element={
+                  <ProtectedRoute>
+                    <Resources />
+                  </ProtectedRoute>
+                } />
+                <Route path="/Progress" element={
+                  <ProtectedRoute>
+                    <Progress />
+                  </ProtectedRoute>
+                } />
+                <Route path="/LiveSessions" element={
+                  <ProtectedRoute>
+                    <LiveSessions />
+                  </ProtectedRoute>
+                } />
+                <Route path="/Profile" element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                } />
+                <Route path="/Support" element={
+                  <ProtectedRoute>
+                    <Support />
+                  </ProtectedRoute>
+                } />
 
-              {/* Admin Routes */}
-              <Route path="/admin" element={
-                <ProtectedRoute>
-                  <ProtectedAdminRoute>
-                    <AdminLayout />
-                  </ProtectedAdminRoute>
-                </ProtectedRoute>
-              }>
-                <Route index element={<AdminDashboard />} />
-                <Route path="users" element={<UserManagement />} />
-                <Route path="resources" element={<ResourceManagement />} />
-                <Route path="activities" element={<div className="p-6">Activities Page (Coming Soon)</div>} />
-                <Route path="support" element={<div className="p-6">Support Page (Coming Soon)</div>} />
-                <Route path="upload" element={<div className="p-6">Upload Page (Coming Soon)</div>} />
-              </Route>
+                {/* Admin Routes */}
+                <Route path="/admin" element={
+                  <ProtectedRoute>
+                    <ProtectedAdminRoute>
+                      <AdminLayout />
+                    </ProtectedAdminRoute>
+                  </ProtectedRoute>
+                }>
+                  <Route index element={<AdminDashboard />} />
+                  <Route path="users" element={<UserManagement />} />
+                  <Route path="resources" element={<ResourceManagement />} />
+                  <Route path="activities" element={<div className="p-6">Activities Page (Coming Soon)</div>} />
+                  <Route path="support" element={<div className="p-6">Support Page (Coming Soon)</div>} />
+                  <Route path="upload" element={<div className="p-6">Upload Page (Coming Soon)</div>} />
+                </Route>
+                
+                {/* Documentation & Resources Routes */}
+                <Route path="/docs" element={<Documentation />} />
+                <Route path="/api-reference" element={<APIReference />} />
+                <Route path="/tutorials" element={<Tutorials />} />
+                <Route path="/video-guides" element={<VideoGuides />} />
+                <Route path="/strategy-templates" element={<StrategyTemplates />} />
+                <Route path="/blog" element={<Blog />} />
+                
+                {/* Support Routes */}
+                <Route path="/help" element={<HelpCenter />} />
+                <Route path="/contact" element={<ContactSupport />} />
+                <Route path="/status" element={<SystemStatus />} />
+                <Route path="/feature-requests" element={<FeatureRequests />} />
+                <Route path="/bug-reports" element={<BugReports />} />
+                <Route path="/community" element={<CommunityForum />} />
+                
+                {/* Legal Routes */}
+                <Route path="/terms" element={<TermsOfService />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/refund-policy" element={<RefundPolicy />} />
+                <Route path="/risk-disclosure" element={<RiskDisclosure />} />
+                <Route path="/compliance" element={<Compliance />} />
+                <Route path="/data-security" element={<DataSecurity />} />
+                
+                {/* Landing Page CTA Routes */}
+                <Route path="/interactive-demo" element={<InteractiveDemo />} />
+                <Route path="/schedule-demo" element={<ScheduleDemo />} />
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/case-study" element={<CaseStudy />} />
+                
+                {/* Catch-all route */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
               
-              {/* Documentation & Resources Routes */}
-              <Route path="/docs" element={<Documentation />} />
-              <Route path="/api-reference" element={<APIReference />} />
-              <Route path="/tutorials" element={<Tutorials />} />
-              <Route path="/video-guides" element={<VideoGuides />} />
-              <Route path="/strategy-templates" element={<StrategyTemplates />} />
-              <Route path="/blog" element={<Blog />} />
-              
-              {/* Support Routes */}
-              <Route path="/help" element={<HelpCenter />} />
-              <Route path="/contact" element={<ContactSupport />} />
-              <Route path="/status" element={<SystemStatus />} />
-              <Route path="/feature-requests" element={<FeatureRequests />} />
-              <Route path="/bug-reports" element={<BugReports />} />
-              <Route path="/community" element={<CommunityForum />} />
-              
-              {/* Legal Routes */}
-              <Route path="/terms" element={<TermsOfService />} />
-              <Route path="/privacy" element={<PrivacyPolicy />} />
-              <Route path="/refund-policy" element={<RefundPolicy />} />
-              <Route path="/risk-disclosure" element={<RiskDisclosure />} />
-              <Route path="/compliance" element={<Compliance />} />
-              <Route path="/data-security" element={<DataSecurity />} />
-              
-              {/* Landing Page CTA Routes */}
-              <Route path="/interactive-demo" element={<InteractiveDemo />} />
-              <Route path="/schedule-demo" element={<ScheduleDemo />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="/case-study" element={<CaseStudy />} />
-              
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            
-            {/* ADD THIS LINE ⬇️ */}
-            <GlobalPopupIntentExit />
-          </BrowserRouter>
-        </TooltipProvider>
-      </AuthProvider>
-    </ThemeProvider> {/* CLOSE THEME PROVIDER WRAPPER */}
-  </QueryClientProvider>
-);
+              {/* Use the PopupTriggerManager to coordinate between slider and popup */}
+              <PopupTriggerManager />
+            </BrowserRouter>
+          </TooltipProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
