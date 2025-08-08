@@ -5,12 +5,12 @@ import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const navigationItems = [
-  { id: 'home', label: 'Home', href: '/', external: false },
-  { id: 'products', label: 'Product', href: '/products', external: false },
-  { id: 'strategies', label: 'Strategies', href: '/strategies', external: true },
-  { id: 'courses', label: 'Courses', href: '/courses', external: false },
-  { id: 'pricing', label: 'Pricing', href: '/pricing', external: false },
-  { id: 'about', label: 'About Us', href: '/about', external: false }
+  { id: 'home', label: 'Home', href: '/', external: false, newTab: false },
+  { id: 'products', label: 'Product', href: '/products', external: false, newTab: true },
+  { id: 'strategies', label: 'Strategies', href: '/strategies', external: true, newTab: true },
+  { id: 'courses', label: 'Courses', href: '/courses', external: false, newTab: true },
+  { id: 'pricing', label: 'Pricing', href: '/pricing', external: false, newTab: false },
+  { id: 'about', label: 'About Us', href: '/about', external: false, newTab: false }
 ];
 
 // Enhanced Theme Toggle Component
@@ -69,7 +69,7 @@ const Header = () => {
   };
 
   const redirectToStrategies = () => {
-    window.location.href = "https://strategies.automatealgos.in";
+    window.open("https://strategies.automatealgos.in", "_blank");
   };
 
   useEffect(() => {
@@ -114,7 +114,7 @@ const Header = () => {
       }
     }
 
-    // Handle internal navigation
+    // Handle internal navigation with new tab support
     if (item.href.startsWith('#')) {
       const targetId = item.href.replace('#', '');
       const element = document.getElementById(targetId);
@@ -128,7 +128,12 @@ const Header = () => {
           behavior: 'smooth'
         });
       }
+    } else if (item.newTab) {
+      // Open in new tab for specified items
+      const baseUrl = window.location.origin;
+      window.open(`${baseUrl}${item.href}`, "_blank");
     }
+    
     setIsMobileMenuOpen(false);
   };
 
@@ -209,7 +214,32 @@ const Header = () => {
                       )}
                     </button>
                   );
+                } else if (item.newTab) {
+                  // Render as button for new tab items
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleNavigation(item)}
+                      className={`px-3 py-2 text-sm font-medium transition-colors relative ${
+                        isActive
+                          ? isScrolled 
+                            ? 'text-primary' 
+                            : 'text-white'
+                          : isScrolled 
+                            ? 'text-muted-foreground hover:text-foreground' 
+                            : 'text-white/80 hover:text-white'
+                      }`}
+                    >
+                      {item.label}
+                      {isActive && (
+                        <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${
+                          isScrolled ? 'bg-primary' : 'bg-white'
+                        } transition-colors`} />
+                      )}
+                    </button>
+                  );
                 } else {
+                  // Regular Link for same tab navigation
                   return (
                     <Link
                       key={item.id}
@@ -302,6 +332,21 @@ const Header = () => {
                     </button>
                   );
                 } else if (item.href.startsWith('#')) {
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleNavigation(item)}
+                      className={`block w-full text-left px-3 py-3 text-base font-medium transition-colors ${
+                        isActive
+                          ? 'text-primary bg-primary/10'
+                          : 'text-foreground hover:text-primary hover:bg-accent'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  );
+                } else if (item.newTab) {
+                  // Handle new tab items in mobile menu
                   return (
                     <button
                       key={item.id}
